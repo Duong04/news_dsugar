@@ -1,0 +1,130 @@
+:root {
+    --color-lightest: #F0F2F5;
+    --color-midgray: #878787;
+    --orange-color: #fa552b;
+    --color-blue: #3858F6;
+}
+
+.bg-lightest {
+    background-color: var(--color-lightest);
+}
+
+.text-midgray {
+    color: var(--color-midgray);
+}
+
+.fs-7 {
+    font-size: 0.85rem;
+}
+
+.logo {
+    width: 150px;
+}
+
+.menu-hv {
+    position: relative;
+    font-weight: 550;
+    transition: all linear 0.4s;
+}
+
+.menu-hv::before {
+    content: '';
+    position: absolute;
+    bottom: 3px;
+    width: 0;
+    left: 0;
+    height: 3px;
+    background-color: var(--color-blue);
+    transition: all linear 0.4s;
+}
+
+.menu-hv:hover {
+    color: var(--color-blue);
+}
+
+.menu-hv:hover::before {
+    width: 100%;
+}
+
+.g-5 {
+    gap: 5px;
+}
+
+.g-10 {
+    gap: 10px;
+}
+
+.search-custom {
+    background-color: var(--color-lightest);
+    border-radius: 18px;
+}
+
+.search-custom input {
+    border: none;
+    background-color: var(--color-lightest);
+    border-radius: 0 18px 18px 0;
+}
+
+.search-custom button {
+    border-radius: 18px 0 0 18px;
+}
+
+.search-custom button:active {
+    border: none;
+    background-color: transparent;
+}
+
+.search-custom input:focus {
+    background-color: var(--color-lightest);
+    outline: none;
+    box-shadow: none;
+}
+
+.h-600 {
+    height: 600px;
+}
+
+.d-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.ct-text {
+    width: 90%;
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-48%);
+    z-index: 2;
+}
+
+.shadow-img::before {
+    position: absolute;
+    content: "";
+    opacity: 0.6;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 300px;
+    transition: all 0.5s;
+    z-index: 1;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+    border-radius: 0 0 1rem 1rem;
+}
+
+.post-hv img {
+    transition: all ease 0.4s;
+}
+
+.post-hv:hover img {
+    transform: scale(1.1);
+}
+
+.ct-title {
+    transition: text-decoration linear 0.4s;
+}
+
+.post-hv:hover .ct-title {
+    text-decoration: underline;
+}

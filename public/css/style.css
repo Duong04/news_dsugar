@@ -3,6 +3,15 @@
     --color-midgray: #878787;
     --orange-color: #fa552b;
     --color-blue: #3858F6;
+    --color-facebook: #3B5997;
+    --color-github: #ED4141;
+    --color-linkedin: #0077B5;
+    --color-instagram: #C231A1;
+    --secondary-font: "Red Hat Display", sans-serif;
+}
+
+body {
+    font-family: var(--secondary-font);
 }
 
 .bg-lightest {
@@ -44,6 +53,23 @@
 
 .menu-hv:hover::before {
     width: 100%;
+}
+
+.account {
+    background-color: var(--color-lightest);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 37px;
+    height: 37px;
+    border-radius: 50%;
+    color: #000;   
+    transition: all ease 0.4s;
+}
+
+.account:hover {
+    background-color: var(--color-blue);
+    color: #fff;
 }
 
 .g-5 {
@@ -114,7 +140,7 @@
 }
 
 .post-hv img {
-    transition: all ease 0.4s;
+    transition: all ease 0.5s;
 }
 
 .post-hv:hover img {
@@ -127,4 +153,100 @@
 
 .post-hv:hover .ct-title {
     text-decoration: underline;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+.ins, .fb, .gh, .lk {
+    transition: all ease 0.4s;
+}
+
+.ins:hover {
+    color: var(--color-instagram);
+}
+
+.fb:hover {
+    color: var(--color-facebook);
+}
+
+.gh:hover {
+    color: var(--color-github);
+}
+
+.lk:hover {
+    color: var(--color-linkedin);
+}
+
+.slide-text-position {
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 10px;
+}
+
+.splide__slide {
+    padding: 6px !important;
+}
+
+.splide__slide img {
+    cursor: pointer;
+    transition: all ease 0.5s;
+}
+
+.splide__slide img:hover {
+    transform: scale(1.1);
+}
+
+.splide__arrow {
+    display: none !important;
+    width: 40px !important;
+    height: 40px !important;
+    background-color: transparent !important;
+    border: 1px solid var(--color-midgray) !important;
+    transition: all ease 0.5s;
+}
+
+.splide__arrow:hover {
+    background-color: #fff !important;
+    border: none !important;
+}
+
+.splide__arrow:hover svg {
+    fill: var(--color-blue) !important;
+}
+
+#card-carousel:hover .splide__arrow {
+    display: flex !important;
+}
+
+/* XL */
+@media (max-width: 1200px) {
+    .logo {
+        width: 110px;
+    }
+}
+
+/* LG */
+@media (max-width: 992px) {
+    .logo {
+        width: 150px;
+    }
+}
+
+/* SM */
+@media (max-width: 576px) {
+    .d-grid-2 {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .ct-title {
+        font-size: 1.0rem !important;
+    }
+
+    .h-sm-300 {
+        height: 300px;
+    }
 }

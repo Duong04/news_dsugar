@@ -9,15 +9,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="{{ asset('libraries/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="libraries/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="libraries/splide/splide.min.css">
+</head>
 </head>
 
 <body>
     <div id="app">
         <header>
             <div class="bg-lightest">
-                <div class="container d-flex justify-content-between align-items-center">
+                <div class="container d-flex flex-column flex-lg-row justify-content-between align-items-center">
                     <ul class="nav">
                         <li class="nav-item">
                             <span class="nav-link text-midgray fs-7">June 28, 2024</span>
@@ -34,28 +36,28 @@
                     </ul>
                     <ul class="nav">
                         <li class="nav-item">
-                            <a class="nav-link text-midgray fs-6" href="#"><i
+                            <a class="nav-link text-midgray fs-6 fb" href="#"><i
                                     class="fa-brands fa-facebook-f"></i></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-midgray fs-6" href="#"><i class="fa-brands fa-github"></i></a>
+                            <a class="nav-link text-midgray fs-6 gh" href="#"><i class="fa-brands fa-github"></i></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-midgray fs-6" href="#"><i
+                            <a class="nav-link text-midgray fs-6 lk" href="#"><i
                                     class="fa-brands fa-linkedin-in"></i></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-midgray fs-6" href="#"><i
+                            <a class="nav-link text-midgray fs-6 ins" href="#"><i
                                     class="fa-brands fa-instagram"></i></a>
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="bg-white">
-                <div class="container">
+                <div class="container-md">
                     <nav class="navbar navbar-expand-lg">
                         <div class="container-fluid">
-                            <div class="navbar-brand logo me-5">
+                            <div class="navbar-brand logo me-2 me-xl-5">
                                 <img class="w-100" src="{{asset('images/logo.png')}}" alt="">
                             </div>
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -65,27 +67,30 @@
                             </button>
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="d-flex g-5 navbar-nav me-auto mb-2 mb-lg-0">
-                                    <li class="nav-item text-center">
-                                        <a class="nav-link menu-hv" href="#">Trang chủ</a>
+                                    <li class="nav-item">
+                                        <a class="nav-link menu-hv fs-6" href="#">Trang chủ</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link menu-hv" href="#">Công nghệ</a>
+                                        <a class="nav-link menu-hv fs-6" href="#">Công nghệ</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link menu-hv" href="#">Phong cách sống</a>
+                                        <a class="nav-link menu-hv fs-6" href="#">Phong cách sống</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link menu-hv" href="#">Sức Khỏe</a>
+                                        <a class="nav-link menu-hv fs-6" href="#">Sức Khỏe</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link menu-hv" href="#">Coder 24h</a>
+                                        <a class="nav-link menu-hv fs-6" href="#">Coder 24h</a>
                                     </li>
                                 </ul>
-                                <form class="d-flex search-custom" role="search">
-                                    <button class="btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-                                    <input type="search" placeholder="Tìm kiếm..."
-                                        aria-label="Search">
-                                </form>
+                                <div class="d-flex g-10">
+                                    <form class="d-flex search-custom" role="search">
+                                        <button class="btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                        <input type="search" placeholder="Tìm kiếm..."
+                                            aria-label="Search">
+                                    </form>
+                                    <a href="" class="account"><i class="fa-solid fa-user fs-7"></i></a>
+                                </div>
                             </div>
                         </div>
                     </nav>
@@ -93,53 +98,112 @@
             </div>
         </header>
         <section class="outstanding bg-lightest py-5">
-            <div class="container row mx-auto py-3">
+            <div class="container-md row mx-auto py-3">
                 <div class="col-12 col-xl-6 mt-4">
-                    <a href="" class="d-flex overflow-hidden position-relative rounded-4 h-600 shadow-img post-hv">
-                        <img class="w-100 h-100 object-fit-cover rounded-4" src="{{ asset('images/news/demo_image-1440x720.jpg') }}" alt="">
+                    <a href="" class="h-sm-300 d-flex overflow-hidden position-relative rounded-4 h-600 shadow-img post-hv">
+                        <img class="w-100 h-100 object-fit-cover rounded-4" src="images/news/demo_image-1440x720.jpg" alt="">
                         <div class="ct-text text-white">
-                            <span class="ct-topic">Phong cách sống</span>
-                            <h3 class="ct-title mt-2">Fashion portrait of young businessman handsome model man in casual cloth.</h3>
+                            <span class="ct-topic fs-7">Phong cách sống</span>
+                            <h3 class="ct-title mt-2 fw-semibold">Fashion portrait of young businessman handsome model man in casual cloth.</h3>
                         </div>
                     </a>
                 </div>
                 <div class="col-12 col-xl-6 mt-4">
                     <div class="h-600 d-grid-2">
-                        <a href="" class="d-flex overflow-hidden position-relative rounded-4 shadow-img post-hv">
-                            <img class="w-100 h-100 object-fit-cover rounded-4" src="{{ asset('images/news/post-single-04-390x260.jpg') }}" alt="">
+                        <a href="" class="h-sm-300 d-flex overflow-hidden position-relative rounded-4 shadow-img post-hv">
+                            <img class="w-100 h-100 object-fit-cover rounded-4" src="images/news/post-single-04-390x260.jpg" alt="">
                             <div class="ct-text text-white" style="bottom: 15px">
-                                <span class="ct-topic">Phong cách sống</span>
-                                <h3 class="ct-title mt-2 fs-5">Fashion portrait of young businessman handsome model man in casual cloth.</h3>
+                                <span class="ct-topic fs-7">Phong cách sống</span>
+                                <h3 class="ct-title mt-2 fw-semibold fs-5">Fashion portrait of young businessman handsome model man in casual cloth.</h3>
                             </div>
                         </a>
-                        <a href="" class="d-flex overflow-hidden position-relative rounded-4 shadow-img post-hv">
-                            <img class="w-100 h-100 object-fit-cover rounded-4" src="{{ asset('images/news/post-single-04-390x260.jpg') }}" alt="">
+                        <a href="" class="h-sm-300 d-flex overflow-hidden position-relative rounded-4 shadow-img post-hv">
+                            <img class="w-100 h-100 object-fit-cover rounded-4" src="images/news/post-single-04-390x260.jpg" alt="">
                             <div class="ct-text text-white" style="bottom: 15px">
-                                <span class="ct-topic">Phong cách sống</span>
-                                <h3 class="ct-title mt-2 fs-5">Fashion portrait of young businessman handsome model man in casual cloth.</h3>
+                                <span class="ct-topic fs-7">Phong cách sống</span>
+                                <h3 class="ct-title mt-2 fw-semibold fs-5">Fashion portrait of young businessman handsome model man in casual cloth.</h3>
                             </div>
                         </a>
-                        <a href="" class="d-flex overflow-hidden position-relative rounded-4 shadow-img post-hv">
-                            <img class="w-100 h-100 object-fit-cover rounded-4" src="{{ asset('images/news/demo_image-5-390x260.jpg') }}" alt="">
+                        <a href="" class="h-sm-300 d-flex overflow-hidden position-relative rounded-4 shadow-img post-hv">
+                            <img class="w-100 h-100 object-fit-cover rounded-4" src="images/news/demo_image-5-390x260.jpg" alt="">
                             <div class="ct-text text-white" style="bottom: 15px">
-                                <span class="ct-topic">Phong cách sống</span>
-                                <h3 class="ct-title mt-2 fs-5">Fashion portrait of young businessman handsome model man in casual cloth.</h3>
+                                <span class="ct-topic fs-7">Phong cách sống</span>
+                                <h3 class="ct-title mt-2 fw-semibold fs-5">Fashion portrait of young businessman handsome model man in casual cloth.</h3>
                             </div>
                         </a>
-                        <a href="" class="d-flex overflow-hidden position-relative rounded-4 shadow-img post-hv">
-                            <img class="w-100 h-100 object-fit-cover rounded-4" src="{{ asset('images/news/demo_image-5-390x260.jpg') }}" alt="">
+                        <a href="" class="h-sm-300 d-flex overflow-hidden position-relative rounded-4 shadow-img post-hv">
+                            <img class="w-100 h-100 object-fit-cover rounded-4" src="images/news/demo_image-5-390x260.jpg" alt="">
                             <div class="ct-text text-white" style="bottom: 15px">
-                                <span class="ct-topic">Phong cách sống</span>
-                                <h3 class="ct-title mt-2 fs-5">Fashion portrait of young businessman handsome model man in casual cloth.</h3>
+                                <span class="ct-topic fs-7">Phong cách sống</span>
+                                <h3 class="ct-title mt-2 fw-semibold fs-5">Fashion portrait of young businessman handsome model man in casual cloth.</h3>
                             </div>
                         </a>
                     </div>
                 </div>
             </div>
+            <div class="container-md mt-5">
+                <h3 class="fw-bold">Chủ đề thịnh hành</h3>
+                <section id="card-carousel" class="splide">
+                    <div class="splide__track">
+                        <ul class="splide__list">
+                            <li class="splide__slide">
+                                <div class="position-relative overflow-hidden rounded-4">
+                                    <img class="w-100 rounded-4" src="images/thumbail/bg-image-2-300x300.jpg" alt="">
+                                    <div class="text-white slide-text-position fw-semibold">Công nghệ</div>
+                                </div>
+                            </li>
+                            <li class="splide__slide">
+                                <div class="position-relative overflow-hidden rounded-4">
+                                    <img class="w-100 rounded-4" src="images/thumbail/demo_image-12-300x300.jpg" alt="">
+                                    <div class="text-white slide-text-position fw-semibold">Công nghệ</div>
+                                </div>
+                            </li>
+                            <li class="splide__slide">
+                                <div class="position-relative overflow-hidden rounded-4">
+                                    <img class="w-100 rounded-4" src="images/thumbail/demo_image-19-300x300.jpg" alt="">
+                                    <div class="text-white slide-text-position fw-semibold">Công nghệ</div>
+                                </div>
+                            </li>
+                            <li class="splide__slide">
+                                <div class="position-relative overflow-hidden rounded-4">
+                                    <img class="w-100 rounded-4" src="images/thumbail/demo_image-21-300x300.jpg" alt="">
+                                    <div class="text-white slide-text-position fw-semibold">Công nghệ</div>
+                                </div>
+                            </li>
+                            <li class="splide__slide">
+                                <div class="position-relative overflow-hidden rounded-4">
+                                    <img class="w-100 rounded-4" src="images/thumbail/demo_image-29-300x300.jpg" alt="">
+                                    <div class="text-white slide-text-position fw-semibold">Công nghệ</div>
+                                </div>
+                            </li>
+                            <li class="splide__slide">
+                                <div class="position-relative overflow-hidden rounded-4">
+                                    <img class="w-100 rounded-4" src="images/thumbail/post-column-01-11-300x300.jpg" alt="">
+                                    <div class="text-white slide-text-position fw-semibold">Công nghệ</div>
+                                </div>
+                            </li>
+                            <li class="splide__slide">
+                                <div class="position-relative overflow-hidden rounded-4">
+                                    <img class="w-100 rounded-4" src="images/thumbail/bg-image-2-300x300.jpg" alt="">
+                                    <div class="text-white slide-text-position fw-semibold">Công nghệ</div>
+                                </div>
+                            </li>
+                            <li class="splide__slide">
+                                <div class="position-relative overflow-hidden rounded-4">
+                                    <img class="w-100 rounded-4" src="images/thumbail/demo_image-12-300x300.jpg" alt="">
+                                    <div class="text-white slide-text-position fw-semibold">Công nghệ</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
         </section>
     </div>
-    <script src="{{ asset('libraries/bootstrap/popper.min.js') }}"></script>
-    <script src="{{ asset('libraries/bootstrap/bootstrap.min.js') }}"></script>
+    <script src="libraries/splide/splide.min.js"></script>
+    <script src="js/slider.js"></script>
+    <script src="libraries/bootstrap/popper.min.js"></script>
+    <script src="libraries/bootstrap/bootstrap.min.js"></script>
 </body>
 
 </html>

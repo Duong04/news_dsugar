@@ -5,9 +5,18 @@ document.addEventListener('DOMContentLoaded', function () {
         perMove: 1,
         pagination: false,
         breakpoints: {
-            640: {
-                perPage: 1,
+            992: {
+                perPage: 5,
             },
+            768: {
+                perPage: 4,
+            },
+            576: {
+                perPage: 3,
+            },
+            400: {
+                perPage: 2,
+            }
         },
     }).mount();
 });

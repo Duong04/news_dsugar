@@ -17,86 +17,7 @@
 
 <body>
     <div id="app">
-        <header>
-            <div class="bg-lightest">
-                <div class="container d-flex flex-column flex-lg-row justify-content-between align-items-center">
-                    <ul class="nav">
-                        <li class="nav-item">
-                            <span class="nav-link text-midgray fs-7">June 28, 2024</span>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-midgray fs-7" href="#">Advertisement</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-midgray fs-7" href="#">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-midgray fs-7" href="#">Contact</a>
-                        </li>
-                    </ul>
-                    <ul class="nav">
-                        <li class="nav-item">
-                            <a class="nav-link text-midgray fs-6 fb" href="#"><i
-                                    class="fa-brands fa-facebook-f"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-midgray fs-6 gh" href="#"><i class="fa-brands fa-github"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-midgray fs-6 lk" href="#"><i
-                                    class="fa-brands fa-linkedin-in"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-midgray fs-6 ins" href="#"><i
-                                    class="fa-brands fa-instagram"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="bg-white shadow-lg" id="header">
-                <div class="container-md">
-                    <nav class="navbar navbar-expand-lg">
-                        <div class="container-fluid">
-                            <div class="navbar-brand logo me-2 me-xl-5">
-                                <img class="w-100" src="images/logo.png" alt="">
-                            </div>
-                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                                aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
-                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                <ul class="d-flex g-5 navbar-nav me-auto mb-2 mb-lg-0">
-                                    <li class="nav-item">
-                                        <a class="nav-link menu-hv fs-6" href="#">Trang chủ</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link menu-hv fs-6" href="#">Công nghệ</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link menu-hv fs-6" href="#">Phong cách sống</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link menu-hv fs-6" href="#">Sức Khỏe</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link menu-hv fs-6" href="#">Coder 24h</a>
-                                    </li>
-                                </ul>
-                                <div class="d-flex g-10">
-                                    <form class="d-flex search-custom" role="search">
-                                        <button class="btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-                                        <input type="search" placeholder="Tìm kiếm..."
-                                            aria-label="Search">
-                                    </form>
-                                    <a href="" class="account"><i class="fa-solid fa-user fs-7"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        </header>
+        <x-layouts-client.header />
         <section class="outstanding bg-lightest py-5">
             <div class="container-md row mx-auto py-3">
                 <div class="col-12 col-xl-6 mt-4">
@@ -747,38 +668,7 @@
                 </div>
             </div>
         </section>
-        <footer>
-            <div class="container-md py-5">
-                <div class="d-flex g-10 social-share justify-content-start align-items-center">
-                    <h5 class="fw-semibold">Follow us</h5>
-                    <a class="text-black fb-2" href=""><i class="fa-brands fa-facebook-f"></i></a>
-                    <a class="text-black tw-2" href=""><i class="fa-brands fa-twitter"></i></a>
-                    <a class="text-black lk-2" href=""><i class="fa-brands fa-linkedin-in"></i></a>
-                    <a class="text-black gh-2" href=""><i class="fa-brands fa-github"></i></a>
-                    <a class="text-black ins-2" href=""><i class="fa-brands fa-instagram"></i></a>
-                </div>
-                <hr>
-                <div class="d-flex flex-column flex-sm-row align-items-sm-center g-20">
-                    <div class="logo">
-                        <img class="w-100" src="images/logo.png" alt="">
-                    </div>
-                    <ul class="nav">
-                        <li class="nav-item">
-                            <a class="nav-link text-midgray" href="#">Contact Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-midgray" href="#">Terms of Use</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-midgray" href="#">Advertise with Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-midgray" href="#">Blogar Store</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </footer>
+        <x-layouts-client.footer />
         <div class="py-3 bg-lightest text-center fs-7 text-midgray">© 2024 copy right duongnt3092004</div>
     </div>
     <div class="go-to-top">

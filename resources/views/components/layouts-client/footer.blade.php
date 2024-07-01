@@ -1,12 +1,8 @@
 <footer>
     <div class="container-md py-5">
-        <div class="d-flex g-10 social-share justify-content-start align-items-center">
+        <div class="d-flex align-items-center g-20 flex-wrap">
             <h5 class="fw-semibold">Follow us</h5>
-            <a class="text-black fb-2" href=""><i class="fa-brands fa-facebook-f"></i></a>
-            <a class="text-black tw-2" href=""><i class="fa-brands fa-twitter"></i></a>
-            <a class="text-black lk-2" href=""><i class="fa-brands fa-linkedin-in"></i></a>
-            <a class="text-black gh-2" href=""><i class="fa-brands fa-github"></i></a>
-            <a class="text-black ins-2" href=""><i class="fa-brands fa-instagram"></i></a>
+            <x-social.social justifyContent="start" />
         </div>
         <hr>
         <div class="d-flex flex-column flex-sm-row align-items-sm-center g-20">

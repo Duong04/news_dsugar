@@ -64,12 +64,8 @@
                                 <a class="nav-link menu-hv fs-6" href="#">Coder 24h</a>
                             </li>
                         </ul>
-                        <div class="d-flex g-10">
-                            <form class="d-flex search-custom" role="search">
-                                <button class="btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-                                <input type="search" placeholder="Tìm kiếm..."
-                                    aria-label="Search">
-                            </form>
+                        <div class="d-flex g-10 align-items-center">
+                            <x-search.search />
                             <a href="" class="account"><i class="fa-solid fa-user fs-7"></i></a>
                         </div>
                     </div>

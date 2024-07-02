@@ -25,6 +25,7 @@
     <div class="go-to-top">
         <a class="text-decoration-none rounded-circle text-white h-100 w-100 d-flex justify-content-center align-items-center" href="#"><i class="fa-solid fa-chevron-down fa-rotate-180"></i></a>
     </div>
+    <div class="mouse-trail"></div>
     <script src="libraries/splide/splide.min.js"></script>
     <script src="js/slider.js"></script>
     <script src="js/header.js"></script>

@@ -1,10 +1,10 @@
 <aside class="col-12 col-lg-4 mt-5 mt-lg-0">
     <div class="p-0 ps-lg-5">
-        <div>
+        <div class="bg-pale-white py-4 px-2 rounded-4">
             <h5 class="border-bottom border-dark-subtle text-center fw-semibold pb-2 mb-3">Tìm kiếm</h5>
             <x-search.search />
         </div>
-        <div class="mt-5">
+        <div class="mt-5 bg-pale-white py-4 px-2 rounded-4">
             <h5 class="border-bottom border-dark-subtle text-center fw-semibold pb-2">Bài viết gần đây</h5>
             <div class="d-flex flex-column g-20 mt-3">
                 <x-posts.post-medium-item />
@@ -13,11 +13,11 @@
                 <x-posts.post-medium-item />
             </div>
         </div>
-        <div class="mt-5">
+        <div class="mt-5 bg-pale-white py-4 px-2 rounded-4">
             <h5 class="border-bottom border-dark-subtle text-center fw-semibold pb-2">Tìm tôi ở đâu 👀</h5>
             <x-social.social justifyContent="center" />
         </div>
-        <div class="mt-5">
+        <div class="mt-5 bg-pale-white py-4 px-2 rounded-4">
             <h5 class="border-bottom border-dark-subtle text-center fw-semibold pb-2">Trưng bày</h5>
             <div class="gallery mt-2">
                 <div class="gallery-img">

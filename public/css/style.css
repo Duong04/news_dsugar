@@ -9,11 +9,45 @@
     --color-instagram: #C231A1;
     --color-twitter: #1BA1F2;
     --color-youtube: #ED4141;
+    --color-pale-white: #FBFBFD;
     --secondary-font: "Red Hat Display", sans-serif;
 }
 
 body {
     font-family: var(--secondary-font);
+}
+
+.mouse-trail {
+    margin-left: -15px;
+    margin-top: -15px;
+    width: 30px;
+    height: 30px;
+    border: 2px solid #CED0D4;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    z-index: 10000000;
+    -webkit-transition: all 0.08s ease-out;
+    transition: all 0.08s ease-out;
+    position: fixed;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mouse-trail::before {
+    content: '';
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    background-color: var(--color-blue);
 }
 
 .go-to-top {
@@ -44,6 +78,10 @@ body {
 
 .bg-lightest {
     background-color: var(--color-lightest);
+}
+
+.bg-pale-white {
+    background-color: var(--color-pale-white);
 }
 
 .text-midgray {
@@ -130,6 +168,7 @@ body {
 }
 
 .search-custom input {
+    width: 87%;
     border: none;
     background-color: var(--color-lightest);
     border-radius: 0 18px 18px 0;
@@ -519,6 +558,40 @@ body {
     display: none;
 }
 
+.ct-title, 
+.post-title,
+.post-medium-text>h6 {
+    overflow: hidden;
+    max-height: 4rem;
+    -webkit-line-clamp: 2;
+    display: box;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+
+.d-grid-10 {
+    display: grid;
+    grid-template-columns: repeat(7, auto);
+    gap: 15px;
+}
+
+.subcat>div>a {
+    display: block;
+    padding: 8px 5px;
+    border-radius: 25px;
+    text-align: center;
+}
+
+.new-post-img {
+    height: 87%;
+}
+
+.new-post .hover-fillip-item::before {
+    color: #000;
+}
+
 @keyframes fadeInC {
     from {
         opacity: 0;
@@ -564,6 +637,15 @@ body {
     .box-cricle-img {
         width: 250px;
         height: 250px;
+    }
+
+    .d-grid-10 {
+        overflow: auto;
+        white-space: nowrap;
+    }
+
+    .subcat>div>a {
+        padding: 8px 20px;
     }
 }
 

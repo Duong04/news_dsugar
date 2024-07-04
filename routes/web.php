@@ -17,3 +17,7 @@ Route::get('/dang-nhap', function () {
 Route::get('/dang-ky', function () {
     return view('clients.auth.register');
 });
+
+Route::get('/chi-tiet', function () {
+    return view('clients.news.new-detail');
+});

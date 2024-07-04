@@ -617,6 +617,34 @@ body {
     min-height: 100vh;
 }
 
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.cursor-pointer:hover {
+    color: var(--color-blue);
+}
+
+.btn-comment {
+    max-width: 250px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 20px;
+    background-color: var(--color-blue);
+    color: #fff;
+    border: 2px solid var(--color-blue);
+    border-radius: 28px;
+    cursor: pointer;
+    transition: all ease 0.5s;
+}
+
+.btn-comment:hover {
+    background-color: #fff;
+    color: var(--color-blue);
+}
+
 @keyframes fadeInC {
     from {
         opacity: 0;

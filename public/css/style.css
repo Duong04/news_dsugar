@@ -645,6 +645,11 @@ body {
     color: var(--color-blue);
 }
 
+.post-content img {
+    width: 100%;
+    border-radius: 1rem;
+}
+
 @keyframes fadeInC {
     from {
         opacity: 0;

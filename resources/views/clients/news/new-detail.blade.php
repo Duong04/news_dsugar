@@ -35,7 +35,7 @@
                 <i class="fa-solid fa-circle fs-7 text-midgray" style="font-size: 0.4rem;"></i>
                 <span class="text-midgray">Heheheheheeh</span>
             </div>
-            <div class="py-4">
+            <div class="py-4 post-content">
                 Nội dung sẽ nằm ở đây
             </div>
             <hr>

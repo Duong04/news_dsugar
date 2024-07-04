@@ -11,3 +11,12 @@ window.addEventListener('scroll', () => {
         headerMain.style.top = '-100px';
     }
 });
+
+// -----------------------------
+document.addEventListener("DOMContentLoaded", () => {
+    const dot = document.querySelector(".mouse-trail");
+  
+    document.addEventListener("mousemove", (e) => {
+      dot.style.transform = `translate(${e.clientX}px, ${e.clientY}px) scale(1)`;
+    });
+});

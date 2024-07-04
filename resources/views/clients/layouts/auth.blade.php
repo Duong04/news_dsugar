@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,26 +10,18 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="libraries/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="libraries/splide/splide.min.css">
 </head>
-</head>
-
 <body>
     <div id="app">
-        @yield('header')
-        @yield('content')
-        @yield('footer')
-        <div class="py-3 bg-lightest text-center fs-7 text-midgray">© 2024 copy right duongnt3092004</div>
-    </div>
-    <div class="go-to-top">
-        <a class="text-decoration-none rounded-circle text-white h-100 w-100 d-flex justify-content-center align-items-center" href="#"><i class="fa-solid fa-chevron-down fa-rotate-180"></i></a>
+        <section class="d-flex mh-100">
+            <div class="col-6 d-none bg-lightest d-lg-flex justify-content-center align-items-center">
+                <img class="w-75" src="images/bg-login.png" alt="">
+            </div>
+            @yield('content')
+        </section>
     </div>
     <div class="mouse-trail"></div>
-    <script src="libraries/splide/splide.min.js"></script>
-    <script src="js/slider.js"></script>
-    <script src="js/header.js"></script>
     <script src="libraries/bootstrap/popper.min.js"></script>
     <script src="libraries/bootstrap/bootstrap.min.js"></script>
 </body>
-
 </html>

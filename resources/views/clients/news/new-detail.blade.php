@@ -36,7 +36,7 @@
                 <span class="text-midgray">Heheheheheeh</span>
             </div>
             <div class="py-4 post-content">
-                Nội dung sẽ nằm ở đây
+                Nội dung sẽ nằm ở đây b
             </div>
             <hr>
             <div class="my-4">

@@ -21,6 +21,7 @@ Route::get('/dang-ky', function () {
 Route::get('/chi-tiet', function () {
     return view('clients.news.new-detail');
 });
+// ---
 
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard', function () {

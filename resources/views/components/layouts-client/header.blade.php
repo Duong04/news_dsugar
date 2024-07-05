@@ -66,7 +66,7 @@
                         </ul>
                         <div class="d-flex g-10 align-items-center">
                             <x-search.search />
-                            <a href="" class="account"><i class="fa-solid fa-user fs-7"></i></a>
+                            <a href="{{ route('login') }}" class="account"><i class="fa-solid fa-user fs-7"></i></a>
                         </div>
                     </div>
                 </div>

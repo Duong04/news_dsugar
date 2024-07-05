@@ -27,7 +27,7 @@
                     Đăng nhập bằng Google
                 </div>
             </form>
-            <div class="text-center mt-3">Bạn chưa có tài khoản? <a href="" class="text-decoration-none">Đăng ký</a></div>
+            <div class="text-center mt-3">Bạn chưa có tài khoản? <a href="{{ route('register') }}" class="text-decoration-none">Đăng ký</a></div>
         </div>
     </div>
 </div>

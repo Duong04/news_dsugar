@@ -20,7 +20,7 @@
                     Đăng ký bằng Google
                 </div>
             </form>
-            <div class="text-center mt-3">Bạn đã có tài khoản? <a href="" class="text-decoration-none">Đăng nhập</a></div>
+            <div class="text-center mt-3">Bạn đã có tài khoản? <a href="{{ route('login') }}" class="text-decoration-none">Đăng nhập</a></div>
         </div>
     </div>
 </div>

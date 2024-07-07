@@ -11,8 +11,8 @@
                 @csrf
                 <x-form.input :error="$errors->first('user_name')" name="user_name" label="Tên người dùng" type="text" icon="fa-regular fa-user" />
                 <x-form.input :error="$errors->first('email')" name="email" label="Email của bạn" type="text" icon="fa-regular fa-envelope" />
-                <x-form.input :error="$errors->first('confirm_psw')" name="confirm_psw" label="Xác nhận mật khẩu" type="password" icon="fa-regular fa-eye" />
-                <x-form.input :error="$errors->first('password')" name="password" label="Mật khẩu" type="password" icon="fa-regular fa-eye" />
+                <x-form.input :error="$errors->first('password')" name="password" label="Mật khẩu" type="password" icon="fa-regular fa-eye-slash" />
+                <x-form.input :error="$errors->first('confirm_psw')" name="confirm_psw" label="Xác nhận mật khẩu" type="password" icon="fa-regular fa-eye-slash" />
                 <div class="mt-4">
                     <button class="btn btn-primary w-100 py-2" type="submit">Đăng ký</button>
                 </div>

@@ -48,7 +48,8 @@ class RegisterRequest extends FormRequest
         return [
             'password' => 'Mật khẩu',
             'user_name' => 'Tên người dùng',
-            'confirm_psw' => 'Xác nhận mật khẩu'
+            'confirm_psw' => 'Xác nhận mật khẩu',
+            'email' => 'Email'
         ]; 
     }
 }

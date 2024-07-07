@@ -3,12 +3,8 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Role;
-use App\Models\User;
 use App\Services\AuthService;
 use App\Http\Requests\Web\Clients\RegisterRequest;
-use PhpParser\Node\Stmt\TryCatch;
 
 class AuthController extends Controller
 {

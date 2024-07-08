@@ -2,12 +2,11 @@
 
 namespace App\Services;
 
-use App\Mail\EmailVerification;
 use App\Repositories\User\UserRepositoryInterface;
 use App\Models\User;
-use Illuminate\Support\Facades\Mail;
 use Hash;
 use Str;
+use App\Jobs\ProcessMail;
 
 class AuthService {
     protected $userInterface;
@@ -19,7 +18,7 @@ class AuthService {
     public function create($request) {
         try {
             $validate = $request->validated();
-            $user = User::create([
+            $user = $this->userInterface->create([
                 'user_name' => $validate['user_name'],
                 'email' => $validate['email'],
                 'password' => Hash::make($validate['password']),
@@ -29,8 +28,21 @@ class AuthService {
                 'token' => Str::random(40)
             ]);
 
-            Mail::to($user['email'])->send(new EmailVerification($user['token']));
+            dispatch(new ProcessMail($user['email'], $user['token']));
             return response()->json('Create Account Successfully!', 200);
+        } catch (\Throwable $th) {
+            return response()->json($th->getMessage(), 422);
+        }
+    }
+
+    public function verifyEmail($token) {
+        try {
+            $user = $this->userInterface->updateToken($token, ['token' => 0, 'status' => 'active']);
+            if ($user) {
+                return $user;
+            }
+
+            return response()->json(['error' => 'Token invalid!'], 404);
         } catch (\Throwable $th) {
             return response()->json($th->getMessage(), 422);
         }

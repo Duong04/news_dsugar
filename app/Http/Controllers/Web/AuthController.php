@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Services\AuthService;
 use App\Http\Requests\Web\Clients\RegisterRequest;
+use Auth;
 
 class AuthController extends Controller
 {
@@ -22,5 +23,12 @@ class AuthController extends Controller
 
     public function showLogin() {
         return view('clients/auth/login');
+    }
+
+    public function verifyEmail($token) {
+        $user = $this->authService->verifyEmail($token);
+        if ($user) {
+            return redirect()->route('login');
+        }
     }
 }

@@ -26,6 +26,16 @@ class UserRepository implements UserRepositoryInterface {
         return $user->update($data);
     }
 
+    public function updateToken($token, array $data) {
+        $user = User::where('token', $token)->first();
+        if (!$user) {
+            return false; 
+        }
+        $user->fill($data); 
+        $user->save();
+        return $user;
+    }
+
     public function delete($id) {
 
     }

@@ -14,6 +14,7 @@ Route::get('/tin-tuc', function () {
 Route::get('/dang-nhap', [AuthController::class, 'showLogin'])->name('login');
 Route::get('/dang-ky', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/dang-ky', [AuthController::class, 'actionRegister'])->name('action.register');
+Route::get('/email/verify/{token}', [AuthController::class, 'verifyEmail']);
 
 Route::get('/chi-tiet', function () {
     return view('clients.news.new-detail');

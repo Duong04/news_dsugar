@@ -42,7 +42,6 @@ class AuthService {
                 return $user;
             }
 
-            return response()->json(['error' => 'Token invalid!'], 404);
         } catch (\Throwable $th) {
             return response()->json($th->getMessage(), 422);
         }

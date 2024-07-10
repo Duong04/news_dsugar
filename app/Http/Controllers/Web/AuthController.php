@@ -18,7 +18,11 @@ class AuthController extends Controller
     }
 
     public function actionRegister(RegisterRequest $request) {
-        return $this->authService->create($request);
+        $user = $this->authService->create($request);
+        if ($user) {
+            toastr()->success('Đăng ký tài khoản thành công!');
+            return redirect()->route('checkmail');
+        }
     }
 
     public function showLogin() {
@@ -28,6 +32,7 @@ class AuthController extends Controller
     public function verifyEmail($token) {
         $user = $this->authService->verifyEmail($token);
         if ($user) {
+            toastr()->success('Đã kích hoạt tài khoản thành công!');
             return redirect()->route('login');
         }
     }

@@ -29,7 +29,7 @@ class AuthService {
             ]);
 
             dispatch(new ProcessMail($user['email'], $user['token']));
-            return response()->json('Create Account Successfully!', 200);
+            return true;
         } catch (\Throwable $th) {
             return response()->json($th->getMessage(), 422);
         }

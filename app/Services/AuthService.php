@@ -59,4 +59,11 @@ class AuthService {
 
         return false;
     }
+
+    public function logout($request) {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return true;
+    }
 }

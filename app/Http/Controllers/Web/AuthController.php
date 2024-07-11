@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\AuthService;
 use App\Http\Requests\Web\Clients\RegisterRequest;
 use App\Http\Requests\Web\Clients\LoginRequest;
+use Illuminate\Http\Request;
 use Auth;
 
 class AuthController extends Controller
@@ -19,8 +20,8 @@ class AuthController extends Controller
     }
 
     public function actionRegister(RegisterRequest $request) {
-        $user = $this->authService->create($request);
-        if ($user) {
+        $registerSuccess = $this->authService->create($request);
+        if ($registerSuccess) {
             toastr()->success('Đăng ký tài khoản thành công!');
             return redirect()->route('checkmail');
         }
@@ -31,20 +32,28 @@ class AuthController extends Controller
     }
 
     public function actionLogin(LoginRequest $request) {
-        $user = $this->authService->login($request);
-        if ($user) {
+        $loginSuccess = $this->authService->login($request);
+        if ($loginSuccess) {
             toastr()->success('Đăng nhập thành công');
             return redirect()->intended('/');
         } 
 
         toastr()->error('Thông tin xác thực được cung cấp không khớp với hồ sơ của chúng tôi.');
-        return redirect()->back();
+        return redirect()->back()->withInput();
     }
 
     public function verifyEmail($token) {
         $user = $this->authService->verifyEmail($token);
         if ($user) {
             toastr()->success('Đã kích hoạt tài khoản thành công!');
+            return redirect()->route('login');
+        }
+    }
+
+    public function logout(Request $request) {
+        $logoutSuccess = $this->authService->logout($request);
+        if ($logoutSuccess) {
+            toastr()->info('Đẫ đăng xuất thành công!');
             return redirect()->route('login');
         }
     }

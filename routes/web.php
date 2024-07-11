@@ -16,6 +16,8 @@ Route::post('/dang-nhap', [AuthController::class, 'actionLogin'])->name('action.
 Route::get('/dang-ky', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/dang-ky', [AuthController::class, 'actionRegister'])->name('action.register');
 Route::get('/email/verify/{token}', [AuthController::class, 'verifyEmail']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
 Route::get('/check-mail', function () {
     return view('clients.auth.checkmail');
 })->name('checkmail');

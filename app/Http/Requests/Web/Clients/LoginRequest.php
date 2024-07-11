@@ -21,8 +21,27 @@ class LoginRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            
+        $rules = [
+            'password' => 'required',
+            'email' => 'required|email',
         ];
+
+        return $rules;
+    }
+
+    public function messages(): array
+    {
+        return [
+            'required' => ':attribute không được để trống!',
+            'email' => 'Vui lòng nhập đúng định dạng email!',
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'password' => 'Mật khẩu',
+            'email' => 'Email'
+        ]; 
     }
 }

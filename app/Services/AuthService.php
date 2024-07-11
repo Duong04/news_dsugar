@@ -7,6 +7,7 @@ use App\Models\User;
 use Hash;
 use Str;
 use App\Jobs\ProcessMail;
+use Auth;
 
 class AuthService {
     protected $userInterface;
@@ -45,5 +46,17 @@ class AuthService {
         } catch (\Throwable $th) {
             return response()->json($th->getMessage(), 422);
         }
+    }
+
+    public function login($request) {
+        $user = $request->validated();
+
+        if (Auth::attempt($user)) {
+            $request->session()->regenerate();
+ 
+            return true;
+        }
+
+        return false;
     }
 }

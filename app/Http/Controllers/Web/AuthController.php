@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Services\AuthService;
 use App\Http\Requests\Web\Clients\RegisterRequest;
+use App\Http\Requests\Web\Clients\LoginRequest;
 use Auth;
 
 class AuthController extends Controller
@@ -27,6 +28,17 @@ class AuthController extends Controller
 
     public function showLogin() {
         return view('clients/auth/login');
+    }
+
+    public function actionLogin(LoginRequest $request) {
+        $user = $this->authService->login($request);
+        if ($user) {
+            toastr()->success('Đăng nhập thành công');
+            return redirect()->intended('/');
+        } 
+
+        toastr()->error('Thông tin xác thực được cung cấp không khớp với hồ sơ của chúng tôi.');
+        return redirect()->back();
     }
 
     public function verifyEmail($token) {

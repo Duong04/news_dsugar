@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Repositories\User\UserRepositoryInterface;
-use App\Models\User;
 use Hash;
 use Str;
 use App\Jobs\ProcessMail;

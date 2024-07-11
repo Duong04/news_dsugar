@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Web\AuthController;
+use App\Http\Controllers\Web\Clients\AuthController;
+use App\Http\Controllers\Web\Admins\CategoryController;;
 
 Route::get('/', function () {
     return view('clients.home.home');
@@ -28,7 +29,8 @@ Route::get('/chi-tiet', function () {
 
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard', function () {
-        
         return view('admins.dashboard.dashboard');
-    });
+    })->name('dashboard');
+    Route::get('/danh-muc', [CategoryController::class, 'index'])->name('categories');
+    Route::get('/them-danh-muc', [CategoryController::class, 'create'])->name('create.category');
 });

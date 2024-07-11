@@ -144,7 +144,9 @@
                           </tr>
                         </tfoot>
                         <tbody>
-                            {{$i = 1}}
+                            @php
+                                $i = 1;
+                            @endphp
                             @foreach ($categories as $item)
                             <tr>
                               <td>{{ $i++ }}</td>

@@ -32,14 +32,7 @@ class AuthController extends Controller
     }
 
     public function actionLogin(LoginRequest $request) {
-        $loginSuccess = $this->authService->login($request);
-        if ($loginSuccess) {
-            toastr()->success('Đăng nhập thành công');
-            return redirect()->intended('/');
-        } 
-
-        toastr()->error('Thông tin xác thực được cung cấp không khớp với hồ sơ của chúng tôi.');
-        return redirect()->back()->withInput();
+        return $this->authService->login($request);
     }
 
     public function verifyEmail($token) {
@@ -53,7 +46,7 @@ class AuthController extends Controller
     public function logout(Request $request) {
         $logoutSuccess = $this->authService->logout($request);
         if ($logoutSuccess) {
-            toastr()->info('Đẫ đăng xuất thành công!');
+            toastr()->info('Đã đăng xuất thành công!');
             return redirect()->route('login');
         }
     }

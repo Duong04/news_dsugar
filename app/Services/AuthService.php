@@ -51,12 +51,27 @@ class AuthService {
         $user = $request->validated();
 
         if (Auth::attempt($user)) {
+            $userData = Auth::user();
+
+            if ($userData->status == 'inactive' || $userData->status == 'disabled') {
+                $message = $userData->status == 'inactive' ? 'chưa kích hoạt!' : 'đã bị vô hiệu hóa!';
+                toastr()->warning("Tài khoản của bạn " . $message);
+                Auth::logout();
+                return redirect()->back(); 
+            }
+
             $request->session()->regenerate();
- 
-            return true;
+            toastr()->success('Đăng nhập thành công');
+
+            if ($userData->role->name == 'Admin') {
+                return redirect()->route('dashboard');
+            }
+
+            return redirect()->intended('/');
         }
 
-        return false;
+        toastr()->error('Thông tin xác thực được cung cấp không khớp với hồ sơ của chúng tôi.');
+        return redirect()->back()->withInput();
     }
 
     public function logout($request) {

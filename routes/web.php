@@ -33,4 +33,5 @@ Route::prefix('admin')->group(function () {
     })->name('dashboard');
     Route::get('/danh-muc', [CategoryController::class, 'index'])->name('categories');
     Route::get('/them-danh-muc', [CategoryController::class, 'create'])->name('create.category');
+    Route::post('/them-danh-muc', [CategoryController::class, 'store'])->name('store.category');
 });

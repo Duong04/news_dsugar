@@ -29,6 +29,36 @@ class CategoryService {
         } catch (\Throwable $th) {
             return response()->json(['error' => $th->getMessage()], 422);
         }
-        
+    }
+
+    public function findId($id) {
+        try {
+            return $this->categoryInterface->find($id);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 404);
+        }
+    }
+
+    public function update($request, $id) {
+        try {
+            $category = $request->validated();
+            $data = [
+                'name' =>$category['name'],
+                'description' =>$category['description'],
+                'slug' => Str::slug($category['name'], '-'),
+            ];
+
+            return $this->categoryInterface->update($id, $data);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 422);
+        }   
+    }
+
+    public function delete($id) {
+        try {
+            return $this->categoryInterface->delete($id);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 422);
+        }
     }
 }

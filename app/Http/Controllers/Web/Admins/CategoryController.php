@@ -25,7 +25,33 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request) {
         $categorySuccess = $this->categoryService->create($request);
 
-        toastr()->success('Đã thêm danh mục thành công!');
-        return redirect()->back();
+        if ($categorySuccess) {
+            toastr()->success('Đã thêm danh mục thành công!');
+            return redirect()->back();
+        }
+
+    }
+
+    public function show($id) {
+        $category = $this->categoryService->findId($id);
+        return view('admins.categories.update', ['category' => $category]);
+    }
+
+    public function edit(CategoryRequest $request, $id) {
+        $categorySuccess = $this->categoryService->update($request, $id);
+        
+        if ($categorySuccess) {
+            toastr()->success('Đã sửa danh mục thành công!');
+            return redirect()->route('categories');
+        }
+    }
+
+    public function destroy($id) {
+        $categorySuccess = $this->categoryService->delete($id);
+
+        if ($categorySuccess) {
+            toastr()->success('Đã xóa danh mục thành công!');
+            return redirect()->back();
+        }
     }
 }

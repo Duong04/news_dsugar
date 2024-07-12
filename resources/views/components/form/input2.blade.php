@@ -1,7 +1,7 @@
 <div class="form-group col-6{{ $error ? ' has-error' : '' }}">
     <label for="{{$name}}">{{ $label }}</label>
     <input
-        value="{{ old($name) }}"
+        value="{{ $value ? $value : old($name) }}"
         type="{{ $type }}"
         class="form-control"
         id="{{ $name }}"

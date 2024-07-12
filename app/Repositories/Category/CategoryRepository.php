@@ -10,7 +10,7 @@ class CategoryRepository implements CategoryRepositoryInterface {
     }
 
     public function find($id){
-
+        return Category::findOrFail($id);
     }
 
     public function create(array $data){
@@ -18,9 +18,11 @@ class CategoryRepository implements CategoryRepositoryInterface {
     }
 
     public function update($id, array $data) {
-
+        $category = Category::findOrFail($id);
+        return $category->update($data);
     }
     public function delete($id){
-
+        $category = Category::findOrFail($id);
+        return $category->delete();
     }
 }

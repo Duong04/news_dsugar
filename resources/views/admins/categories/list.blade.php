@@ -25,7 +25,6 @@
     <link rel="stylesheet" href="/templates/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/templates/css/plugins.min.css" />
     <link rel="stylesheet" href="/templates/css/kaiadmin.min.css" />
-
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="/templates/css/demo.css" />
 @endsection
@@ -43,6 +42,8 @@
     <script src="/templates/js/kaiadmin.min.js"></script>
     <!-- Kaiadmin DEMO methods, don't include it in your project! -->
     <script src="/templates/js/setting-demo2.js"></script>
+    <script src="/templates/js/plugin/sweetalert/sweetalert.min.js"></script>
+    <script src="/templates/js/sweetalert.js"></script>
     <script>
       $(document).ready(function () {
         $("#multi-filter-select").DataTable({
@@ -156,24 +157,27 @@
                               <td>{{ $item->updated_at }}</td>
                               <td>
                                 <div class="form-button-action">
-                                  <button
-                                    type="button"
+                                  <a href="{{ route('edit.category', ['id' => $item->id]) }}"
                                     data-bs-toggle="tooltip"
-                                    title=""
+                                    title="Sửa"
                                     class="btn btn-link btn-primary btn-lg"
                                     data-original-title="Edit Task"
                                   >
                                     <i class="fa fa-edit"></i>
-                                  </button>
-                                  <button
-                                    type="button"
-                                    data-bs-toggle="tooltip"
-                                    title=""
-                                    class="btn btn-link btn-danger"
-                                    data-original-title="Remove"
-                                  >
-                                    <i class="fa fa-times"></i>
-                                  </button>
+                                  </a>
+                                  <form class="d-flex align-items-center" id="delete-form-{{ $item->id }}" method="POST" action="{{ route('delete.category', ['id' => $item->id]) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button
+                                      data-bs-toggle="tooltip"
+                                      title="Xóa"
+                                      class="btn btn-link btn-danger delete"
+                                      data-original-title="Remove"
+                                      data-id="{{ $item->id }}"
+                                    >
+                                      <i class="fa fa-times"></i>
+                                    </button>
+                                  </form>
                                 </div>
                               </td>
                             </tr>

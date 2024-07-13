@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\Clients\AuthController;
-use App\Http\Controllers\Web\Admins\CategoryController;;
+use App\Http\Controllers\Web\Admins\CategoryController;
+use App\Http\Controllers\Web\Admins\SubcategoryController;
 
 Route::get('/', function () {
     return view('clients.home.home');
@@ -31,10 +32,15 @@ Route::prefix('admin')->group(function () {
     Route::get('/dashboard', function () {
         return view('admins.dashboard.dashboard');
     })->name('dashboard');
+
+    // Danh mục
     Route::get('/danh-muc', [CategoryController::class, 'index'])->name('categories');
     Route::get('/them-danh-muc', [CategoryController::class, 'create'])->name('create.category');
     Route::post('/them-danh-muc', [CategoryController::class, 'store'])->name('store.category');
     Route::get('/sua-danh-muc/{id}', [CategoryController::class, 'show'])->name('edit.category');
     Route::put('/sua-danh-muc/{id}', [CategoryController::class, 'edit'])->name('update.category');
     Route::delete('/xoa-danh-muc/{id}', [CategoryController::class, 'destroy'])->name('delete.category');
+
+    // Danh mục con
+    Route::get('/danh-muc-con', [SubcategoryController::class, 'index'])->name('subcategories');
 });

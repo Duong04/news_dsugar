@@ -58,7 +58,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="components/buttons.html">
+                                <a href="{{ route('subcategories') }}">
                                     <span class="sub-item">Danh mục con</span>
                                 </a>
                             </li>

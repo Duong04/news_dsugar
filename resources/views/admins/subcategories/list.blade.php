@@ -111,7 +111,7 @@
                 <div class="card">
                     <div class="card-header d-flex align-items-center">
                     <h4 class="card-title">Danh mục</h4>
-                    <a href="{{route('create.category')}}"
+                    <a href="{{route('create.subcategory')}}"
                         class="btn btn-primary btn-round ms-auto"
                         >
                         <i class="fa fa-plus"></i>

@@ -43,4 +43,5 @@ Route::prefix('admin')->group(function () {
 
     // Danh mục con
     Route::get('/danh-muc-con', [SubcategoryController::class, 'index'])->name('subcategories');
+    Route::get('/them-danh-muc-con', [SubcategoryController::class, 'create'])->name('create.subcategory');
 });

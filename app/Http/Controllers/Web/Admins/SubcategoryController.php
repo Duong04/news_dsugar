@@ -18,4 +18,8 @@ class SubcategoryController extends Controller
         $subacategories = $this->subcategoryService->getAll();
         return view('admins.subcategories.list', ['subcategories' => $subacategories]);
     }
+
+    public function create() {
+        return view('admins.subcategories.create');
+    }
 }

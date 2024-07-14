@@ -17,11 +17,13 @@ class select extends Component
     public $name;
     public $type;
     public $categories;
-    public function __construct($label, $name, $type, $error = null, CategoryService $categoryService)
+    public $id;
+    public function __construct($label, $name, $type, $error = null, $id = null, CategoryService $categoryService)
     {
         $this->error = $error;
         $this->label = $label;
         $this->name = $name;
+        $this->id = $id;
         $this->categories = $categoryService->getAll();
     }
 

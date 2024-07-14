@@ -46,4 +46,6 @@ Route::prefix('admin')->group(function () {
     Route::get('/them-danh-muc-con', [SubcategoryController::class, 'create'])->name('create.subcategory');
     Route::post('/them-danh-muc-con', [SubcategoryController::class, 'store'])->name('store.subcategory');
     Route::get('/sua-danh-muc-con/{id}', [SubcategoryController::class, 'show'])->name('show.subcategory');
+    Route::put('/sua-danh-muc-con/{id}', [SubcategoryController::class, 'update'])->name('update.subcategory');
+    Route::delete('/xoa-danh-muc-con/{id}', [SubcategoryController::class, 'destroy'])->name('delete.subcategory');
 });

@@ -168,7 +168,7 @@
                                   >
                                     <i class="fa fa-edit"></i>
                                   </a>
-                                  <form class="d-flex align-items-center" id="delete-form-{{ $item->id }}" method="POST" action="{{ route('delete.category', ['id' => $item->id]) }}">
+                                  <form class="d-flex align-items-center" id="delete-form-{{ $item->id }}" method="POST" action="{{ route('delete.subcategory', ['id' => $item->id]) }}">
                                     @csrf
                                     @method('DELETE')
                                     <button

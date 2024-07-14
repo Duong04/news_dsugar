@@ -9,15 +9,17 @@ class SubcategoryRepository implements SubcategoryRepositoryInterface {
         return Subcategory::with('categories')->get();
     }
     public function find($id) {
-
+        return Subcategory::findOrFail($id);
     }
     public function create(array $data) {
         return Subcategory::create($data);
     }
     public function update($id, array $data) {
-
+        $subcategory = Subcategory::findOrFail($id);
+        return $subcategory->update($data);
     }
     public function delete($id) {
-
+        $subcategory = Subcategory::findOrFail($id);
+        return $subcategory->delete();
     }
 }

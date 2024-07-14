@@ -33,6 +33,23 @@ class SubcategoryController extends Controller
     }
 
     public function show($id) {
-        return 'okok';
+        $subcategory = $this->subcategoryService->findId($id);
+        return view('admins.subcategories.update', ['subcategory' => $subcategory]);
+    }
+
+    public function update(SubcategoryRequest $request, $id) {
+        $subcategorySuccess = $this->subcategoryService->update($request, $id);
+        if ($subcategorySuccess) {
+            toastr()->success('Cập nhật danh mục con thành công!');
+            return redirect()->route('subcategories');
+        }
+    }
+
+    public function destroy($id) {
+        $subcategorySuccess = $this->subcategoryService->delete($id);
+        if ($subcategorySuccess) {
+            toastr()->success('Xóa danh mục con thành công!');
+            return redirect()->back();
+        }
     }
 }

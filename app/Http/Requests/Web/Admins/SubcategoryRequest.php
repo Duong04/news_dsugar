@@ -21,11 +21,16 @@ class SubcategoryRequest extends FormRequest
      */
     public function rules(): array
     {
+        $id = $this->route('id');
         $rules = [
             'name' => 'required|max:255|unique:subcategories,name',
             'description' => 'required',
             'category_id' => 'required|exists:categories,id',
         ];
+
+        if ($id) {
+            $rules['name'] .=','. $id;
+        }
 
         return $rules;
     }

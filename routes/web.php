@@ -37,11 +37,13 @@ Route::prefix('admin')->group(function () {
     Route::get('/danh-muc', [CategoryController::class, 'index'])->name('categories');
     Route::get('/them-danh-muc', [CategoryController::class, 'create'])->name('create.category');
     Route::post('/them-danh-muc', [CategoryController::class, 'store'])->name('store.category');
-    Route::get('/sua-danh-muc/{id}', [CategoryController::class, 'show'])->name('edit.category');
+    Route::get('/sua-danh-muc/{id}', [CategoryController::class, 'show'])->name('show.category');
     Route::put('/sua-danh-muc/{id}', [CategoryController::class, 'edit'])->name('update.category');
     Route::delete('/xoa-danh-muc/{id}', [CategoryController::class, 'destroy'])->name('delete.category');
 
     // Danh mục con
     Route::get('/danh-muc-con', [SubcategoryController::class, 'index'])->name('subcategories');
     Route::get('/them-danh-muc-con', [SubcategoryController::class, 'create'])->name('create.subcategory');
+    Route::post('/them-danh-muc-con', [SubcategoryController::class, 'store'])->name('store.subcategory');
+    Route::get('/sua-danh-muc-con/{id}', [SubcategoryController::class, 'show'])->name('show.subcategory');
 });

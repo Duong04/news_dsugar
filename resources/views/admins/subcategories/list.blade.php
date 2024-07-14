@@ -129,6 +129,7 @@
                               <td>Stt</td>
                               <th>Tên danh mục</th>
                               <th>Mô tả ngắn</th>
+                              <th>Danh mục</th>
                               <th>Ngày tạo</th>
                               <th>Ngày cập nhật</th>
                               <th style="width: 10%">Action</th>
@@ -139,6 +140,7 @@
                             <td>Stt</td>
                             <th>Tên danh mục</th>
                             <th>Mô tả ngắn</th>
+                            <th>Danh  mục</th>
                             <th>Ngày tạo</th>
                             <th>Ngày cập nhật</th>
                             <th style="width: 10%">Action</th>
@@ -152,12 +154,13 @@
                             <tr>
                               <td>{{ $i++ }}</td>
                               <td>{{ $item->name }}</td>
-                              <td>{{ $item->description }}</td>
+                              <td style="width: 150px;"><p class="description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt ab quasi quod alias laudantium nemo, accusantium facilis corrupti inventore sint sunt voluptas necessitatibus at quidem eaque pariatur nobis dignissimos molestias! {{ $item->description }}</p></td>
+                              <td>{{ $item->categories->name }}</td>
                               <td>{{ $item->created_at }}</td>
                               <td>{{ $item->updated_at }}</td>
                               <td>
                                 <div class="form-button-action">
-                                  <a href="{{ route('edit.category', ['id' => $item->id]) }}"
+                                  <a href="{{ route('show.subcategory', ['id' => $item->id]) }}"
                                     data-bs-toggle="tooltip"
                                     title="Sửa"
                                     class="btn btn-link btn-primary btn-lg"

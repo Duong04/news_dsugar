@@ -157,7 +157,7 @@
                               <td>{{ $item->updated_at }}</td>
                               <td>
                                 <div class="form-button-action">
-                                  <a href="{{ route('edit.category', ['id' => $item->id]) }}"
+                                  <a href="{{ route('show.category', ['id' => $item->id]) }}"
                                     data-bs-toggle="tooltip"
                                     title="Sửa"
                                     class="btn btn-link btn-primary btn-lg"

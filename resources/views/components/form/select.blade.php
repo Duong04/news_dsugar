@@ -1,4 +1,4 @@
-<div class="form-group col-6">
+<div class="form-group col-6{{ $error ? ' has-error' : '' }}">
     <label for="{{ $name }}">{{ $label }}</label>
     <select name="{{ $name }}" id="{{ $name }}" class="form-control">
       <option value="">Vui lòng chọn danh mục</option>

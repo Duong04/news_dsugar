@@ -6,13 +6,13 @@ use App\Models\Subcategory;
 
 class SubcategoryRepository implements SubcategoryRepositoryInterface {
     public function all() {
-        return Subcategory::all();
+        return Subcategory::with('categories')->get();
     }
     public function find($id) {
 
     }
     public function create(array $data) {
-
+        return Subcategory::create($data);
     }
     public function update($id, array $data) {
 

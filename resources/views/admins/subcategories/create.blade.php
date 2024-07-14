@@ -106,7 +106,7 @@
             </ul>
         </div>
         <div class="row">
-          <form class="row col-12" action="{{ route('store.category') }}" method="POST">
+          <form class="row col-12" action="{{ route('store.subcategory') }}" method="POST">
             @csrf
             <x-form.input2 :error="$errors->first('name')" name="name" label="Tên danh mục" type="text" />
             <x-form.input2 :error="$errors->first('description')" name="description" label="Mô tả ngắn" type="text" />
@@ -115,7 +115,6 @@
               <button class="btn btn-primary">Thêm danh mục</button>
             </div>
           </form>
-
         </div>
     </div>
 </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web\Admins;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\SubcategoryService;
+use App\Http\Requests\Web\Admins\SubcategoryRequest;
 
 class SubcategoryController extends Controller
 {
@@ -21,5 +22,17 @@ class SubcategoryController extends Controller
 
     public function create() {
         return view('admins.subcategories.create');
+    }
+
+    public function store(SubcategoryRequest $request) {
+        $subcategorySuccess = $this->subcategoryService->create($request);
+        if ($subcategorySuccess) {
+            toastr()->success('Đã thêm danh mục con thành công!');
+            return redirect()->back();
+        }
+    }
+
+    public function show($id) {
+        return 'okok';
     }
 }

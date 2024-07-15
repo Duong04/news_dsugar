@@ -21,6 +21,7 @@
         </section>
     </div>
     <div class="mouse-trail"></div>
+    <script src="js/header.js"></script>
     <script src="libraries/bootstrap/popper.min.js"></script>
     <script src="libraries/bootstrap/bootstrap.min.js"></script>
 </body>

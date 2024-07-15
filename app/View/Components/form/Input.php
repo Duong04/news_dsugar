@@ -15,12 +15,14 @@ class Input extends Component
     public $icon;
     public $label;
     public $type;
-    public function __construct($name, $icon, $label, $type)
+    public $error;
+    public function __construct($name, $icon, $label, $type, $error = null)
     {
         $this->name = $name;
         $this->icon = $icon;
         $this->label = $label;
         $this->type = $type;
+        $this->error = $error;
     }
 
     /**

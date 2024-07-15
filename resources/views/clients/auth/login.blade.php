@@ -7,9 +7,10 @@
         <h4 class="text-center fw-semibold">Hi, Welcome Back!</h4>
         <p class="text-center text-midgray">Chào mừng bạn quay lại. Với tư cách là khách hàng cũ, bạn có quyền truy cập vào tất cả thông tin đã lưu trước đó của mình.</p>
         <div class="main-form">
-            <form action="">
-                <x-form.input name="email" label="Email của bạn" type="text" icon="fa-regular fa-envelope" />
-                <x-form.input name="password" label="Mật khẩu" type="password" icon="fa-regular fa-eye" />
+            <form action="{{ route('action.login') }}" method="POST">
+                @csrf
+                <x-form.input :error="$errors->first('email')" name="email" label="Email của bạn" type="text" icon="fa-regular fa-envelope" />
+                <x-form.input :error="$errors->first('password')" name="password" label="Mật khẩu" type="password" icon="fa-regular fa-eye" />
                 <div class="mt-3 d-flex justify-content-between">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>

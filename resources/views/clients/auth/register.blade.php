@@ -7,13 +7,14 @@
         <h4 class="text-center fw-semibold">Hi, Welcome Back!</h4>
         <p class="text-center text-midgray">Chào mừng bạn quay lại. Với tư cách là khách hàng cũ, bạn có quyền truy cập vào tất cả thông tin đã lưu trước đó của mình.</p>
         <div class="main-form">
-            <form action="">
-                <x-form.input name="user_name" label="Tên người dùng" type="text" icon="fa-regular fa-user" />
-                <x-form.input name="email" label="Email của bạn" type="text" icon="fa-regular fa-envelope" />
-                <x-form.input name="confirm-psw" label="Xác nhận mật khẩu" type="password" icon="fa-regular fa-eye" />
-                <x-form.input name="password" label="Mật khẩu" type="password" icon="fa-regular fa-eye" />
+            <form action="{{ route('action.register') }}" method="POST">
+                @csrf
+                <x-form.input :error="$errors->first('user_name')" name="user_name" label="Tên người dùng" type="text" icon="fa-regular fa-user" />
+                <x-form.input :error="$errors->first('email')" name="email" label="Email của bạn" type="text" icon="fa-regular fa-envelope" />
+                <x-form.input :error="$errors->first('password')" name="password" label="Mật khẩu" type="password" icon="fa-regular fa-eye-slash" />
+                <x-form.input :error="$errors->first('confirm_psw')" name="confirm_psw" label="Xác nhận mật khẩu" type="password" icon="fa-regular fa-eye-slash" />
                 <div class="mt-4">
-                    <button class="btn btn-primary w-100 py-2">Đăng ký</button>
+                    <button class="btn btn-primary w-100 py-2" type="submit">Đăng ký</button>
                 </div>
                 <div class="mt-3 btn btn-lightest w-100 d-flex align-items-center justify-content-center g-10">
                     <img style="width: 28px" height="28px" src="images/gg.png" alt="">

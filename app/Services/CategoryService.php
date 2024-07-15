@@ -19,7 +19,7 @@ class CategoryService {
         try {
             $category = $request->validated();
 
-            $okok = $this->categoryInterface->create([
+            $this->categoryInterface->create([
                 'name' => $category['name'],
                 'description' => $category['description'],
                 'slug' => Str::slug($category['name'], '-')

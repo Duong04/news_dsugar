@@ -1,49 +1,6 @@
 @extends('admins.layouts.master')
 
-@section('script-top')
-<script src="/templates/js/plugin/webfont/webfont.min.js"></script>
-<script>
-  WebFont.load({
-    google: { families: ["Public Sans:300,400,500,600,700"] },
-    custom: {
-      families: [
-        "Font Awesome 5 Solid",
-        "Font Awesome 5 Regular",
-        "Font Awesome 5 Brands",
-        "simple-line-icons",
-      ],
-      urls: ["/templates/css/fonts.min.css"],
-    },
-    active: function () {
-      sessionStorage.fonts = true;
-    },
-  });
-</script>
-@endsection
-@section('css')
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="/templates/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/templates/css/plugins.min.css" />
-    <link rel="stylesheet" href="/templates/css/kaiadmin.min.css" />
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link rel="stylesheet" href="/templates/css/demo.css" />
-@endsection
 @section('script-bottom')
-    <!--   Core JS Files   -->
-    <script src="/templates/js/core/jquery-3.7.1.min.js"></script>
-    <script src="/templates/js/core/popper.min.js"></script>
-    <script src="/templates/js/core/bootstrap.min.js"></script>
-
-    <!-- jQuery Scrollbar -->
-    <script src="/templates/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-    <!-- Datatables -->
-    <script src="/templates/js/plugin/datatables/datatables.min.js"></script>
-    <!-- Kaiadmin JS -->
-    <script src="/templates/js/kaiadmin.min.js"></script>
-    <!-- Kaiadmin DEMO methods, don't include it in your project! -->
-    <script src="/templates/js/setting-demo2.js"></script>
-    <script src="/templates/js/plugin/sweetalert/sweetalert.min.js"></script>
-    <script src="/templates/js/sweetalert.js"></script>
     <script>
       $(document).ready(function () {
         $("#multi-filter-select").DataTable({
@@ -168,7 +125,7 @@
                                   >
                                     <i class="fa fa-edit"></i>
                                   </a>
-                                  <form class="d-flex align-items-center" id="delete-form-{{ $item->id }}" method="POST" action="{{ route('delete.category', ['id' => $item->id]) }}">
+                                  <form class="d-flex align-items-center" id="delete-form-{{ $item->id }}" method="POST" action="{{ route('delete.subcategory', ['id' => $item->id]) }}">
                                     @csrf
                                     @method('DELETE')
                                     <button

@@ -1,4 +1,4 @@
-<div class="form-group col-6{{ $error ? ' has-error' : '' }}">
+<div class="form-group {{$class}}{{ $error ? ' has-error' : '' }}">
     <label for="{{$name}}">{{ $label }}</label>
     <input
         value="{{ $value ? $value : old($name) }}"

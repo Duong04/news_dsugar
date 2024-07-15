@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\Clients\AuthController;
 use App\Http\Controllers\Web\Admins\CategoryController;
 use App\Http\Controllers\Web\Admins\SubcategoryController;
+use App\Http\Controllers\Web\Admins\PostController;
 
 Route::get('/', function () {
     return view('clients.home.home');
@@ -46,4 +47,9 @@ Route::prefix('admin')->group(function () {
     Route::get('/them-danh-muc-con', [SubcategoryController::class, 'create'])->name('create.subcategory');
     Route::post('/them-danh-muc-con', [SubcategoryController::class, 'store'])->name('store.subcategory');
     Route::get('/sua-danh-muc-con/{id}', [SubcategoryController::class, 'show'])->name('show.subcategory');
+    Route::put('/sua-danh-muc-con/{id}', [SubcategoryController::class, 'update'])->name('update.subcategory');
+    Route::delete('/xoa-danh-muc-con/{id}', [SubcategoryController::class, 'destroy'])->name('delete.subcategory');
+
+    // Bài viết
+    Route::get('/them-bai-viet', [PostController::class, 'create'])->name('post');
 });

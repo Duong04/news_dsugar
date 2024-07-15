@@ -30,7 +30,7 @@
             @csrf
             <x-form.input2 class="col-6" :error="$errors->first('name')" name="name" label="Tên danh mục" type="text" />
             <x-form.input2 class="col-6" :error="$errors->first('description')" name="description" label="Mô tả ngắn" type="text" />
-            <x-form.select class="col-6" :id="null" type="categories" :error="$errors->first('category_id')" name="category_id" label="Danh mục" />
+            <x-form.select class="col-6" classChild="categories" :id="null" type="categories" :error="$errors->first('category_id')" name="category_id" label="Danh mục" />
             <div class="col-12 form-group">
               <button class="btn btn-primary">Thêm danh mục</button>
             </div>

@@ -42,7 +42,6 @@ class SubcategoryService {
             return response()->json(['error' => $th->getMessage()], 404);
         }
     }
-
     public function findCategoryId($categoryId) {
         try {
             return $this->subcategoryInterface->findAll($categoryId);

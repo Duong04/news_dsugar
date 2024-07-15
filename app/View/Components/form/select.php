@@ -20,8 +20,7 @@ class select extends Component
     public $id;
     public $class;
     public $classChild;
-    public function __construct($label, $name, $type, $class, $classChild, $error = null, $id = null, CategoryService $categoryService)
-    {
+    public function __construct($label, $name, $type, $class, $classChild, $error = null, $id = null, CategoryService $categoryService) {
         $this->error = $error;
         $this->label = $label;
         $this->name = $name;

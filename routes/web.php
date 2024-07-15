@@ -49,7 +49,6 @@ Route::prefix('admin')->group(function () {
     Route::get('/sua-danh-muc-con/{id}', [SubcategoryController::class, 'show'])->name('show.subcategory');
     Route::put('/sua-danh-muc-con/{id}', [SubcategoryController::class, 'update'])->name('update.subcategory');
     Route::delete('/xoa-danh-muc-con/{id}', [SubcategoryController::class, 'destroy'])->name('delete.subcategory');
-
-    // Bài viết
+    
     Route::get('/them-bai-viet', [PostController::class, 'create'])->name('post');
 });

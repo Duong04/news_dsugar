@@ -24,13 +24,13 @@
                 <i class="icon-arrow-right"></i>
             </li>
             <li class="nav-item">
-                <a href="{{ route('categories') }}">Danh mục</a>
+                <a href="{{ route('categories') }}">Bài viết</a>
             </li>
             <li class="separator">
                 <i class="icon-arrow-right"></i>
             </li>
             <li class="nav-item">
-                <a href="#">Thêm danh mục</a>
+                <a href="#">Thêm bài viết</a>
             </li>
             </ul>
         </div>

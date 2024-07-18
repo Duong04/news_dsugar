@@ -21,6 +21,8 @@ Route::post('/dang-ky', [AuthController::class, 'actionRegister'])->name('action
 Route::get('/email/verify/{token}', [AuthController::class, 'verifyEmail']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::get('/upload', [PostController::class, 'upload']);
+Route::post('/upload', [PostController::class, 'postUpload']);
 Route::get('/check-mail', function () {
     return view('clients.auth.checkmail');
 })->name('checkmail');
@@ -50,5 +52,7 @@ Route::prefix('admin')->group(function () {
     Route::put('/sua-danh-muc-con/{id}', [SubcategoryController::class, 'update'])->name('update.subcategory');
     Route::delete('/xoa-danh-muc-con/{id}', [SubcategoryController::class, 'destroy'])->name('delete.subcategory');
     
-    Route::get('/them-bai-viet', [PostController::class, 'create'])->name('post');
+    Route::get('/bai-viet', [PostController::class, 'index'])->name('posts');
+    Route::get('/them-bai-viet', [PostController::class, 'create'])->name('create.post');
+    Route::post('/them-bai-viet', [PostController::class, 'store'])->name('store.post');
 });

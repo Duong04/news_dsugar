@@ -74,13 +74,13 @@
                     <div class="collapse" id="sidebarLayouts">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="sidebar-style-2.html">
-                                    <span class="sub-item">Sidebar Style 2</span>
+                                <a href="{{ route('posts') }}">
+                                    <span class="sub-item">Bài viết</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="icon-menu.html">
-                                    <span class="sub-item">Icon Menu</span>
+                                <a href="{{ route('create.post') }}">
+                                    <span class="sub-item">Thêm bài viết</span>
                                 </a>
                             </li>
                         </ul>

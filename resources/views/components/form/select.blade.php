@@ -4,7 +4,7 @@
         <option value="">Vui lòng chọn danh mục</option>
         @isset($categories)
             @foreach ($categories as $item)
-                <option {{ $id && $id == $item->id ? 'selected' : '' }} value="{{ $item->id }}">{{ $item->name }}</option>
+                <option {{old($name) == $item->id ? 'selected' : ''}} {{ $id && $id == $item->id ? 'selected' : '' }} value="{{ $item->id }}">{{ $item->name }}</option>
             @endforeach
         @endisset
     </select>

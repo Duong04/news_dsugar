@@ -6,7 +6,18 @@ const layoutSelect = ({id, name}) => {
     return `<option value="${id}">${name}</option>`;
 }
 
-document.querySelector('.categories').addEventListener('change', async (e) => {
+document.addEventListener('DOMContentLoaded', () => {
+    const categoriesElement = document.querySelector('.categories');
+    
+    if (categoriesElement) {
+        categoriesElement.addEventListener('change', async (e) => {
+            getSubcategories(e);
+        });
+
+        getSubcategories({ target: categoriesElement });
+    }
+});
+const getSubcategories = async (e) => {
     const id = e.target.value;
     try {
         if (id) {
@@ -20,4 +31,4 @@ document.querySelector('.categories').addEventListener('change', async (e) => {
     }catch (e) {
         console.log(e);
     }
-})
+}

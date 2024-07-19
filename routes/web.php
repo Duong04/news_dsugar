@@ -55,4 +55,5 @@ Route::prefix('admin')->group(function () {
     Route::get('/bai-viet', [PostController::class, 'index'])->name('posts');
     Route::get('/them-bai-viet', [PostController::class, 'create'])->name('create.post');
     Route::post('/them-bai-viet', [PostController::class, 'store'])->name('store.post');
+    Route::get('/sua-bai-viet/{id}', [PostController::class, 'show'])->name('show.post');
 });

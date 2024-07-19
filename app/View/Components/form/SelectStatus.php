@@ -14,11 +14,13 @@ class SelectStatus extends Component
     public $name;
     public $class;
     public $error;
-    public function __construct($name, $class, $error)
+    public $value;
+    public function __construct($name, $class, $error, $value = null)
     {
         $this->name = $name;
         $this->class = $class;
         $this->error = $error;
+        $this->value = $value;
     }
 
     /**

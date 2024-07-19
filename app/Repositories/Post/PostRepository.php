@@ -9,7 +9,7 @@ class PostRepository implements PostRepositoryInterface {
         return Post::with('category', 'subcategory', 'user')->get();
     }
     public function find($id) {
-
+        return Post::with('category', 'subcategory')->findOrFail($id);
     }
     public function create(array $data) {
         return Post::create($data);

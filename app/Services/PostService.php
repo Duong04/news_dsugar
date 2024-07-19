@@ -47,4 +47,12 @@ class PostService {
             return response()->json(['error' => $th->getMessage()], 422);
         }
     }
+
+    public function findById($id) {
+        try {
+            return $this->postInterface->find($id);
+        } catch (\Throwable $th) {
+            return false;
+        }
+    }
 }

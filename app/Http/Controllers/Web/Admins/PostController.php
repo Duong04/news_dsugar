@@ -32,4 +32,9 @@ class PostController extends Controller
         }
     }
 
+    public function show($id) {
+        $post = $this->postService->findById($id);
+        return view('admins.posts.update', ['post' => $post]);
+    }
+
 }

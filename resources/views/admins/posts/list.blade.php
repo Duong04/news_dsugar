@@ -123,7 +123,7 @@
                                                 <td>{{ $item->created_at }}</td>
                                                 <td>
                                                     <div class="form-button-action">
-                                                        <a href="{{ route('show.category', ['id' => $item->id]) }}"
+                                                        <a href="{{ route('show.post', ['id' => $item->id]) }}"
                                                             data-bs-toggle="tooltip" title="Sửa"
                                                             class="btn btn-link btn-primary btn-lg"
                                                             data-original-title="Edit Task">

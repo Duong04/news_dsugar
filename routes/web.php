@@ -66,4 +66,5 @@ Route::prefix('admin')->group(function () {
 
     // Vai trò
     Route::get('/role', [RoleController::class, 'index'])->name('roles');
+    Route::get('/create-role', [RoleController::class, 'create'])->name('create.role');
 });

@@ -12,6 +12,10 @@ class RolePermission extends Model
     protected $table = 'role_permissions';
     protected $fillabel = [
         'permission_id',
-        'role_id'
+        'role_id',
+        'read',
+        'create',
+        'update',
+        'delete'
     ];
 }

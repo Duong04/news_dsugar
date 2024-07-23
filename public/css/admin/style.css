@@ -1,0 +1,7 @@
+.colorinput-color.bg-info {
+    background-color: transparent !important;
+}
+
+.colorinput-input:checked ~ .colorinput-color.bg-info {
+    background-color: #48abf7 !important
+}

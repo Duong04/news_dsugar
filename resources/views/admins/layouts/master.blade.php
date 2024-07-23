@@ -37,6 +37,7 @@
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="/templates/css/demo.css" />
+    <link rel="stylesheet" href="/css/admin/style.css" />
     <style>
       .ck-editor__editable_inline {
           min-height: 500px;

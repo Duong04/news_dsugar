@@ -63,7 +63,7 @@ class AuthService {
             $request->session()->regenerate();
             toastr()->success('Đăng nhập thành công');
 
-            if ($userData->role->name == 'Admin') {
+            if ($userData->role->name == 'Super Admin') {
                 return redirect()->route('dashboard');
             }
 

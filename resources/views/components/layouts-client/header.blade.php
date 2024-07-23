@@ -72,7 +72,7 @@
                                 <ul style="left: -50px;" class="dropdown-menu">
                                     <li><a class="dropdown-item" href="#">Tài khoản</a></li>
                                     <li><a class="dropdown-item" href="#">Thêm bài viết</a></li>
-                                    @if (Auth::user()->role->name == 'Admin')
+                                    @if (Auth::user()->role->name == 'Super Admin')
                                     <li><a class="dropdown-item" href="{{ route('dashboard') }}">Quản trị viên</a></li>
                                     @endif
                                     <li><form class="dropdown-item" action="{{ route('logout') }}" method="POST">@csrf <button class="nav-link">Đăng xuất</button></form></li>

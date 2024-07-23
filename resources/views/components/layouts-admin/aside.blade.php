@@ -89,14 +89,19 @@
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#forms">
                         <i class="fas fa-pen-square"></i>
-                        <p>Forms</p>
+                        <p>Phân quyền</p>
                         <span class="caret"></span>
                     </a>
                     <div class="collapse" id="forms">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="forms/forms.html">
-                                    <span class="sub-item">Basic Form</span>
+                                <a href="{{ route('roles') }}">
+                                    <span class="sub-item">Vai trò</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('permissions') }}">
+                                    <span class="sub-item">Quyền người dùng</span>
                                 </a>
                             </li>
                         </ul>

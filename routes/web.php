@@ -5,6 +5,8 @@ use App\Http\Controllers\Web\Clients\AuthController;
 use App\Http\Controllers\Web\Admins\CategoryController;
 use App\Http\Controllers\Web\Admins\SubcategoryController;
 use App\Http\Controllers\Web\Admins\PostController;
+use App\Http\Controllers\Web\Admins\PermissionController;
+use App\Http\Controllers\Web\Admins\RoleController;
 
 Route::get('/', function () {
     return view('clients.home.home');
@@ -52,8 +54,16 @@ Route::prefix('admin')->group(function () {
     Route::put('/sua-danh-muc-con/{id}', [SubcategoryController::class, 'update'])->name('update.subcategory');
     Route::delete('/xoa-danh-muc-con/{id}', [SubcategoryController::class, 'destroy'])->name('delete.subcategory');
     
+    // Bài viết
     Route::get('/bai-viet', [PostController::class, 'index'])->name('posts');
     Route::get('/them-bai-viet', [PostController::class, 'create'])->name('create.post');
     Route::post('/them-bai-viet', [PostController::class, 'store'])->name('store.post');
     Route::get('/sua-bai-viet/{id}', [PostController::class, 'show'])->name('show.post');
+
+    // Phân quyền
+    Route::get('/permissions', [PermissionController::class, 'index'])->name('permissions');
+    Route::post('/permissions', [PermissionController::class, 'store'])->name('store.permission');
+
+    // Vai trò
+    Route::get('/role', [RoleController::class, 'index'])->name('roles');
 });

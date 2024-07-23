@@ -7,10 +7,14 @@ use App\Repositories\User\UserRepositoryInterface;
 use App\Repositories\Category\CategoryRepositoryInterface;
 use App\Repositories\Subcategory\SubcategoryRepositoryInterface;
 use App\Repositories\Post\PostRepositoryInterface;
+use App\Repositories\Role\RoleRepositoryInterface;
+use App\Repositories\Permission\PermissionRepositoryInterface;
 use App\Services\AuthService;
 use App\Services\CategoryService;
 use App\Services\SubcategoryService;
 use App\Services\PostService;
+use App\Services\RoleService;
+use App\Services\PermissionService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,6 +34,12 @@ class AppServiceProvider extends ServiceProvider
         });
         $this->app->bind(PostService::class, function ($app) {
             return new PostService($app->make(PostRepositoryInterface::class));
+        });
+        $this->app->bind(RoleService::class, function ($app) {
+            return new RoleService($app->make(RoleRepositoryInterface::class));
+        });
+        $this->app->bind(PermissionService::class, function ($app) {
+            return new PermissionService($app->make(PermissionRepositoryInterface::class));
         });
     }
 

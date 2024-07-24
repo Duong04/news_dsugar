@@ -6,24 +6,18 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Input2 extends Component
+class SelectType extends Component
 {
     public $name;
-    public $label;
-    public $type;
+    public $class;
     public $error;
     public $value;
-    public $class;
-    public $classChild;
-    public function __construct($name, $label, $type, $class, $classChild=null, $error = null, $value = null)
+    public function __construct($name, $class, $error, $value = null)
     {
         $this->name = $name;
-        $this->label = $label;
-        $this->type = $type;
+        $this->class = $class;
         $this->error = $error;
         $this->value = $value;
-        $this->class = $class;
-        $this->classChild = $classChild;
     }
 
     /**
@@ -31,6 +25,6 @@ class Input2 extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.form.input2');
+        return view('components.form.select-type');
     }
 }

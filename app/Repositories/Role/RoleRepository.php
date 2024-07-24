@@ -12,7 +12,7 @@ class RoleRepository implements RoleRepositoryInterface {
         
     }
     public function create(array $data) {
-        
+        return Role::create($data);
     }
     public function update($id, array $data) {
         

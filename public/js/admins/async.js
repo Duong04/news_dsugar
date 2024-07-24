@@ -35,3 +35,52 @@ const getSubcategories = async (e) => {
         console.log(e);
     }
 }
+
+const editFormPermission = document.querySelectorAll('.btn-edit-permission');
+const editFormAction = document.querySelectorAll('.btn-edit-action');
+
+editFormPermission.forEach(item => {
+    item.onclick = async () => {
+        const id = item.getAttribute('data-id');
+        const inpName = document.querySelector('.inp-name');
+        const inpDesc = document.querySelector('.inp-desc');
+        const formEdit = document.querySelector('#form-edit');
+        const btnSubmit = document.querySelector('.btn-submit');
+        const route = `${formEdit.getAttribute('action')}/${id}`;
+        btnSubmit.onclick = (e) => {
+            e.preventDefault();
+            formEdit.action = route;
+            formEdit.submit();
+        }
+
+        try {
+            const response = await axios_ins.get(`/permissions/${id}`);
+            inpName.value = response.data.name;
+            inpDesc.value = response.data.description;
+        } catch (error) {
+            console.log(error);
+        }
+    };
+});
+
+editFormAction.forEach(item => {
+    item.onclick = async () => {
+        const id = item.getAttribute('data-id');
+        const inpName = document.querySelector('.inp-name');
+        const formEdit = document.querySelector('#form-edit');
+        const btnSubmit = document.querySelector('.btn-submit');
+        const route = `${formEdit.getAttribute('action')}/${id}`;
+        btnSubmit.onclick = (e) => {
+            e.preventDefault();
+            formEdit.action = route;
+            formEdit.submit();
+        }
+
+        try {
+            const response = await axios_ins.get(`/actions/${id}`);
+            inpName.value = response.data.name;
+        } catch (error) {
+            console.log(error);
+        }
+    };
+});

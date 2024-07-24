@@ -7,6 +7,7 @@ use App\Http\Controllers\Web\Admins\SubcategoryController;
 use App\Http\Controllers\Web\Admins\PostController;
 use App\Http\Controllers\Web\Admins\PermissionController;
 use App\Http\Controllers\Web\Admins\RoleController;
+use App\Http\Controllers\Web\Admins\ActionController;
 
 Route::get('/', function () {
     return view('clients.home.home');
@@ -63,8 +64,17 @@ Route::prefix('admin')->group(function () {
     // Phân quyền
     Route::get('/permissions', [PermissionController::class, 'index'])->name('permissions');
     Route::post('/permissions', [PermissionController::class, 'store'])->name('store.permission');
+    Route::put('/permissions/{id}', [PermissionController::class, 'update']);
+    Route::delete('/permissions/{id}', [PermissionController::class, 'delete'])->name('delete.permission');
 
     // Vai trò
     Route::get('/role', [RoleController::class, 'index'])->name('roles');
     Route::get('/create-role', [RoleController::class, 'create'])->name('create.role');
+    Route::post('/create-role', [RoleController::class, 'store'])->name('store.role');
+
+    // Action
+    Route::get('/actions', [ActionController::class, 'index'])->name('actions');
+    Route::post('/actions', [ActionController::class, 'store'])->name('store.action');
+    Route::put('/actions/{id}', [ActionController::class, 'update']);
+    Route::delete('/actions/{id}', [ActionController::class, 'delete'])->name('delete.action');
 });

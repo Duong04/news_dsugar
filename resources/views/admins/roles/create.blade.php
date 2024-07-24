@@ -30,12 +30,16 @@
             </ul>
         </div>
         <div class="row">
-          <form class="row col-12" action="{{ route('store.category') }}" method="POST">
+          <form class="row col-12" action="{{ route('store.role') }}" method="POST">
             @csrf
+            <div class="col-6 form-group">
+                <button class="btn btn-primary">Thêm vai trò</button>
+            </div>
             <div class="col-12 row">
                 <div class="row mx-0">
-                    <x-form.input2 class="col-6" :error="$errors->first('name')" name="name" label="Tên vai trò" type="text" />
-                    <x-form.input2 class="col-6" :error="$errors->first('description')" name="description" label="Mô tả ngắn" type="text" />
+                    <x-form.input2 class="col-4" :error="$errors->first('name')" name="name" label="Tên vai trò" type="text" />
+                    <x-form.input2 class="col-4" :error="$errors->first('description')" name="description" label="Mô tả ngắn" type="text" />
+                    <x-form.select-type class="col-4" :error="$errors->first('type')" name="type" />
                 </div>
                 <div class="col-12">
                     <div class="form-group d-flex justify-content-between">
@@ -47,15 +51,14 @@
                             <div class="form-group">
                                 <div>
                                     <label for="">{{$item->name}}</label>
-                                    <input type="hidden" name="permission_id[]" value="{{$item->id}}">
+                                    <input type="hidden" class="parent-checkbox-{{$item->id}}" hidden name="permission_id[]" value="{{$item->id}}">
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group form-check-{{$item->id}}">
                                 <div class="row gutters-xs">
-                                    <x-form.checkbox name="action" className="check-action" id="create-{{$item->id}}" value="true" label="CREATE" />
-                                    <x-form.checkbox name="action" className="check-action" id="read-{{$item->id}}" value="true" label="READ" />
-                                    <x-form.checkbox name="action" className="check-action" id="update-{{$item->id}}" value="true" label="UPDATE" />
-                                    <x-form.checkbox name="action" className="check-action" id="delete-{{$item->id}}" value="true" label="DELETE" />
+                                    @foreach ($actions as $action)
+                                    <x-form.checkbox name="actions[{{$item->id}}][{{$action->name}}]" className="check-action" id="checkbox-{{$action->id}}-{{$item->id}}" value="{{$action->id}}" label="{{ $action->name }}" />
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -63,7 +66,7 @@
                 </div>
             </div>
             <div class="col-6 form-group">
-              <button class="btn btn-primary">Thêm vai trò</button>
+                <button class="btn btn-primary">Thêm vai trò</button>
             </div>
           </form>
         </div>

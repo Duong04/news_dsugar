@@ -3,7 +3,7 @@
     <input
         value="{{ $value ? $value : old($name) }}"
         type="{{ $type }}"
-        class="form-control"
+        class="form-control {{ $classChild }}"
         id="{{ $name }}"
         name="{{ $name }}"
         placeholder="{{ $label }}"

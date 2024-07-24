@@ -26,4 +26,20 @@ class PermissionController extends Controller
             return redirect()->back();
         }
     }
+
+    public function update(PermissionRequest $request, $id) {
+        $permissonSuccess = $this->permissionService->update($request, $id);
+        if ($permissonSuccess) {
+            toastr()->success('Cập nhật thành công!');
+            return redirect()->back();
+        }
+    }
+
+    public function delete($id) {
+        $permissonSuccess = $this->permissionService->delete($id);
+        if ($permissonSuccess) {
+            toastr()->success('Xóa quyền thành công!');
+            return redirect()->back();
+        }
+    }
 }

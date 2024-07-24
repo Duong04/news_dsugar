@@ -6,14 +6,18 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\RoleService;
 use App\Services\PermissionService;
+use App\Services\ActionService;
+use App\Http\Requests\Web\Admins\RoleRequest;
 
 class RoleController extends Controller
 {
     protected $roleService;
     protected $permissionService;
-    public function __construct(RoleService $roleService, PermissionService $permissionService) {
+    protected $actionService;
+    public function __construct(RoleService $roleService, PermissionService $permissionService, ActionService $actionService) {
         $this->roleService = $roleService;
         $this->permissionService = $permissionService;
+        $this->actionService = $actionService;
     }
 
     public function index() {
@@ -23,6 +27,16 @@ class RoleController extends Controller
 
     public function create() {
         $permissions = $this->permissionService->getAll();
-        return view('admins.roles.create', ['permissions' => $permissions]);
+        $actions = $this->actionService->getAll();
+        return view('admins.roles.create', ['permissions' => $permissions, 'actions' => $actions]);
+    }
+
+    public function store(RoleRequest $request) {
+        $roleSuccess = $this->roleService->create($request);
+        try {
+            return response()->json(['error' => $roleSuccess], 200);
+        } catch (\Throwable $th) {
+            return response()->json($th->getMessage(), 200);
+        }
     }
 }

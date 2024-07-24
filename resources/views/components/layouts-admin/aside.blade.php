@@ -104,6 +104,11 @@
                                     <span class="sub-item">Quyền người dùng</span>
                                 </a>
                             </li>
+                            <li>
+                                <a href="{{ route('actions') }}">
+                                    <span class="sub-item">Action</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>

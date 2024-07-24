@@ -10,12 +10,9 @@ class RolePermission extends Model
     use HasFactory;
 
     protected $table = 'role_permissions';
-    protected $fillabel = [
+    protected $fillable = [
         'permission_id',
         'role_id',
-        'read',
-        'create',
-        'update',
-        'delete'
+        'action_id'
     ];
 }

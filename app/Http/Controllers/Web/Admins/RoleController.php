@@ -33,10 +33,26 @@ class RoleController extends Controller
 
     public function store(RoleRequest $request) {
         $roleSuccess = $this->roleService->create($request);
-        try {
-            return response()->json(['error' => $roleSuccess], 200);
-        } catch (\Throwable $th) {
-            return response()->json($th->getMessage(), 200);
+        if ($roleSuccess) {
+            toastr()->success('Tạo role thành công!');
+            return redirect()->back();
+        }
+    }
+
+    public function show($id) {
+        
+        $role = $this->roleService->findById($id);
+        $permissions = $this->permissionService->getAll();
+        $actions = $this->actionService->getAll();
+        return view('admins.roles.update', compact('role', 'permissions', 'actions'));
+    }
+
+    public function update(RoleRequest $request, $id) {
+        $roleSuccess = $this->roleService->update($request, $id);
+
+        if ($roleSuccess) {
+            toastr()->success('Cập nhật role thành công!');
+            return redirect()->route('roles');
         }
     }
 }

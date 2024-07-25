@@ -2,6 +2,7 @@
 namespace App\Repositories\RolePermission;
 
 use App\Models\RolePermission;
+use App\Models\Role;
 use App\Repositories\RolePermission\RolePermissionRepositoryInterface;
 class RolePermissionRepository implements RolePermissionRepositoryInterface {
     public function all() {
@@ -17,6 +18,6 @@ class RolePermissionRepository implements RolePermissionRepositoryInterface {
 
     }
     public function delete($id) {
-
+        return RolePermission::where('role_id', $id)->delete();
     }
 }

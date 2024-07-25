@@ -13,13 +13,15 @@ class checkbox extends Component
     public $label;
     public $id;
     public $className;
-    public function __construct($name, $value, $label, $id, $className)
+    public $checked;
+    public function __construct($name, $value, $label, $id, $className, $checked = false)
     {
         $this->name = $name;
         $this->value = $value;
         $this->label = $label;
         $this->id = $id;
         $this->className = $className;
+        $this->checked = $checked;
     }
 
     /**

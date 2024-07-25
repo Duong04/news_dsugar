@@ -25,21 +25,22 @@
                 <i class="icon-arrow-right"></i>
             </li>
             <li class="nav-item">
-                <a href="#">Thêm vai trò</a>
+                <a href="#">Cập nhật vai trò</a>
             </li>
             </ul>
         </div>
         <div class="row">
-          <form class="row col-12" action="{{ route('store.role') }}" method="POST">
+          <form class="row col-12" action="{{ route('update.role', ['id' => $role->id]) }}" method="POST">
             @csrf
+            @method('PUT')
             <div class="col-6 form-group">
-                <button class="btn btn-primary">Thêm vai trò</button>
+                <button class="btn btn-primary">Cập nhật vai trò</button>
             </div>
             <div class="col-12 row">
                 <div class="row mx-0">
-                    <x-form.input2 class="col-4" :error="$errors->first('name')" name="name" label="Tên vai trò" type="text" />
-                    <x-form.input2 class="col-4" :error="$errors->first('description')" name="description" label="Mô tả ngắn" type="text" />
-                    <x-form.select-type class="col-4" :error="$errors->first('type')" name="type" />
+                    <x-form.input2 :value="$role->name" class="col-4" :error="$errors->first('name')" name="name" label="Tên vai trò" type="text" />
+                    <x-form.input2 :value="$role->description" class="col-4" :error="$errors->first('description')" name="description" label="Mô tả ngắn" type="text" />
+                    <x-form.select-type :value="$role->type" class="col-4" :error="$errors->first('type')" name="type" />
                 </div>
                 <div class="col-12">
                     <div class="form-group d-flex justify-content-between">
@@ -47,6 +48,10 @@
                         <x-form.checkbox name="select-all" className="" id="select-all" value="true" label="Chọn tất cả" />
                     </div>
                     @foreach ($permissions as $item)
+                        @php
+                            $permission = $role->permissions->find($item->id);
+                            $actionIds = $permission ? $permission->actions->pluck('id')->toArray() : [];
+                        @endphp
                         <div class="col-12 d-flex justify-content-between">
                             <div class="form-group">
                                 <div>
@@ -57,7 +62,7 @@
                             <div class="form-group form-check-{{$item->id}}">
                                 <div class="row gutters-xs">
                                     @foreach ($actions as $action)
-                                    <x-form.checkbox name="actions[{{$item->id}}][]" className="check-action" id="checkbox-{{$action->id}}-{{$item->id}}" value="{{$action->id}}" label="{{ $action->name }}" />
+                                    <x-form.checkbox name="actions[{{$item->id}}][]" className="check-action" id="checkbox-{{$action->id}}-{{$item->id}}" value="{{$action->id}}" :checked="in_array($action->id, $actionIds)" label="{{ $action->name }}" />
                                     @endforeach
                                 </div>
                             </div>

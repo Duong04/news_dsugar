@@ -71,6 +71,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/role', [RoleController::class, 'index'])->name('roles');
     Route::get('/create-role', [RoleController::class, 'create'])->name('create.role');
     Route::post('/create-role', [RoleController::class, 'store'])->name('store.role');
+    Route::get('/update-role/{id}', [RoleController::class, 'show'])->name('show.role');
+    Route::put('/update-role/{id}', [RoleController::class, 'update'])->name('update.role');
 
     // Action
     Route::get('/actions', [ActionController::class, 'index'])->name('actions');

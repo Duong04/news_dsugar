@@ -77,7 +77,7 @@
                               <td>{{ $item->updated_at }}</td>
                               <td>
                                 <div class="form-button-action">
-                                  <a href="{{ route('show.category', ['id' => $item->id]) }}"
+                                  <a href="{{ route('show.role', ['id' => $item->id]) }}"
                                     data-bs-toggle="tooltip"
                                     title="Sửa"
                                     class="btn btn-link btn-primary btn-lg"
@@ -111,5 +111,4 @@
         </div>
     </div>
 </div>
-{{------------------- Modal -----------------------}}
 @endsection

@@ -24,43 +24,72 @@ class RoleService {
     public function create($request) {
         try {
             $request->validated();
-            $data = $request->input();
-            dd($data);
-
+            
+            $data = $request->input(); 
+            
             $role = Role::create([
                 'name' => $data['name'],
                 'description' => $data['description'],
                 'type' => $data['type'],
             ]);
-
-            $permissionIds = $data['permission_id'];
+    
             $actions = $data['actions'];
-            
-            $validActions = array_filter($actions, function($action) {
-                return !empty(array_filter($action));
-            });
-
-            foreach ($validActions as $itemId => $action) {
-                $create = isset($action['create']) ? (bool)$action['create'] : false;
-                $read = isset($action['read']) ? (bool)$action['read'] : false;
-                $update = isset($action['update']) ? (bool)$action['update'] : false;
-                $delete = isset($action['delete']) ? (bool)$action['delete'] : false;
-                
-                $this->rolePermissionRepository->create([
-                    'permission_id' => $itemId,
-                    'role_id' => $role->id,
-                    'read' => $read,
-                    'create' => $create,
-                    'update' => $update,
-                    'delete' => $delete
-                ]);
+    
+            foreach ($actions as $permission_id => $action) {
+                foreach ($action as $action_id) {
+                    $this->rolePermissionRepository->create([
+                        'permission_id' => $permission_id,
+                        'role_id' => $role->id,
+                        'action_id' => $action_id
+                    ]);
+                }
             }
+    
+            return true;
+    
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
 
+    public function findById($id) {
+        try {
+            return $this->roleRepository->find($id);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
+    public function update($request, $id) {
+        try {
+            $request->validated();
+
+            $data = $request->input();
+
+            $this->rolePermissionRepository->delete($id);
+            $this->roleRepository->update($id, [
+                'name' => $data['name'],
+                'description' => $data['description'],
+                'type' => $data['type'],
+            ]);
+
+            $actions = $data['actions'];
+    
+            foreach ($actions as $permission_id => $action) {
+                foreach ($action as $action_id) {
+                    $this->rolePermissionRepository->create([
+                        'permission_id' => $permission_id,
+                        'role_id' => $id,
+                        'action_id' => $action_id
+                    ]);
+                }
+            }
+    
             return true;
 
         } catch (\Throwable $th) {
             return $th->getMessage();
         }
     }
-
+ 
 }

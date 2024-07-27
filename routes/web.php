@@ -60,6 +60,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/them-bai-viet', [PostController::class, 'create'])->name('create.post');
     Route::post('/them-bai-viet', [PostController::class, 'store'])->name('store.post');
     Route::get('/sua-bai-viet/{id}', [PostController::class, 'show'])->name('show.post');
+    Route::put('/sua-bai-viet/{id}', [PostController::class, 'update'])->name('update.post');
+    Route::delete('/xoa-bai-viet/{id}', [PostController::class, 'delete'])->name('delete.post');
 
     // Phân quyền
     Route::get('/permissions', [PermissionController::class, 'index'])->name('permissions');

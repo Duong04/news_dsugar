@@ -19,6 +19,7 @@ use App\Services\RoleService;
 use App\Services\PermissionService;
 use App\Services\RolePermissionService;
 use App\Services\ActionService;
+use App\Services\CloundinaryService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -37,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
             return new SubcategoryService($app->make(SubcategoryRepositoryInterface::class));
         });
         $this->app->bind(PostService::class, function ($app) {
-            return new PostService($app->make(PostRepositoryInterface::class));
+            return new PostService($app->make(PostRepositoryInterface::class), $app->make(CloundinaryService::class));
         });
         $this->app->bind(RoleService::class, function ($app) {
             return new RoleService($app->make(RoleRepositoryInterface::class), $app->make(RolePermissionRepositoryInterface::class));

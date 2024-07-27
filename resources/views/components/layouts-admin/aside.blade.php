@@ -2,8 +2,8 @@
     <div class="sidebar-logo">
         <!-- Logo Header -->
         <div class="logo-header" data-background-color="dark">
-            <a href="/" class="logo">
-                <img src="/templates/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand" height="20" />
+            <a href="/" class="logo mx-auto pt-3">
+                <img src="/images/logo_admin.png" alt="navbar brand" class="navbar-brand" height="80" />
             </a>
             <div class="nav-toggle">
                 <button class="btn btn-toggle toggle-sidebar">

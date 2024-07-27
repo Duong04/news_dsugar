@@ -71,7 +71,7 @@
                 </div>
             </div>
             <div class="col-6 form-group">
-                <button class="btn btn-primary">Thêm vai trò</button>
+                <button class="btn btn-primary">Cập nhật vai trò</button>
             </div>
           </form>
         </div>

@@ -122,6 +122,7 @@
           <div class="modal-body">
               <div>   
                   <x-form.input2 class="col-12" :error="$errors->first('name')" name="name" label="Tên action" type="text" />
+                  <x-form.input2 class="col-12" :error="$errors->first('value')" name="value" label="Value" type="text" />
               </div>
           </div>
           <div class="modal-footer">
@@ -143,6 +144,7 @@
           <div class="modal-body">
               <div>   
                   <x-form.input2 class="col-12" classChild="inp-name" :error="$errors->first('name')" name="name" label="Tên quyền" type="text" />
+                  <x-form.input2 class="col-12" classChild="inp-value" :error="$errors->first('value')" name="value" label="Value" type="text" />
               </div>
           </div>
           <div class="modal-footer">

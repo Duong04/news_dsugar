@@ -35,8 +35,9 @@
             </ul>
         </div>
         <div class="row">
-          <form class="row col-12" action="{{ route('store.post') }}" method="POST" enctype="multipart/form-data">
+          <form class="row col-12" action="{{ route('update.post', ['id' => $post->id]) }}" method="POST" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
             <div class="col-6 mb-3">
               <button class="btn btn-primary">Cập nhật bài viết</button>
             </div>

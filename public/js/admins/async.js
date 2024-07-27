@@ -67,6 +67,7 @@ editFormAction.forEach(item => {
     item.onclick = async () => {
         const id = item.getAttribute('data-id');
         const inpName = document.querySelector('.inp-name');
+        const inpValue = document.querySelector('.inp-value');
         const formEdit = document.querySelector('#form-edit');
         const btnSubmit = document.querySelector('.btn-submit');
         const route = `${formEdit.getAttribute('action')}/${id}`;
@@ -79,6 +80,7 @@ editFormAction.forEach(item => {
         try {
             const response = await axios_ins.get(`/actions/${id}`);
             inpName.value = response.data.name;
+            inpValue.value = response.data.value;
         } catch (error) {
             console.log(error);
         }

@@ -14,6 +14,7 @@ class Action extends Model
     protected $table = 'actions';
     protected $fillable = [
         'name',
+        'value'
     ];
 
     protected $hidden = [

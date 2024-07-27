@@ -31,7 +31,8 @@ class ActionService {
             $request->validated();
 
             return $this->actionRepository->create([
-                'name' => $request->input('name')
+                'name' => $request->input('name'),
+                'value' => $request->input('value')
             ]);
         } catch (\Throwable $th) {
             return false;

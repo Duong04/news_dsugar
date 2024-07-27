@@ -25,10 +25,12 @@ class ActionRequest extends FormRequest
         
         $rules = [
             'name' => 'required|string|max:255|unique:actions,name',
+            'value' => 'required|string|max:255|unique:actions,value',
         ];
 
         if ($id) {
             $rules['name'] .= ",$id";
+            $rules['value'] .= ",$id";
         }
 
         return $rules;

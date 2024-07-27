@@ -97,7 +97,7 @@
                                                         </a>
                                                         <form class="d-flex align-items-center"
                                                             id="delete-form-{{ $item->id }}" method="POST"
-                                                            action="{{ route('delete.category', ['id' => $item->id]) }}">
+                                                            action="{{ route('delete.post', ['id' => $item->id]) }}">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button data-bs-toggle="tooltip" title="Xóa"

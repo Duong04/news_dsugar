@@ -21,6 +21,7 @@ class PostRequest extends FormRequest
      */
     public function rules(): array
     {
+        $id = $this->route('id');
         $rules = [
             'content' => 'required',
             'title' => 'required|unique:posts,title',
@@ -28,8 +29,16 @@ class PostRequest extends FormRequest
             'category_id' => 'required|exists:categories,id',
             'subcat_id' => 'required|exists:subcategories,id',
             'status' => 'required',
-            'image' => 'required|image|mimes:jpg,jpeg,webp,png|max:2048'
         ];
+
+        if (!$id) {
+            $rules['image'] = 'required|image|mimes:jpg,jpeg,webp,png|max:2048';
+        }
+
+        if ($id) {
+            $rules['image'] = 'image|mimes:jpg,jpeg,webp,png|max:2048';
+            $rules['title'] .= ",$id";
+        }
 
         return $rules;
     }

@@ -37,4 +37,19 @@ class PostController extends Controller
         return view('admins.posts.update', ['post' => $post]);
     }
 
+    public function update(PostRequest $request, $id) {
+        $postSuccess = $this->postService->update($request, $id);
+        if ($postSuccess) {
+            toastr()->success('Cập nhật bài viết thành công!');
+            return redirect()->route('posts');
+        }
+    }
+
+    public function delete($id) {
+        $postSuccess = $this->postService->delete($id);
+        if ($postSuccess) {
+            toastr()->success('Xóa bài viết thành công!');
+            return redirect()->back();
+        }
+    }
 }

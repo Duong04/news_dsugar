@@ -11,6 +11,7 @@ use App\Repositories\Role\RoleRepositoryInterface;
 use App\Repositories\Permission\PermissionRepositoryInterface;
 use App\Repositories\RolePermission\RolePermissionRepositoryInterface;
 use App\Repositories\Action\ActionRepositoryInterface;
+use App\Repositories\PermissionAction\PermissionActionRepositoryInterface;
 use App\Services\AuthService;
 use App\Services\CategoryService;
 use App\Services\SubcategoryService;
@@ -44,7 +45,7 @@ class AppServiceProvider extends ServiceProvider
             return new RoleService($app->make(RoleRepositoryInterface::class), $app->make(RolePermissionRepositoryInterface::class));
         });
         $this->app->bind(PermissionService::class, function ($app) {
-            return new PermissionService($app->make(PermissionRepositoryInterface::class));
+            return new PermissionService($app->make(PermissionRepositoryInterface::class), $app->make(PermissionActionRepositoryInterface::class));
         });
         $this->app->bind(RolePermissionService::class, function ($app) {
             return new RolePermissionService($app->make(RolePermissionRepositoryInterface::class));

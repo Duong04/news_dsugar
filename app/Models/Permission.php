@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Role;
 use App\Models\Action;
+use App\Models\PermissionAction;
 
 class Permission extends Model
 {
@@ -24,15 +25,12 @@ class Permission extends Model
         'pivot'
     ];
 
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class, 'role_permissions')
-                    ->withPivot('action_id')
-                    ->withTimestamps();
-    }
-
     public function actions()
     {
         return $this->belongsToMany(Action::class, 'role_permissions', 'permission_id', 'action_id');
+    }
+
+    public function permissionActions() {
+        return $this->hasMany(PermissionAction::class, 'permission_id');
     }
 }

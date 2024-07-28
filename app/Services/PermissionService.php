@@ -2,33 +2,47 @@
 namespace App\Services;
 
 use App\Repositories\Permission\PermissionRepositoryInterface;
+use App\Repositories\PermissionAction\PermissionActionRepository;
+use App\Repositories\PermissionAction\PermissionActionRepositoryInterface;
 
 class PermissionService {
     protected $permissionRepository;
+    protected $permissionActionRepository;
 
-    public function __construct(PermissionRepositoryInterface $permissionRepository) {
+    public function __construct(PermissionRepositoryInterface $permissionRepository, PermissionActionRepositoryInterface $permissionActionRepository) {
         $this->permissionRepository = $permissionRepository;
+        $this->permissionActionRepository = $permissionActionRepository;
     }
 
     public function getAll() {
         try {
             return $this->permissionRepository->all();
         } catch (\Throwable $th) {
-            return false;
+            return $th->getMessage();
         }
     }
 
     public function create($request) {
         try {
-            $permission = $request->validated();
-            
-            return $this->permissionRepository->create([
-                'name' => $permission['name'],
-                'description' => $permission['description'],
+            $request->validated();
+            $data = $request->input();
+
+            $permission = $this->permissionRepository->create([
+                'name' => $data['name'],
+                'description' => $data['description'],
             ]);
 
+            foreach ($data['actions'] as $item) {
+                $this->permissionActionRepository->create([
+                    'action_id' => $item,
+                    'permission_id' => $permission->id
+                ]);
+            }
+
+            return $permission;
+
         } catch (\Throwable $th) {
-            return false;
+            return $th->getMessage();
         }
     }
 
@@ -36,7 +50,7 @@ class PermissionService {
         try {
             return $this->permissionRepository->find($id);
         } catch (\Throwable $th) {
-            return false;
+            return $th->getMessage();
         }
     }
 
@@ -50,7 +64,7 @@ class PermissionService {
                 'description' => $data['description'],
             ]);
         } catch (\Throwable $th) {
-            return false;
+            return $th->getMessage();
         }
     }
 
@@ -58,7 +72,7 @@ class PermissionService {
         try {
             return $this->permissionRepository->delete($id);
         } catch (\Throwable $th) {
-            return false;
+            return $th->getMessage();
         }
     }
 }

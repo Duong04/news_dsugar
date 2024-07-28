@@ -9,7 +9,7 @@ class PermissionRepository implements PermissionRepositoryInterface {
         return Permission::all();
     }
     public function find($id) {
-        return Permission::findOrFail($id);
+        return Permission::with('permissionActions')->findOrFail($id);
     }
     public function create(array $data) {
         return Permission::create($data);

@@ -1,7 +1,6 @@
 @extends('admins.layouts.master')
 @section('script-bottom')
 <script src="/libraries/axios/axios.min.js"></script>
-<script src="/js/admins/async.js"></script>
 <script src="/js/admins/datatable.js"></script>
 @endsection
 
@@ -35,9 +34,12 @@
                 <div class="card">
                     <div class="card-header d-flex align-items-center">
                     <h4 class="card-title">Quản lý quyền</h4>
-                    <button type="button" class="btn btn-primary btn-round ms-auto" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        <i class="fa fa-plus"></i> Thêm quyền
-                    </button>
+                    <a href="{{route('create.permission')}}"
+                        class="btn btn-primary btn-round ms-auto"
+                        >
+                        <i class="fa fa-plus"></i>
+                        Tạo quyền
+                    </a>
                           
                     </div>
                     <div class="card-body">
@@ -79,10 +81,9 @@
                               <td>{{ $item->updated_at }}</td>
                               <td>
                                 <div class="form-button-action">
-                                  <a href=""
+                                  <a href="{{ route('show.permission', ['id' => $item->id]) }}"
                                     title="Sửa"
-                                    data-id="{{ $item->id }}"
-                                    type="button" data-bs-toggle="modal" data-bs-target="#modal-2"
+                                    data-id="{{ $item->id }}" data-bs-toggle="tooltip"
                                     class="btn btn-link btn-primary btn-lg btn-edit-permission"
                                     data-original-title="Edit Task"
                                   >
@@ -113,50 +114,6 @@
             </div>
         </div>
     </div>
-</div>
-{{------------------- Modal -----------------------}}
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <form method="POST" action="{{ route('store.permission') }}" class="modal-content">
-            @csrf
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Thêm quyền</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div>   
-                    <x-form.input2 class="col-12" :error="$errors->first('name')" name="name" label="Tên quyền" type="text" />
-                    <x-form.input2 class="col-12" :error="$errors->first('description')" name="description" label="Mô tả" type="text" />
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                <button type="submit" class="btn btn-primary">Thêm ngay</button>
-            </div>
-        </form>
-    </div>
-</div>
-<div class="modal fade" id="modal-2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-      <form method="POST" action="{{ route('store.permission') }}" id="form-edit" class="modal-content">
-          @csrf
-          @method('PUT')
-          <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Thêm quyền</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-              <div>   
-                  <x-form.input2 class="col-12" classChild="inp-name" :error="$errors->first('name')" name="name" label="Tên quyền" type="text" />
-                  <x-form.input2 class="col-12" classChild="inp-desc" :error="$errors->first('description')" name="description" label="Mô tả" type="text" />
-              </div>
-          </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-              <button type="submit" class="btn btn-primary btn-submit">Cập nhật</button>
-          </div>
-      </form>
-  </div>
 </div>
 @error('name')
     @php

@@ -65,8 +65,10 @@ Route::prefix('admin')->group(function () {
 
     // Phân quyền
     Route::get('/permissions', [PermissionController::class, 'index'])->name('permissions');
-    Route::post('/permissions', [PermissionController::class, 'store'])->name('store.permission');
-    Route::put('/permissions/{id}', [PermissionController::class, 'update']);
+    Route::get('/create-permission', [PermissionController::class, 'create'])->name('create.permission');
+    Route::post('/create-permissions', [PermissionController::class, 'store'])->name('store.permission');
+    Route::get('/update-permissions/{id}', [PermissionController::class, 'show'])->name('show.permission');
+    Route::put('/update-permissions/{id}', [PermissionController::class, 'update'])->name('update.permission');
     Route::delete('/permissions/{id}', [PermissionController::class, 'delete'])->name('delete.permission');
 
     // Vai trò

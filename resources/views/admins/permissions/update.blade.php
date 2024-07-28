@@ -26,8 +26,9 @@
                 </ul>
             </div>
             <div class="row">
-                <form class="row col-12" action="{{ route('store.permission') }}" method="POST">
+                <form class="row col-12" action="{{ route('update.permission', ['id' => $permission->id]) }}" method="POST">
                     @csrf
+                    @method('PUT')
                     <x-form.input2 :value="$permission->name" class="col-6" :error="$errors->first('name')" name="name" label="Tên quyền" type="text" />
                     <x-form.input2 :value="$permission->description" class="col-6" :error="$errors->first('description')" name="description" label="Mô tả" type="text" />
                     <div class="col-12">

@@ -17,6 +17,6 @@ class PermissionActionRepository implements PermissionActionRepositoryInterface 
 
     }
     public function delete($id) {
-
+        return PermissionAction::where('permission_id', $id)->delete();
     }
 }

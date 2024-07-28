@@ -59,10 +59,20 @@ class PermissionService {
             $request->validated();
             $data = $request->input();
 
-            return $this->permissionRepository->update($id, [
+            $this->permissionActionRepository->delete($id);
+            $permisson = $this->permissionRepository->update($id, [
                 'name' => $data['name'],
                 'description' => $data['description'],
             ]);
+
+            foreach ($data['actions'] as $item) {
+                $this->permissionActionRepository->create([
+                    'action_id' => $item,
+                    'permission_id' => $id
+                ]);
+            }
+
+            return $permisson;
         } catch (\Throwable $th) {
             return $th->getMessage();
         }

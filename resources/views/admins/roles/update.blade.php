@@ -51,6 +51,7 @@
                         @php
                             $permission = $role->permissions->find($item->id);
                             $actionIds = $permission ? $permission->actions->pluck('id')->toArray() : [];
+                            $allowedActions = $item->permissionActions->pluck('action_id')->toArray();
                         @endphp
                         <div class="col-12 d-flex justify-content-between">
                             <div class="form-group">
@@ -62,7 +63,9 @@
                             <div class="form-group form-check-{{$item->id}}">
                                 <div class="row gutters-xs">
                                     @foreach ($actions as $action)
-                                    <x-form.checkbox name="actions[{{$item->id}}][]" className="check-action" id="checkbox-{{$action->id}}-{{$item->id}}" value="{{$action->id}}" :checked="in_array($action->id, $actionIds)" label="{{ $action->name }}" />
+                                        @if (in_array($action->id, $allowedActions))
+                                        <x-form.checkbox name="actions[{{$item->id}}][]" className="check-action" id="checkbox-{{$action->id}}-{{$item->id}}" value="{{$action->id}}" :checked="in_array($action->id, $actionIds)" label="{{ $action->name }}" />
+                                        @endif
                                     @endforeach
                                 </div>
                             </div>

@@ -46,7 +46,7 @@ class PermissionController extends Controller
         $permissonSuccess = $this->permissionService->update($request, $id);
         if ($permissonSuccess) {
             toastr()->success('Cập nhật thành công!');
-            return redirect()->back();
+            return redirect()->route('permissions');
         }
     }
 

@@ -30,7 +30,7 @@ class RoleService {
             $role = Role::create([
                 'name' => $data['name'],
                 'description' => $data['description'],
-                'type' => $data['type'],
+                'type_id' => $data['type'],
             ]);
     
             $actions = $data['actions'];
@@ -70,7 +70,7 @@ class RoleService {
             $this->roleRepository->update($id, [
                 'name' => $data['name'],
                 'description' => $data['description'],
-                'type' => $data['type'],
+                'type_id' => $data['type'],
             ]);
 
             $actions = $data['actions'];

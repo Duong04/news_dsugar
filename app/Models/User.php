@@ -54,4 +54,24 @@ class User extends Authenticatable
     public function role() {
         return $this->belongsTo(Role::class);
     }
+
+    public function permissions()
+    {
+        return $this->role()->with('permissions')->get()->pluck('permissions')->flatten()->unique('id');
+    }
+
+    public function actions()
+    {
+        return $this->permissions()->pluck('actions')->flatten()->unique('id');
+    }
+
+    public function hasPermission($permissionName)
+    {
+        return $this->permissions()->contains('name', $permissionName);
+    }
+
+    public function hasAction($actionName)
+    {
+        return $this->actions()->contains('value', $actionName);
+    }
 }

@@ -40,7 +40,7 @@
                 <div class="row mx-0">
                     <x-form.input2 :value="$role->name" class="col-4" :error="$errors->first('name')" name="name" label="Tên vai trò" type="text" />
                     <x-form.input2 :value="$role->description" class="col-4" :error="$errors->first('description')" name="description" label="Mô tả ngắn" type="text" />
-                    <x-form.select-type :value="$role->type" class="col-4" :error="$errors->first('type')" name="type" />
+                    <x-form.select-type :value="$role->type_id" class="col-4" :error="$errors->first('type')" name="type" />
                 </div>
                 <div class="col-12">
                     <div class="form-group d-flex justify-content-between">

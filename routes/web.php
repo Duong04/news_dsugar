@@ -9,9 +9,10 @@ use App\Http\Controllers\Web\Admins\PermissionController;
 use App\Http\Controllers\Web\Admins\RoleController;
 use App\Http\Controllers\Web\Admins\ActionController;
 
+
 Route::get('/', function () {
     return view('clients.home.home');
-});
+})->name('home');
 
 Route::get('/tin-tuc', function () {
     return view('clients.news.news');
@@ -59,8 +60,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/bai-viet', [PostController::class, 'index'])->name('posts');
     Route::get('/them-bai-viet', [PostController::class, 'create'])->name('create.post');
     Route::post('/them-bai-viet', [PostController::class, 'store'])->name('store.post');
-    Route::get('/sua-bai-viet/{id}', [PostController::class, 'show'])->name('show.post');
-    Route::put('/sua-bai-viet/{id}', [PostController::class, 'update'])->name('update.post');
+    Route::get('/sua-bai-viet/{id}', [PostController::class, 'show'])->name('show.post')->middleware('permission.action:Posts Management,update');
+    Route::put('/sua-bai-viet/{id}', [PostController::class, 'update'])->name('update.post')->middleware('permission.action:Posts Management,update');
     Route::delete('/xoa-bai-viet/{id}', [PostController::class, 'delete'])->name('delete.post');
 
     // Phân quyền
@@ -83,4 +84,9 @@ Route::prefix('admin')->group(function () {
     Route::post('/actions', [ActionController::class, 'store'])->name('store.action');
     Route::put('/actions/{id}', [ActionController::class, 'update']);
     Route::delete('/actions/{id}', [ActionController::class, 'delete'])->name('delete.action');
+});
+
+
+Route::fallback(function () {
+    return view('errors.404');
 });

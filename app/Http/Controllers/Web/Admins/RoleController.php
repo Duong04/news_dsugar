@@ -32,6 +32,7 @@ class RoleController extends Controller
     }
 
     public function store(RoleRequest $request) {
+        dd($request);
         $roleSuccess = $this->roleService->create($request);
         if ($roleSuccess) {
             toastr()->success('Tạo role thành công!');

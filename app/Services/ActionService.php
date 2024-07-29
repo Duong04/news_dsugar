@@ -14,7 +14,7 @@ class ActionService {
         try {
             return $this->actionRepository->all();
         } catch (\Throwable $th) {
-            return false;
+            return $th->getMessage();
         }
     }
 
@@ -22,7 +22,7 @@ class ActionService {
         try {
             return $this->actionRepository->find($id);
         } catch (\Throwable $th) {
-            return false;
+            return $th->getMessage();
         }
     }
 
@@ -35,7 +35,7 @@ class ActionService {
                 'value' => $request->input('value')
             ]);
         } catch (\Throwable $th) {
-            return false;
+            return $th->getMessage();
         }
     }
 
@@ -45,7 +45,7 @@ class ActionService {
 
             return $this->actionRepository->update($id, ['name' => $request->input('name')]);
         } catch (\Throwable $th) {
-            return false;
+            return $th->getMessage();
         }
     }
 
@@ -53,7 +53,7 @@ class ActionService {
         try {
             return $this->actionRepository->delete($id);
         } catch (\Throwable $th) {
-            return false;
+            return $th->getMessage();
         }
     }
 }

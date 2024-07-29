@@ -39,7 +39,7 @@
                 <div class="row mx-0">
                     <x-form.input2 class="col-4" :error="$errors->first('name')" name="name" label="Tên vai trò" type="text" />
                     <x-form.input2 class="col-4" :error="$errors->first('description')" name="description" label="Mô tả ngắn" type="text" />
-                    <x-form.select-type class="col-4" :error="$errors->first('type')" name="type" />
+                    <x-form.select-type class="col-4" :error="$errors->first('type')" value="{{null}}" name="type" />
                 </div>
                 <div class="col-12">
                     <div class="form-group d-flex justify-content-between">

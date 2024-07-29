@@ -21,6 +21,8 @@ use App\Repositories\Action\ActionRepository;
 use App\Repositories\Action\ActionRepositoryInterface;
 use App\Repositories\PermissionAction\PermissionActionRepository;
 use App\Repositories\PermissionAction\PermissionActionRepositoryInterface;
+use App\Repositories\TypeRole\TypeRoleRepository;
+use App\Repositories\TypeRole\TypeRoleRepositoryInterface;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -38,6 +40,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(RolePermissionRepositoryInterface::class, RolePermissionRepository::class);
         $this->app->bind(ActionRepositoryInterface::class, ActionRepository::class);
         $this->app->bind(PermissionActionRepositoryInterface::class, PermissionActionRepository::class);
+        $this->app->bind(TypeRoleRepositoryInterface::class, TypeRoleRepository::class);
     }
 
     /**

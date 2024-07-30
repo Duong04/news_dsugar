@@ -3,10 +3,18 @@ namespace App\Repositories\User;
 
 use App\Repositories\User\UserRepositoryInterface;
 use App\Models\User;
+use App\Http\Resources\UserResource;
 
 class UserRepository implements UserRepositoryInterface {
     public function all() {
-        return User::all();
+        $users = User::with(
+            ['role.permissions.actions' => function ($query) {
+                $query->distinct();
+            }
+        ])->get();
+
+        return UserResource::collection($users);
+
     }
 
     public function pagination() {

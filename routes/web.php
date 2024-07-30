@@ -8,8 +8,8 @@ use App\Http\Controllers\Web\Admins\PostController;
 use App\Http\Controllers\Web\Admins\PermissionController;
 use App\Http\Controllers\Web\Admins\RoleController;
 use App\Http\Controllers\Web\Admins\ActionController;
-use App\Http\Resources\UserResource;
-
+use App\Http\Controllers\Web\Admins\UserController;
+use App\Http\Controllers\Web\Admins\TypeController;
 
 Route::get('/', function () {
     return view('clients.home.home');
@@ -36,7 +36,7 @@ Route::get('/chi-tiet', function () {
     return view('clients.news.new-detail');
 });
 
-Route::prefix('admin')->group(function () {
+Route::middleware('auth.admin')->prefix('admin')->group(function () {
     Route::get('/dashboard', function () {
         return view('admins.dashboard.dashboard');
     })->name('dashboard');
@@ -85,6 +85,17 @@ Route::prefix('admin')->group(function () {
     Route::post('/actions', [ActionController::class, 'store'])->name('store.action');
     Route::put('/actions/{id}', [ActionController::class, 'update']);
     Route::delete('/actions/{id}', [ActionController::class, 'delete'])->name('delete.action');
+
+    // User
+    Route::get('/users', [UserController::class, 'index'])->name('users');
+
+    //grant permissions
+    Route::get('/grant-role', [UserController::class, 'grantRole'])->name('grant.role');
+
+    //Type 
+    Route::get('type-roles', [TypeController::class, 'index'])->name('types');
+    Route::post('type-roles', [TypeController::class, 'store'])->name('store.type');
+    Route::delete('type-roles/{id}', [TypeController::class, 'delete'])->name('delete.type');
 });
 
 

@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Permission;
 use App\Models\RolePermission;
 use App\Models\Action;
+use App\Models\TypeRole;
 
 class Role extends Model
 {
@@ -34,6 +35,10 @@ class Role extends Model
     {
         return $this->belongsToMany(Permission::class, 'role_permissions')
                     ->withPivot('action_id');
+    }
+
+    public function typeRole() {
+        return $this->BelongsTo(TypeRole::class, 'type_id');
     }
 
     public function actions()

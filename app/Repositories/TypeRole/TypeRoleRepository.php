@@ -18,7 +18,7 @@ class TypeRoleRepository implements TypeRoleRepositoryInterface {
     }
 
     public function create(array $data) {
-
+        return TypeRole::create($data);
     }
 
     public function update($id, array $data) {
@@ -26,6 +26,7 @@ class TypeRoleRepository implements TypeRoleRepositoryInterface {
     }
     
     public function delete($id) {
-
+        $type = TypeRole::findOrFail($id);
+        return $type->delete();
     }
 } 

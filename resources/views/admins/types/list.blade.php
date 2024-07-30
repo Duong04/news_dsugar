@@ -9,7 +9,7 @@
 <div class="container">
     <div class="page-inner">
         <div class="page-header">
-            <h3 class="fw-bold mb-3">Actions</h3>
+            <h3 class="fw-bold mb-3">Types</h3>
             <ul class="breadcrumbs mb-3">
             <li class="nav-home">
                 <a href="#">
@@ -26,7 +26,7 @@
                 <i class="icon-arrow-right"></i>
             </li>
             <li class="nav-item">
-                <a href="#">Actions</a>
+                <a href="#">Types</a>
             </li>
             </ul>
         </div>
@@ -34,9 +34,9 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header d-flex align-items-center">
-                    <h4 class="card-title">Action</h4>
+                    <h4 class="card-title">Types</h4>
                     <button type="button" class="btn btn-primary btn-round ms-auto" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                      <i class="fa fa-plus"></i> Tạo action
+                      <i class="fa fa-plus"></i> Thêm Type
                     </button>
                     </div>
                     <div class="card-body">
@@ -67,7 +67,7 @@
                             @php
                                 $i = 1;
                             @endphp
-                            @foreach ($actions as $item)
+                            @foreach ($types as $item)
                             <tr>
                               <td>{{ $i++ }}</td>
                               <td>{{ $item->name }}</td>
@@ -84,7 +84,7 @@
                                   >
                                     <i class="fa fa-edit"></i>
                                   </a>
-                                  <form class="d-flex align-items-center" id="delete-form-{{ $item->id }}" method="POST" action="{{ route('delete.action', ['id' => $item->id]) }}">
+                                  <form class="d-flex align-items-center" id="delete-form-{{ $item->id }}" method="POST" action="{{ route('delete.type', ['id' => $item->id]) }}">
                                     @csrf
                                     @method('DELETE')
                                     <button
@@ -112,33 +112,33 @@
 </div>
 {{------------------- Modal -----------------------}}
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-      <form method="POST" action="{{ route('store.action') }}" class="modal-content">
-          @csrf
-          <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Tạo action</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-              <div>   
-                  <x-form.input2 class="col-12" :error="$errors->first('name')" name="name" label="Tên action" type="text" />
-                  <x-form.input2 class="col-12" :error="$errors->first('value')" name="value" label="Value" type="text" />
-              </div>
-          </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-              <button type="submit" class="btn btn-primary">Thêm ngay</button>
-          </div>
-      </form>
-  </div>
+    <div class="modal-dialog">
+        <form method="POST" action="{{ route('store.type') }}" class="modal-content">
+            @csrf
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Tạo action</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div>   
+                    <x-form.input2 class="col-12" :error="$errors->first('name')" name="name" label="Tên type" type="text" />
+                    <x-form.input2 class="col-12" :error="$errors->first('redirect_url')" name="redirect_url" label="Redirect Url" type="text" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="submit" class="btn btn-primary">Thêm ngay</button>
+            </div>
+        </form>
+    </div>
 </div>
 <div class="modal fade" id="modal-2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-      <form method="POST" action="{{ route('store.action') }}" id="form-edit" class="modal-content">
+      <form method="POST" action="{{ route('store.type') }}" id="form-edit" class="modal-content">
           @csrf
           @method('PUT')
           <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Thêm quyền</h1>
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Thêm type</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -159,7 +159,7 @@
         toastr()->error($message);
     @endphp
 @enderror
-@error('value')
+@error('redirect_url')
     @php
         toastr()->error($message);
     @endphp

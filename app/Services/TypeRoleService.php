@@ -16,4 +16,22 @@ class TypeRoleService {
             return $th->getMessage();
         }
     }
+
+    public function create($request) {
+        try {
+            $data = $request->validated();
+
+            return $this->typeRoleRepository->create($data);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
+    public function delete($id) {
+        try {
+            return $this->typeRoleRepository->delete($id);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
 }

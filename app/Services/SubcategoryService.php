@@ -71,7 +71,7 @@ class SubcategoryService {
 
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
-                $folder = 'news_dsugar/categories';
+                $folder = 'news_dsugar/subcategories';
 
                 $url = $this->cloundinaryService->upload($image, $folder);
                 $data['image'] = $url;

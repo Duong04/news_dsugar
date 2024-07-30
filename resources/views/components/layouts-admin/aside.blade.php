@@ -87,6 +87,27 @@
                     </div>
                 </li>
                 <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#users">
+                        <i class="fas fa-user"></i>
+                        <p>Tài khoản</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="users">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="{{ route('users') }}">
+                                    <span class="sub-item">Tài khoản</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('grant.role') }}">
+                                    <span class="sub-item">Cấp vai trò</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#forms">
                         <i class="fas fa-pen-square"></i>
                         <p>Phân quyền</p>
@@ -106,7 +127,12 @@
                             </li>
                             <li>
                                 <a href="{{ route('actions') }}">
-                                    <span class="sub-item">Action</span>
+                                    <span class="sub-item">Actions</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('types') }}">
+                                    <span class="sub-item">Types</span>
                                 </a>
                             </li>
                         </ul>

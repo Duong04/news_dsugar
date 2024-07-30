@@ -8,6 +8,7 @@ use App\Http\Controllers\Web\Admins\PostController;
 use App\Http\Controllers\Web\Admins\PermissionController;
 use App\Http\Controllers\Web\Admins\RoleController;
 use App\Http\Controllers\Web\Admins\ActionController;
+use App\Http\Resources\UserResource;
 
 
 Route::get('/', function () {
@@ -57,12 +58,12 @@ Route::prefix('admin')->group(function () {
     Route::delete('/xoa-danh-muc-con/{id}', [SubcategoryController::class, 'destroy'])->name('delete.subcategory');
     
     // Bài viết
-    Route::get('/bai-viet', [PostController::class, 'index'])->name('posts');
-    Route::get('/them-bai-viet', [PostController::class, 'create'])->name('create.post');
-    Route::post('/them-bai-viet', [PostController::class, 'store'])->name('store.post');
+    Route::get('/bai-viet', [PostController::class, 'index'])->name('posts')->middleware('permission.action:Posts Management,read');;
+    Route::get('/them-bai-viet', [PostController::class, 'create'])->name('create.post')->middleware('permission.action:Posts Management,create');;
+    Route::post('/them-bai-viet', [PostController::class, 'store'])->name('store.post')->middleware('permission.action:Posts Management,create');;
     Route::get('/sua-bai-viet/{id}', [PostController::class, 'show'])->name('show.post')->middleware('permission.action:Posts Management,update');
     Route::put('/sua-bai-viet/{id}', [PostController::class, 'update'])->name('update.post')->middleware('permission.action:Posts Management,update');
-    Route::delete('/xoa-bai-viet/{id}', [PostController::class, 'delete'])->name('delete.post');
+    Route::delete('/xoa-bai-viet/{id}', [PostController::class, 'delete'])->name('delete.post')->middleware('permission.action:Posts Management,delete');;
 
     // Phân quyền
     Route::get('/permissions', [PermissionController::class, 'index'])->name('permissions');

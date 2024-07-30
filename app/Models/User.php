@@ -62,7 +62,7 @@ class User extends Authenticatable
 
     public function actions()
     {
-        return $this->permissions()->pluck('actions')->flatten()->unique('id');
+        return $this->role->actions();
     }
 
     public function hasPermission($permissionName)
@@ -70,8 +70,13 @@ class User extends Authenticatable
         return $this->permissions()->contains('name', $permissionName);
     }
 
-    public function hasAction($actionName)
+    public function hasAction($permissionName, $actionName)
     {
-        return $this->actions()->contains('value', $actionName);
+        $permission = $this->permissions()->where('name', $permissionName)->first();
+        if ($permission) {
+            return $permission->actions->contains('value', $actionName);
+        }
+        return false;
     }
+
 }

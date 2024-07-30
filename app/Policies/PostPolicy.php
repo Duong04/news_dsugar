@@ -17,6 +17,6 @@ class PostPolicy
 
     public function update(User $user, Post $post)
     {
-        return $user->hasPermission('Posts Management') && $user->hasAction('update');
+        return $user->hasPermission('Posts Management') && $user->hasAction('Posts Management', 'update');
     }
 }

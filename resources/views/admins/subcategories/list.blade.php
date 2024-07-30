@@ -52,6 +52,7 @@
                               <td>Stt</td>
                               <th>Tên danh mục</th>
                               <th>Mô tả ngắn</th>
+                              <th>Image</th>
                               <th>Danh mục</th>
                               <th>Ngày tạo</th>
                               <th>Ngày cập nhật</th>
@@ -63,6 +64,7 @@
                             <td>Stt</td>
                             <th>Tên danh mục</th>
                             <th>Mô tả ngắn</th>
+                            <th>Image</th>
                             <th>Danh  mục</th>
                             <th>Ngày tạo</th>
                             <th>Ngày cập nhật</th>
@@ -78,6 +80,7 @@
                               <td>{{ $i++ }}</td>
                               <td>{{ $item->name }}</td>
                               <td style="width: 150px;"><p class="description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt ab quasi quod alias laudantium nemo, accusantium facilis corrupti inventore sint sunt voluptas necessitatibus at quidem eaque pariatur nobis dignissimos molestias! {{ $item->description }}</p></td>
+                              <th><img width="80px" src="{{ $item->image }}" alt=""></th>
                               <td>{{ $item->categories->name }}</td>
                               <td>{{ $item->created_at }}</td>
                               <td>{{ $item->updated_at }}</td>

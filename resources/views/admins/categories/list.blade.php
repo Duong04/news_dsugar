@@ -51,6 +51,7 @@
                               <td>Stt</td>
                               <th>Tên danh mục</th>
                               <th>Mô tả ngắn</th>
+                              <th>Image</th>
                               <th>Ngày tạo</th>
                               <th>Ngày cập nhật</th>
                               <th style="width: 10%">Action</th>
@@ -61,6 +62,7 @@
                             <td>Stt</td>
                             <th>Tên danh mục</th>
                             <th>Mô tả ngắn</th>
+                            <th>Image</th>
                             <th>Ngày tạo</th>
                             <th>Ngày cập nhật</th>
                             <th style="width: 10%">Action</th>
@@ -75,6 +77,7 @@
                               <td>{{ $i++ }}</td>
                               <td>{{ $item->name }}</td>
                               <td>{{ $item->description }}</td>
+                              <th><img width="80px" src="{{ $item->image }}" alt=""></th>
                               <td>{{ $item->created_at }}</td>
                               <td>{{ $item->updated_at }}</td>
                               <td>

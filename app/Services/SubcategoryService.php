@@ -3,12 +3,15 @@ namespace App\Services;
 
 use App\Repositories\Subcategory\SubcategoryRepositoryInterface;
 use Str;
+use App\Services\CloundinaryService;
 
 class SubcategoryService {
     protected $subcategoryInterface;
+    protected $cloundinaryService;
 
-    public function __construct(SubcategoryRepositoryInterface $subcategoryInterface) {
+    public function __construct(SubcategoryRepositoryInterface $subcategoryInterface, CloundinaryService $cloundinaryService) {
         $this->subcategoryInterface = $subcategoryInterface;
+        $this->cloundinaryService = $cloundinaryService;
     }
 
     public function getAll() {
@@ -23,11 +26,17 @@ class SubcategoryService {
         try {
             $subcategory = $request->validated();
 
+            $image = $request->file('image');
+            $folder = 'news_dsugar/subcategories';
+
+            $url = $this->cloundinaryService->upload($image, $folder);
+
             return $this->subcategoryInterface->create([
                 'name' => $subcategory['name'],
                 'description' => $subcategory['description'],
                 'category_id' => $subcategory['category_id'],
-                'slug' => Str::slug($subcategory['name'], '-')
+                'slug' => Str::slug($subcategory['name'], '-'),
+                'image' => $url
             ]);
             
         } catch (\Throwable $th) {
@@ -59,6 +68,14 @@ class SubcategoryService {
                 'category_id' => $subcategory['category_id'],
                 'slug' => Str::slug($subcategory['name'], '-')
             ];
+
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $folder = 'news_dsugar/categories';
+
+                $url = $this->cloundinaryService->upload($image, $folder);
+                $data['image'] = $url;
+            }
 
             return $this->subcategoryInterface->update($id, $data);
         } catch (\Throwable $th) {

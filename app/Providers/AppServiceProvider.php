@@ -35,10 +35,10 @@ class AppServiceProvider extends ServiceProvider
             return new AuthService($app->make(UserRepositoryInterface::class));
         });
         $this->app->bind(CategoryService::class, function ($app) {
-            return new CategoryService($app->make(CategoryRepositoryInterface::class));
+            return new CategoryService($app->make(CategoryRepositoryInterface::class), $app->make(CloundinaryService::class));
         });
         $this->app->bind(SubcategoryService::class, function ($app) {
-            return new SubcategoryService($app->make(SubcategoryRepositoryInterface::class));
+            return new SubcategoryService($app->make(SubcategoryRepositoryInterface::class), $app->make(CloundinaryService::class));
         });
         $this->app->bind(PostService::class, function ($app) {
             return new PostService($app->make(PostRepositoryInterface::class), $app->make(CloundinaryService::class));

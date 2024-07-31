@@ -26,6 +26,14 @@ class TypeController extends Controller
         }
     }
 
+    public function update(TypeRequest $request, $id) {
+        $typeSuccess = $this->typeRoleService->update($request, $id);
+        if ($typeSuccess) {
+            toastr()->success('Cập nhật type thành công!');
+            return redirect()->back();
+        }
+    }
+
     public function delete($id) {
         $typeSuccess = $this->typeRoleService->delete($id);
         if ($typeSuccess) {

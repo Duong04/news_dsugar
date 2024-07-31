@@ -58,8 +58,29 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="{{ route('create.category') }}">
+                                    <span class="sub-item">Tạo danh mục</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#subcat">
+                        <i class="fas fa-list-alt"></i>
+                        <p>Danh mục con</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="subcat">
+                        <ul class="nav nav-collapse">
+                            <li>
                                 <a href="{{ route('subcategories') }}">
                                     <span class="sub-item">Danh mục con</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('create.subcategory') }}">
+                                    <span class="sub-item">Tạo danh mục con</span>
                                 </a>
                             </li>
                         </ul>

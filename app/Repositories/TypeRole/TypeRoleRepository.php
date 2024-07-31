@@ -10,11 +10,7 @@ class TypeRoleRepository implements TypeRoleRepositoryInterface {
     }
 
     public function find($id) {
-
-    }
-
-    public function findAll($id) {
-
+        return TypeRole::findOrFail($id);
     }
 
     public function create(array $data) {
@@ -22,7 +18,8 @@ class TypeRoleRepository implements TypeRoleRepositoryInterface {
     }
 
     public function update($id, array $data) {
-
+        $type = TypeRole::findOrFail($id);
+        return $type->update($data);
     }
     
     public function delete($id) {

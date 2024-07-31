@@ -17,6 +17,14 @@ class TypeRoleService {
         }
     }
 
+    public function findById($id) {
+        try {
+            return $this->typeRoleRepository->find($id);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
     public function create($request) {
         try {
             $data = $request->validated();
@@ -25,6 +33,16 @@ class TypeRoleService {
         } catch (\Throwable $th) {
             return $th->getMessage();
         }
+    }
+
+    public function update($request, $id) {
+        try {
+            $data = $request->validated();
+            return $this->typeRoleRepository->update($id, $data);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+        
     }
 
     public function delete($id) {

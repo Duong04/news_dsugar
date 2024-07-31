@@ -3,6 +3,7 @@ const axios_ins = axios.create({
 });
 
 const editFormAction = document.querySelectorAll(".btn-edit-action");
+const editFormType = document.querySelectorAll(".btn-edit-type");
 const btnStatus= document.querySelectorAll(".btn-status");
 const btnRole = document.querySelectorAll(".btn-role");
 
@@ -56,6 +57,30 @@ const getSubcategories = async (e) => {
         console.log(e);
     }
 };
+
+editFormType.forEach(item => {
+    item.onclick = async () => {
+        const id = item.getAttribute("data-id");
+        const inpName = document.querySelector(".inp-name");
+        const inpUrl = document.querySelector(".inp-url");
+        const formEdit = document.querySelector("#form-edit");
+        const btnSubmit = document.querySelector(".btn-submit");
+        const route = `${formEdit.getAttribute("action")}/${id}`;
+        btnSubmit.onclick = (e) => {
+            e.preventDefault();
+            formEdit.action = route;
+            formEdit.submit();
+        };
+
+        try {
+            const response = await axios_ins.get(`/types/${id}`);
+            inpName.value = response.data.name;
+            inpUrl.value = response.data.redirect_url;
+        } catch (error) {
+            console.log(error);
+        }
+    };
+});
 
 editFormAction.forEach((item) => {
     item.onclick = async () => {

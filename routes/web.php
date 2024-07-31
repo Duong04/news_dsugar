@@ -95,6 +95,7 @@ Route::middleware('auth.admin')->prefix('admin')->group(function () {
     //Type 
     Route::get('type-roles', [TypeController::class, 'index'])->name('types');
     Route::post('type-roles', [TypeController::class, 'store'])->name('store.type');
+    Route::put('type-roles/{id}', [TypeController::class, 'update'])->name('update.type');
     Route::delete('type-roles/{id}', [TypeController::class, 'delete'])->name('delete.type');
 });
 

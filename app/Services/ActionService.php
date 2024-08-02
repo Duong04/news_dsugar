@@ -43,7 +43,7 @@ class ActionService {
         try {
             $request->validated();
 
-            return $this->actionRepository->update($id, ['name' => $request->input('name')]);
+            return $this->actionRepository->update($id, ['name' => $request->input('name'), 'value' => $request->input('value')]);
         } catch (\Throwable $th) {
             return $th->getMessage();
         }

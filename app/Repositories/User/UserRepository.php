@@ -7,11 +7,7 @@ use App\Http\Resources\UserResource;
 
 class UserRepository implements UserRepositoryInterface {
     public function all() {
-        $users = User::with(
-            ['role.permissions.actions' => function ($query) {
-                $query->distinct();
-            }
-        ])->get();
+        $users = User::with('role.permissions.actions')->get();
 
         return UserResource::collection($users);
 

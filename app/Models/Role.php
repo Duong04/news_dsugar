@@ -34,7 +34,8 @@ class Role extends Model
     public function permissions()
     {
         return $this->belongsToMany(Permission::class, 'role_permissions')
-                    ->withPivot('action_id');
+                    ->withPivot('role_id', 'permission_id')
+                    ->with('actions');
     }
 
     public function typeRole() {
@@ -43,6 +44,7 @@ class Role extends Model
 
     public function actions()
     {
-        return $this->belongsToMany(Action::class, 'role_permissions');
+        return $this->belongsToMany(Action::class, 'role_permissions')
+        ->withPivot('role_id', 'permission_id');;
     }
 }

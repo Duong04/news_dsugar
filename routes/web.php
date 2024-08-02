@@ -50,20 +50,20 @@ Route::middleware('auth.admin')->prefix('admin')->group(function () {
     Route::delete('/xoa-danh-muc/{id}', [CategoryController::class, 'destroy'])->name('delete.category');
 
     // Danh mục con
-    Route::get('/danh-muc-con', [SubcategoryController::class, 'index'])->name('subcategories');
-    Route::get('/them-danh-muc-con', [SubcategoryController::class, 'create'])->name('create.subcategory');
-    Route::post('/them-danh-muc-con', [SubcategoryController::class, 'store'])->name('store.subcategory');
-    Route::get('/sua-danh-muc-con/{id}', [SubcategoryController::class, 'show'])->name('show.subcategory');
-    Route::put('/sua-danh-muc-con/{id}', [SubcategoryController::class, 'update'])->name('update.subcategory');
-    Route::delete('/xoa-danh-muc-con/{id}', [SubcategoryController::class, 'destroy'])->name('delete.subcategory');
+    Route::get('/danh-muc-con', [SubcategoryController::class, 'index'])->name('subcategories')->middleware('permission.action:Subcategies Management,viewany');
+    Route::get('/them-danh-muc-con', [SubcategoryController::class, 'create'])->name('create.subcategory')->middleware('permission.action:Subcategies Management,create');
+    Route::post('/them-danh-muc-con', [SubcategoryController::class, 'store'])->name('store.subcategory')->middleware('permission.action:Subcategies Management,create');
+    Route::get('/sua-danh-muc-con/{id}', [SubcategoryController::class, 'show'])->name('show.subcategory')->middleware('permission.action:Subcategies Management,view');
+    Route::put('/sua-danh-muc-con/{id}', [SubcategoryController::class, 'update'])->name('update.subcategory')->middleware('permission.action:Subcategies Management,update');
+    Route::delete('/xoa-danh-muc-con/{id}', [SubcategoryController::class, 'destroy'])->name('delete.subcategory')->middleware('permission.action:Subcategies Management,update');
     
     // Bài viết
-    Route::get('/bai-viet', [PostController::class, 'index'])->name('posts')->middleware('permission.action:Posts Management,read');;
-    Route::get('/them-bai-viet', [PostController::class, 'create'])->name('create.post')->middleware('permission.action:Posts Management,create');;
-    Route::post('/them-bai-viet', [PostController::class, 'store'])->name('store.post')->middleware('permission.action:Posts Management,create');;
-    Route::get('/sua-bai-viet/{id}', [PostController::class, 'show'])->name('show.post')->middleware('permission.action:Posts Management,update');
+    Route::get('/bai-viet', [PostController::class, 'index'])->name('posts')->middleware('permission.action:Posts Management,viewany');
+    Route::get('/them-bai-viet', [PostController::class, 'create'])->name('create.post')->middleware('permission.action:Posts Management,create');
+    Route::post('/them-bai-viet', [PostController::class, 'store'])->name('store.post')->middleware('permission.action:Posts Management,create');
+    Route::get('/sua-bai-viet/{id}', [PostController::class, 'show'])->name('show.post')->middleware('permission.action:Posts Management,view');
     Route::put('/sua-bai-viet/{id}', [PostController::class, 'update'])->name('update.post')->middleware('permission.action:Posts Management,update');
-    Route::delete('/xoa-bai-viet/{id}', [PostController::class, 'delete'])->name('delete.post')->middleware('permission.action:Posts Management,delete');;
+    Route::delete('/xoa-bai-viet/{id}', [PostController::class, 'delete'])->name('delete.post')->middleware('permission.action:Posts Management,delete');
 
     // Phân quyền
     Route::get('/permissions', [PermissionController::class, 'index'])->name('permissions');

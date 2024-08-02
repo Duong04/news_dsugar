@@ -10,9 +10,8 @@ class RoleRepository implements RoleRepositoryInterface {
         return Role::all();
     }
     public function find($id) {
-        $role = Role::with(['permissions.actions' => function ($query) {
-            $query->distinct();
-        }])->findOrFail($id);
+        $role = Role::with('permissions.actions')->findOrFail($id);
+        
         return new RoleResource($role);
     }
     public function create(array $data) {

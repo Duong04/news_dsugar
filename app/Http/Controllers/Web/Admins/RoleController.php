@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web\Admins;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PermissionResource;
 use Illuminate\Http\Request;
 use App\Services\RoleService;
 use App\Services\PermissionService;
@@ -32,7 +33,6 @@ class RoleController extends Controller
     }
 
     public function store(RoleRequest $request) {
-        dd($request);
         $roleSuccess = $this->roleService->create($request);
         if ($roleSuccess) {
             toastr()->success('Tạo role thành công!');
@@ -41,8 +41,31 @@ class RoleController extends Controller
     }
 
     public function show($id) {
-        
-        $role = $this->roleService->findById($id);
+        $response = $this->roleService->findById($id);
+        $permissions = $response->permissions;
+        $role = [
+            'id' => $response->id,
+            'name' => $response->name,
+            'description' => $response->description,
+            'type_id' => $response->type_id,
+            'permissions' => $permissions->map(function ($permission) use ($response) {
+                $filteredActions = $permission->actions->filter(function ($action) use ($response, $permission) {
+                    return $action->pivot->role_id == $response->id && $action->pivot->permission_id == $permission->id;
+                })->values();
+                return [
+                    'id' => $permission->id,
+                    'name' => $permission->name,
+                    'description' => $permission->description,
+                    'actions' => $filteredActions->map(function ($action) {
+                        return [
+                            'id' => $action->id,
+                            'name' => $action->name,
+                            'value' => $action->value, // Thêm value nếu cần thiết
+                        ];
+                    })
+                ];
+            })
+        ];
         $permissions = $this->permissionService->getAll();
         $actions = $this->actionService->getAll();
         return view('admins.roles.update', compact('role', 'permissions', 'actions'));

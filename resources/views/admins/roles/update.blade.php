@@ -30,7 +30,7 @@
             </ul>
         </div>
         <div class="row">
-          <form class="row col-12" action="{{ route('update.role', ['id' => $role->id]) }}" method="POST">
+          <form class="row col-12" action="{{ route('update.role', ['id' => $role['id']]) }}" method="POST">
             @csrf
             @method('PUT')
             <div class="col-6 form-group">
@@ -38,9 +38,9 @@
             </div>
             <div class="col-12 row">
                 <div class="row mx-0">
-                    <x-form.input2 :value="$role->name" class="col-4" :error="$errors->first('name')" name="name" label="Tên vai trò" type="text" />
-                    <x-form.input2 :value="$role->description" class="col-4" :error="$errors->first('description')" name="description" label="Mô tả ngắn" type="text" />
-                    <x-form.select-type :value="$role->type_id" class="col-4" :error="$errors->first('type')" name="type" />
+                    <x-form.input2 :value="$role['name']" class="col-4" :error="$errors->first('name')" name="name" label="Tên vai trò" type="text" />
+                    <x-form.input2 :value="$role['description']" class="col-4" :error="$errors->first('description')" name="description" label="Mô tả ngắn" type="text" />
+                    <x-form.select-type :value="$role['type_id']" class="col-4" :error="$errors->first('type')" name="type" />
                 </div>
                 <div class="col-12">
                     <div class="form-group d-flex justify-content-between">
@@ -49,8 +49,8 @@
                     </div>
                     @foreach ($permissions as $item)
                         @php
-                            $permission = $role->permissions->find($item->id);
-                            $actionIds = $permission ? $permission->actions->pluck('id')->toArray() : [];
+                            $permission = $role['permissions']->where('id', $item->id)->first();
+                            $actionIds[$item->id] = $permission ? $permission['actions']->pluck('id')->toArray() : [];
                             $allowedActions = $item->permissionActions->pluck('action_id')->toArray();
                         @endphp
                         <div class="col-12 d-flex justify-content-between">
@@ -64,7 +64,7 @@
                                 <div class="row gutters-xs">
                                     @foreach ($actions as $action)
                                         @if (in_array($action->id, $allowedActions))
-                                        <x-form.checkbox name="actions[{{$item->id}}][]" className="check-action" id="checkbox-{{$action->id}}-{{$item->id}}" value="{{$action->id}}" :checked="in_array($action->id, $actionIds)" label="{{ $action->name }}" />
+                                        <x-form.checkbox name="actions[{{$item->id}}][]" className="check-action" id="checkbox-{{$action->id}}-{{$item->id}}" value="{{$action->id}}" :checked="in_array($action->id, $actionIds[$item->id])" label="{{ $action->name }}" />
                                         @endif
                                     @endforeach
                                 </div>

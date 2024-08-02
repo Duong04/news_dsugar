@@ -14,11 +14,17 @@ class PermissionResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $roleId = $this->pivot->role_id ?? null;
+
+        $filteredActions = $this->actions->filter(function ($action) use ($roleId) {
+            return $action->pivot->role_id == $roleId;
+        })->values();
+
         return [
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
-            'actions' => ActionResource::collection($this->actions),
+            'actions' => ActionResource::collection($filteredActions),
         ];
     }
 }

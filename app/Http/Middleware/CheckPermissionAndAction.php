@@ -18,8 +18,9 @@ class CheckPermissionAndAction
     public function handle(Request $request, Closure $next, $permission, $action): Response
     {
         $user = Auth::user();
+        $role_id = $user->role->id;
 
-        if (!$user->hasPermission($permission) || !$user->hasAction($permission, $action)) {
+        if (!$user->hasPermission($permission) || !$user->hasAction($permission, $action, $role_id)) {
             abort(403);
         }
 

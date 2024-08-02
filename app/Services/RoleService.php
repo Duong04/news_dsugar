@@ -54,7 +54,9 @@ class RoleService {
 
     public function findById($id) {
         try {
-            return $this->roleRepository->find($id);
+            $role = $this->roleRepository->find($id);
+
+            return $role;
         } catch (\Throwable $th) {
             return $th->getMessage();
         }

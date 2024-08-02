@@ -22,12 +22,11 @@ class Permission extends Model
         'created_at',  
         'updated_at',  
         'deleted_at',  
-        'pivot'
     ];
 
     public function actions()
     {
-        return $this->belongsToMany(Action::class, 'role_permissions', 'permission_id', 'action_id');
+        return $this->belongsToMany(Action::class, 'role_permissions', 'permission_id', 'action_id')->withPivot('role_id', 'permission_id','action_id');
     }
 
     public function permissionActions() {

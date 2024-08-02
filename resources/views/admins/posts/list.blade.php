@@ -56,21 +56,6 @@
                                             <th style="width: 10%">Action</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <td>Stt</td>
-                                            <th>Tên danh mục</th>
-                                            <th>Lượt xem</th>
-                                            <th>Ảnh</th>
-                                            <th style="width: 140px;">Tác giả</th>
-                                            <th>Danh mục</th>
-                                            <th>Danh mục con</th>
-                                            <th>Trạng thái</th>
-                                            <th>Mô tả ngắn</th>
-                                            <th>Ngày tạo</th>
-                                            <th style="width: 10%">Action</th>
-                                        </tr>
-                                    </tfoot>
                                     <tbody>
                                         @php
                                             $i = 1;
@@ -78,15 +63,15 @@
                                         @foreach ($posts as $item)
                                             <tr>
                                                 <td>{{ $i++ }}</td>
-                                                <td>{{ $item->title }}</td>
+                                                <td><div style="width: 180px;">{{ $item->title }}</div></td>
                                                 <td>{{ $item->view }}</td>
                                                 <td><img width="80px" src="{{ $item->image }}" alt=""></td>
-                                                <td>{{ $item->user->user_name }}</td>
-                                                <td>{{ $item->category->name }}</td>
-                                                <td>{{ $item->subcategory->name }}</td>
-                                                <td>{{ $item->status }}</td>
-                                                <td><p class="description">{{ $item->description }}</p></div></td>
-                                                <td>{{ $item->created_at }}</td>
+                                                <td><div style="width: 150px;">{{ $item->user->user_name }}</div></td>
+                                                <td><div style="width: 150px;">{{ $item->category->name }}</div></td>
+                                                <td><div style="width: 150px;">{{ $item->subcategory->name }}</div></td>
+                                                <td><div style="width: 100px;">{{ $item->status }}</div></td>
+                                                <td><p class="description" style="width: 200px;">{{ $item->description }}</p></div></td>
+                                                <td><div style="width: 150px;">{{ $item->created_at }}</div></td>
                                                 <td>
                                                     <div class="form-button-action">
                                                         <a href="{{ route('show.post', ['id' => $item->id]) }}"

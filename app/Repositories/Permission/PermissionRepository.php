@@ -6,7 +6,7 @@ use App\Models\Permission;
 
 class PermissionRepository implements PermissionRepositoryInterface {
     public function all() {
-        return Permission::with('permissionActions')->get();
+        return Permission::with(['permissionActions'])->get();
     }
     public function find($id) {
         return Permission::with('permissionActions')->findOrFail($id);

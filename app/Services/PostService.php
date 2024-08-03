@@ -19,7 +19,63 @@ class PostService {
         try {
             return $this->postInterface->all();
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 422);
+            return $th->getMessage();
+        }
+    }
+
+    public function getLastPost($limit = null, $id = null) {
+        try {
+            return $this->postInterface->getLastPost($limit, $id);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
+    public function getMostViewedPost($limit = null, $id = null) {
+        try {
+            return $this->postInterface->mostViewedPost($limit, $id);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
+    public function getPostRand($limit = null, $id = null) {
+        try {
+            return $this->postInterface->postRand($limit, $id);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
+    public function getPostByCategory($categoryName, $table, $limit = null, $id = null) {
+        try {
+            return $this->postInterface->postByCategory($categoryName, $table, $limit, $id);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
+    public function getPostBySlug($slug) {
+        try {
+            return $this->postInterface->postBySlug($slug);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
+    public function getPostByCategorySlug($slug, $table, $limit = null, $id = null) {
+        try {
+            return $this->postInterface->postByCategorySlug($slug, $table, $limit, $id);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
+    public function getPostByCategorySlugPaginate($slug, $table, $limit = null, $id = null) {
+        try {
+            return $this->postInterface->postByCategorySlugPaginate($slug, $table, $limit, $id);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
         }
     }
 
@@ -46,7 +102,7 @@ class PostService {
 
             return $this->postInterface->create($data);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 422);
+            return $th->getMessage();
         }
     }
 

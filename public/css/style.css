@@ -335,6 +335,17 @@ body {
     text-decoration: underline !important;
 }
 
+.text-line-3 {
+    overflow: hidden;
+    max-height: 6rem;
+    -webkit-line-clamp: 3;
+    display: box;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+
 .featured-post-item:hover {
     background-color: var(--color-lightest);
 }

@@ -5,20 +5,24 @@ use App\Repositories\TypeRole\TypeRoleRepositoryInterface;
 use App\Models\TypeRole;
 
 class TypeRoleRepository implements TypeRoleRepositoryInterface {
+    private $typeRole;
+    public function __construct(TypeRole $typeRole) {
+        $this->typeRole = $typeRole;
+    }
     public function all() {
-        return TypeRole::all();
+        return $this->typeRole::all();
     }
 
     public function find($id) {
-        return TypeRole::findOrFail($id);
+        return $this->typeRole::findOrFail($id);
     }
 
     public function create(array $data) {
-        return TypeRole::create($data);
+        return $this->typeRole::create($data);
     }
 
     public function update($id, array $data) {
-        $type = TypeRole::findOrFail($id);
+        $type = $this->typeRole::findOrFail($id);
         return $type->update($data);
     }
     

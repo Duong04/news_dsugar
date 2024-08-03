@@ -39,7 +39,7 @@
             <nav class="navbar navbar-expand-lg">
                 <div class="container-fluid">
                     <div class="navbar-brand logo me-2 me-xl-5">
-                        <img class="w-100" src="images/logo.png" alt="">
+                        <img class="w-100" src="/images/logo.png" alt="">
                     </div>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -49,20 +49,13 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="d-flex g-5 navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link menu-hv fs-6" href="#">Trang chủ</a>
+                                <a class="nav-link menu-hv fs-6" href="{{ route('home') }}">Trang chủ</a>
                             </li>
+                            @foreach ($categories as $item)
                             <li class="nav-item">
-                                <a class="nav-link menu-hv fs-6" href="#">Công nghệ</a>
+                                <a class="nav-link menu-hv fs-6" href="{{ route('category', ['category' => $item->slug]) }}">{{ $item->name }}</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link menu-hv fs-6" href="#">Phong cách sống</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link menu-hv fs-6" href="#">Sức Khỏe</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link menu-hv fs-6" href="#">Coder 24h</a>
-                            </li>
+                            @endforeach
                         </ul>
                         <div class="d-flex g-10 align-items-center">
                             <x-search.search />

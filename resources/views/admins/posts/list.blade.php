@@ -59,8 +59,17 @@
                                     <tbody>
                                         @php
                                             $i = 1;
+                                            $statusPost = [
+                                                'draft' => ['Bản nháp', 'badge-warning'],
+                                                'published' => ['Đã xuất bản', 'badge-success'],
+                                                'archived' => ['Lưu trử', 'badge-info'],
+                                            ];
                                         @endphp
                                         @foreach ($posts as $item)
+                                            @php
+                                                $textStatus = $statusPost[$item->status][0];
+                                                $bgStatus = $statusPost[$item->status][1];
+                                            @endphp
                                             <tr>
                                                 <td>{{ $i++ }}</td>
                                                 <td><div style="width: 180px;">{{ $item->title }}</div></td>
@@ -69,7 +78,7 @@
                                                 <td><div style="width: 150px;">{{ $item->user->user_name }}</div></td>
                                                 <td><div style="width: 150px;">{{ $item->category->name }}</div></td>
                                                 <td><div style="width: 150px;">{{ $item->subcategory->name }}</div></td>
-                                                <td><div style="width: 100px;">{{ $item->status }}</div></td>
+                                                <td><div style="width: 100px;" class="badge {{ $bgStatus }}">{{ $textStatus }}</div></td>
                                                 <td><p class="description" style="width: 200px;">{{ $item->description }}</p></div></td>
                                                 <td><div style="width: 150px;">{{ $item->created_at }}</div></td>
                                                 <td>

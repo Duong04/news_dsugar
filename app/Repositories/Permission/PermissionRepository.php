@@ -5,21 +5,25 @@ use App\Repositories\Permission\PermissionRepositoryInterface;
 use App\Models\Permission;
 
 class PermissionRepository implements PermissionRepositoryInterface {
+    private $permissions;
+    public function __construct(Permission $permissions) {
+        $this->permissions = $permissions;
+    }
     public function all() {
-        return Permission::with(['permissionActions'])->get();
+        return $this->permissions::with(['permissionActions'])->get();
     }
     public function find($id) {
-        return Permission::with('permissionActions')->findOrFail($id);
+        return $this->permissions::with('permissionActions')->findOrFail($id);
     }
     public function create(array $data) {
-        return Permission::create($data);
+        return $this->permissions::create($data);
     }
     public function update($id, array $data) {
-        $permission = Permission::findOrFail($id);
+        $permission = $this->permissions::findOrFail($id);
         return $permission->update($data);
     }
     public function delete($id) {
-        $permission = Permission::findOrFail($id);
+        $permission = $this->permissions::findOrFail($id);
         return $permission->delete();
     }
 }

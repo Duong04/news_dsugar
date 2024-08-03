@@ -11,6 +11,10 @@
                 <a href="" class="text-decoration-none text-black">Trang chủ</a>
                 <i class="fa-solid fa-circle fs-7 text-midgray" style="font-size: 0.4rem;"></i>
                 <span class="text-midgray">Công nghệ</span>
+                @if (request()->segment(2))
+                <i class="fa-solid fa-circle fs-7 text-midgray" style="font-size: 0.4rem;"></i>
+                <span class="text-midgray">{{ $post->subcategory->name }}</span>
+                @endif
             </div>
             <h2 class="mt-3 d-flex align-items-center g-10 fw-sm-semibold"><span>Danh mục</span> <i
                     class="fa-solid fa-angle-right"></i> <span>Công nghệ</span></h2>
@@ -19,26 +23,21 @@
     <section class="container-md py-4">
         <h5>Danh mục con</h5>
         <div class="d-grid-10 subcat">
-            <div><a class="btn btn-outline-primary" href="">Công nghệ</a></div>
-            <div><a class="btn btn-outline-primary" href="">Công nghệ</a></div>
-            <div><a class="btn btn-outline-primary" href="">Công nghệ</a></div>
-            <div><a class="btn btn-outline-primary" href="">Công nghệ</a></div>
-            <div><a class="btn btn-outline-primary" href="">Công nghệ</a></div>
-            <div><a class="btn btn-outline-primary" href="">Công nghệ</a></div>
-            <div><a class="btn btn-outline-primary" href="">Công nghệ</a></div>
+            @foreach ($category->subcategories as $item)
+            <div><a class="btn btn-outline-primary" href="{{ route('subcategory', ['category' => $category->slug, 'subcategory' => $item->slug]) }}">{{ $item->name }}</a></div>
+            @endforeach
         </div>
     </section>
     <section class="outstanding bg-lightest py-5">
         <div class="container-md row mx-auto py-3">
             <div class="col-12 col-xl-6 mt-4">
-                <x-posts.new-post />
+                <x-posts.new-post :post="$post" />
             </div>
             <div class="col-12 col-xl-6 mt-4">
                 <div class="h-600 d-grid-2">
-                    <x-posts.new-post-item2 />
-                    <x-posts.new-post-item2 />
-                    <x-posts.new-post-item2 />
-                    <x-posts.new-post-item2 />
+                    @foreach ($posts as $item)
+                        <x-posts.new-post-item2 :post="$item" />
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -47,11 +46,9 @@
         <div class="container-md d-flex flex-column flex-lg-row mx-auto">
             <article class="col-12 col-lg-8">
                 <div class="d-flex flex-column g-30 mt-4">
-                    <x-posts.post-list-view />
-                    <x-posts.post-list-view />
-                    <x-posts.post-list-view />
-                    <x-posts.post-list-view />
-                    <x-posts.post-list-view />
+                    @foreach ($postPaginates as $item)
+                    <x-posts.post-list-view :post="$item" />
+                    @endforeach
                 </div>
                 <nav aria-label="Page navigation">
                     <ul class="pagination d-flex justify-content-center mt-3">

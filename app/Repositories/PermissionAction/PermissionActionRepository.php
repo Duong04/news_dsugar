@@ -4,6 +4,10 @@ namespace App\Repositories\PermissionAction;
 use App\Repositories\PermissionAction\PermissionActionRepositoryInterface;
 use App\Models\PermissionAction;
 class PermissionActionRepository implements PermissionActionRepositoryInterface {
+    private $permissionAction;
+    public function __construct(PermissionAction $permissionAction) {
+        $this->permissionAction = $permissionAction;
+    }
     public function all() {
 
     }
@@ -11,12 +15,12 @@ class PermissionActionRepository implements PermissionActionRepositoryInterface 
 
     }
     public function create(array $data) {
-        return PermissionAction::create($data);
+        return $this->permissionAction::create($data);
     }
     public function update($id, array $data) {
 
     }
     public function delete($id) {
-        return PermissionAction::where('permission_id', $id)->delete();
+        return $this->permissionAction::where('permission_id', $id)->delete();
     }
 }

@@ -39,6 +39,14 @@ class CategoryService {
         }
     }
 
+    public function getBySlug($slug) {
+        try {
+            return $this->categoryInterface->getBySlug($slug);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
     public function findId($id) {
         try {
             return $this->categoryInterface->find($id);

@@ -86,20 +86,24 @@
                               <td class="text-center" id="role-{{$item->id}}"><span class="mx-auto badge {{ $bgRole }}">{{ $item->role->name }}</span></td>
                               <td>
                                 <div class="d-flex">
-                                    @foreach ($roles as $role)
-                                        @php
-                                            $btnRole = $roleClasseBgs[$role->name] ?? 'btn-black';
-                                        @endphp
-                                        @if ($role->name !== 'Super Admin')
-                                            <button data-bs-toggle="tooltip"
-                                            title="{{ $role->name }}"
-                                            class="btn btn-icon btn-round {{$btnRole}} mx-2 p-1 btn-role"
-                                            data-user-id="{{ $item->id }}"
-                                            data-role-id="{{ $role->id }}"
-                                            data-role-name="{{ $role->name }}"
-                                            data-original-title="Edit Task"><i class="fas fa-user-check"></i></button>
-                                        @endif
-                                    @endforeach
+                                    @if ($item->role->name !== 'Super Admin')
+                                        @foreach ($roles as $role)
+                                            @php
+                                                $btnRole = $roleClasseBgs[$role->name] ?? 'btn-black';
+                                            @endphp
+                                            @if ($role->name !== 'Super Admin')
+                                                <button data-bs-toggle="tooltip"
+                                                title="{{ $role->name }}"
+                                                class="btn btn-icon btn-round {{$btnRole}} mx-2 p-1 btn-role"
+                                                data-user-id="{{ $item->id }}"
+                                                data-role-id="{{ $role->id }}"
+                                                data-role-name="{{ $role->name }}"
+                                                data-original-title="Edit Task"><i class="fas fa-user-check"></i></button>
+                                            @endif
+                                        @endforeach
+                                    @else
+                                        <p class="badge badge-info">Bạn không thể thao tác được người này!</p>
+                                    @endif
                                 </div>
                               </td>
                             </tr>

@@ -9,14 +9,14 @@
     <div class="container-md d-flex flex-column flex-lg-row mx-auto">
         <article class="col-12 col-lg-8">
             <div>
-                <span class="b-red fs-7 text-danger position-relative hover-fillip-item" data-text="Công nghệ">Công nghệ</span>
-                <h1 class="fw-semibold">Beauty of deep space. Billions of galaxies in</h1>
+                <span class="b-red fs-7 text-danger position-relative hover-fillip-item" data-text="{{ $post->subcategory->name }}">{{ $post->subcategory->name }}</span>
+                <h1 class="fw-semibold">{{ $post->title }}</h1>
                 <div class="d-flex g-10 align-items-md-center flex-column flex-md-row justify-content-between mt-4">
                     <div class="d-flex g-10 align-items-center">
-                        <img class="rounded-circle object-fit-cover" width="60px" height="60px" src="images/avatar/1b70c830da30f39d5c6fab323017430c.png" alt="">
+                        <img class="rounded-circle object-fit-cover" width="60px" height="60px" src="{{ $post->user->avatar }}" alt="">
                         <div class="d-flex flex-column">
-                            <span class="fs-7 fw-semibold author hover-fillip-item" data-text="Nguyễn Thành Đường">Nguyễn Thành Đường</span>
-                            <span class="fs-7 text-midgray">January 21, 2021</span>
+                            <span class="fs-7 fw-semibold author hover-fillip-item" data-text="{{ $post->user->user_name }}">{{ $post->user->user_name }}</span>
+                            <span class="fs-7 text-midgray">{{ $post->created_at }}</span>
                         </div>
                     </div>
                     <div class="d-flex g-10 social-share">
@@ -29,20 +29,28 @@
             </div>
             <hr class="my-4">
             <div class="d-flex g-10 flex-wrap align-items-center">
-                <a href="" class="text-decoration-none text-black">Trang chủ</a>
+                <a href="{{ route('home') }}" class="text-decoration-none text-black">Trang chủ</a>
                 <i class="fa-solid fa-circle fs-7 text-midgray" style="font-size: 0.4rem;"></i>
-                <span class="text-midgray">Công nghệ</span>
+                <span class="text-midgray">{{ $post->category->name }}</span>
                 <i class="fa-solid fa-circle fs-7 text-midgray" style="font-size: 0.4rem;"></i>
-                <span class="text-midgray">Heheheheheeh</span>
+                <span class="text-midgray">{{ $post->subcategory->name }}</span>
+                <i class="fa-solid fa-circle fs-7 text-midgray" style="font-size: 0.4rem;"></i>
+                <span class="text-midgray">{{ $post->title }}</span>
             </div>
             <div class="py-4 post-content">
-                Nội dung sẽ nằm ở đây b
+                <div class="w-100">
+                    <img src="{{ $post->image }}" class="w-100" alt="">
+                </div>
+                <div class="mt-3">
+                    {!! $post->content !!}
+                </div>
+                
             </div>
             <hr>
             <div class="my-4">
                 <div class="d-flex flex-column g-20">
                     <div class="mt-3 d-flex g-20 align-items-start">
-                        <img class="rounded-circle object-fit-cover" width="60px" height="60px" src="images/avatar/1b70c830da30f39d5c6fab323017430c.png" alt="">
+                        <img class="rounded-circle object-fit-cover" width="60px" height="60px" src="/images/avatar/1b70c830da30f39d5c6fab323017430c.png" alt="">
                         <div class="d-flex flex-column">
                             <span class="fs-7 fw-semibold author hover-fillip-item" data-text="Nguyễn Thành Đường">Nguyễn Thành Đường</span>
                             <span class="fs-7">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Pariatur necessitatibus, numquam beatae consectetur omnis voluptas cupiditate expedita labore molestiae vitae at vero iusto molestias! Omnis expedita quos ducimus qui odit.</span>
@@ -52,7 +60,7 @@
                                 <div><i class="fa-regular fa-comment cursor-pointer"></i></div>
                             </div>
                             <div class="mt-3 d-flex g-20 align-items-start">
-                                <img class="rounded-circle object-fit-cover" width="60px" height="60px" src="images/avatar/1b70c830da30f39d5c6fab323017430c.png" alt="">
+                                <img class="rounded-circle object-fit-cover" width="60px" height="60px" src="/images/avatar/1b70c830da30f39d5c6fab323017430c.png" alt="">
                                 <div class="d-flex flex-column">
                                     <span class="fs-7 fw-semibold author hover-fillip-item" data-text="Nguyễn Thành Đường">Nguyễn Thành Đường</span>
                                     <span class="fs-7">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Pariatur necessitatibus, numquam beatae consectetur omnis voluptas cupiditate expedita labore molestiae vitae at vero iusto molestias! Omnis expedita quos ducimus qui odit.</span>

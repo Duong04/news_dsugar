@@ -93,20 +93,24 @@
                               <td class="text-center"><span class="mx-auto badge {{ $bgRole }}">{{ $item->role->name }}</span></td>
                               <td class="text-center" id="status-{{ $item->id }}"><span class="mx-auto badge {{ $bgStatus }}">{{ $textStatus }}</span></td>
                               <td>
-                                <div class="d-flex">
-                                    <button data-bs-toggle="tooltip"
-                                    title="Kích hoạt"
-                                    class="btn btn-link btn-primary btn-lg btn-status"
-                                    data-id="{{ $item->id }}"
-                                    data-status="active"
-                                    data-original-title="Edit Task"><i class="fas fa-user-check"></i></button>
-                                    <button data-bs-toggle="tooltip"
-                                    title="Vô hiệu hóa"
-                                    data-id="{{ $item->id }}"
-                                    data-status="disabled"
-                                    class="btn btn-link btn-danger btn-lg btn-status"
-                                    data-original-title="Edit Task"><i class="fas fa-user-lock"></i></button>
-                                </div>
+                                @if ($item->role->name !== 'Super Admin')
+                                    <div class="d-flex justify-content-center">
+                                        <button data-bs-toggle="tooltip"
+                                        title="Kích hoạt"
+                                        class="btn btn-link btn-primary btn-lg btn-status"
+                                        data-id="{{ $item->id }}"
+                                        data-status="active"
+                                        data-original-title="Edit Task"><i class="fas fa-user-check"></i></button>
+                                        <button data-bs-toggle="tooltip"
+                                        title="Vô hiệu hóa"
+                                        data-id="{{ $item->id }}"
+                                        data-status="disabled"
+                                        class="btn btn-link btn-danger btn-lg btn-status"
+                                        data-original-title="Edit Task"><i class="fas fa-user-lock"></i></button>
+                                    </div>
+                                @else
+                                    <p class="badge badge-info">Bạn không thể thao tác được người này!</p>
+                                @endif
                               </td>
                             </tr>
                             @endforeach

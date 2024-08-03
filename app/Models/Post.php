@@ -38,4 +38,17 @@ class Post extends Model
     public function user() {
         return $this->belongsTo(User::class, 'author_id');
     }
+
+    public function scopePublished($query)
+    {
+        return $query->where('status', 'published');
+    }
+
+    public function scopeMostViewed($query) {
+        return $query->orderByDesc('view');
+    }
+
+    public function scopePostRand($query) {
+        return $query->inRandomOrder();
+    }
 }

@@ -10,31 +10,11 @@ use App\Http\Controllers\Web\Admins\RoleController;
 use App\Http\Controllers\Web\Admins\ActionController;
 use App\Http\Controllers\Web\Admins\UserController;
 use App\Http\Controllers\Web\Admins\TypeController;
+use App\Http\Controllers\Web\Clients\HomeController;
+use App\Http\Controllers\Web\Clients\PostController as ClientPostController;
 
-Route::get('/', function () {
-    return view('clients.home.home');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/tin-tuc', function () {
-    return view('clients.news.news');
-});
-
-Route::get('/dang-nhap', [AuthController::class, 'showLogin'])->name('login');
-Route::post('/dang-nhap', [AuthController::class, 'actionLogin'])->name('action.login');
-Route::get('/dang-ky', [AuthController::class, 'showRegister'])->name('register');
-Route::post('/dang-ky', [AuthController::class, 'actionRegister'])->name('action.register');
-Route::get('/email/verify/{token}', [AuthController::class, 'verifyEmail']);
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-Route::get('/upload', [PostController::class, 'upload']);
-Route::post('/upload', [PostController::class, 'postUpload']);
-Route::get('/check-mail', function () {
-    return view('clients.auth.checkmail');
-})->name('checkmail');
-
-Route::get('/chi-tiet', function () {
-    return view('clients.news.new-detail');
-});
 
 Route::middleware('auth.admin')->prefix('admin')->group(function () {
     Route::get('/dashboard', function () {
@@ -98,6 +78,27 @@ Route::middleware('auth.admin')->prefix('admin')->group(function () {
     Route::put('type-roles/{id}', [TypeController::class, 'update'])->name('update.type');
     Route::delete('type-roles/{id}', [TypeController::class, 'delete'])->name('delete.type');
 });
+
+Route::get('/dang-nhap', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/dang-nhap', [AuthController::class, 'actionLogin'])->name('action.login');
+Route::get('/dang-ky', [AuthController::class, 'showRegister'])->name('register');
+Route::post('/dang-ky', [AuthController::class, 'actionRegister'])->name('action.register');
+Route::get('/email/verify/{token}', [AuthController::class, 'verifyEmail']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/upload', [PostController::class, 'upload']);
+Route::post('/upload', [PostController::class, 'postUpload']);
+Route::get('/check-mail', function () {
+    return view('clients.auth.checkmail');
+})->name('checkmail');
+
+Route::get('/chi-tiet', function () {
+    return view('clients.news.new-detail');
+});
+
+Route::get('/bai-viet/{post}', [ClientPostController::class, 'postDetail'])->name('post.detail');
+Route::get('/{category}', [ClientPostController::class, 'getPostByCategory'])->name('category');
+Route::get('/{category}/{subcategory}', [ClientPostController::class, 'getPostBySubcategory'])->name('subcategory');
 
 
 Route::fallback(function () {

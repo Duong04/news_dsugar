@@ -81,7 +81,7 @@
                               <td>{{ $item->name }}</td>
                               <td style="width: 150px;"><p class="description">{{ $item->description }}</p></td>
                               <th><img width="80px" src="{{ $item->image }}" alt=""></th>
-                              <td>{{ $item->categories->name }}</td>
+                              <td>{{ $item->category->name }}</td>
                               <td>{{ $item->created_at }}</td>
                               <td>{{ $item->updated_at }}</td>
                               <td>

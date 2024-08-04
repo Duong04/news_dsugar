@@ -20,7 +20,7 @@ class CheckPermissionAndAction
         $user = Auth::user();
         $role_id = $user->role->id;
 
-        if (!$user->hasPermission($permission) || !$user->hasAction($permission, $action, $role_id)) {
+        if ($user->role->name != 'Super Admin' && (!$user->hasPermission($permission) || !$user->hasAction($permission, $action, $role_id))) {
             abort(403);
         }
 

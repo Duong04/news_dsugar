@@ -39,7 +39,7 @@
             <nav class="navbar navbar-expand-lg">
                 <div class="container-fluid">
                     <div class="navbar-brand logo me-2 me-xl-5">
-                        <img class="w-100" src="/images/logo.png" alt="">
+                        <a href="{{ route('home') }}"><img class="w-100" src="/images/logo.png" alt=""></a>
                     </div>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"

@@ -38,7 +38,6 @@ class PermissionController extends Controller
     public function show($id) {
         $actions = $this->actionService->getAll();
         $permission = $this->permissionService->findById($id);
-        $permission->permissionActions;
         return view('admins.permissions.update', ['permission' => $permission, 'actions' => $actions]);
     }
 

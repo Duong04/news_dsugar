@@ -13,7 +13,7 @@ class ActionRepository implements ActionRepositoryInterface {
         return $this->action::all();
     }
     public function find($id) {
-        return $this->action::findOrFail($id);
+        return $this->action::with('permissionActions')->findOrFail($id);
     }
     public function create(array $data) {
         return $this->action::create($data);

@@ -2,12 +2,11 @@
 namespace App\Services;
 
 use App\Repositories\Permission\PermissionRepositoryInterface;
-use App\Repositories\PermissionAction\PermissionActionRepository;
 use App\Repositories\PermissionAction\PermissionActionRepositoryInterface;
 
 class PermissionService {
-    protected $permissionRepository;
-    protected $permissionActionRepository;
+    private $permissionRepository;
+    private $permissionActionRepository;
 
     public function __construct(PermissionRepositoryInterface $permissionRepository, PermissionActionRepositoryInterface $permissionActionRepository) {
         $this->permissionRepository = $permissionRepository;
@@ -59,7 +58,7 @@ class PermissionService {
             $request->validated();
             $data = $request->input();
 
-            $this->permissionActionRepository->delete($id);
+            $this->permissionActionRepository->delete('permission_id', $id);
             $permisson = $this->permissionRepository->update($id, [
                 'name' => $data['name'],
                 'description' => $data['description'],

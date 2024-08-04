@@ -20,7 +20,7 @@ class PermissionActionRepository implements PermissionActionRepositoryInterface 
     public function update($id, array $data) {
 
     }
-    public function delete($id) {
-        return $this->permissionAction::where('permission_id', $id)->delete();
+    public function delete($col, $id) {
+        return $this->permissionAction::where($col, $id)->delete();
     }
 }

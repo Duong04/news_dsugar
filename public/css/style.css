@@ -380,6 +380,10 @@ body {
     overflow: hidden;
 }
 
+.h-300 {
+    height: 288px;
+}
+
 .gallery-ins-img,
 .post-medium-img img,
 .post-list-text>div,

@@ -2,12 +2,16 @@
 namespace App\Services;
 
 use App\Repositories\Action\ActionRepositoryInterface;
+use App\Repositories\PermissionAction\PermissionActionRepositoryInterface;
+
 
 class ActionService {
     protected $actionRepository;
+    private $permissionActionRepository;
 
-    public function __construct(ActionRepositoryInterface $actionRepository) {
+    public function __construct(ActionRepositoryInterface $actionRepository, PermissionActionRepositoryInterface $permissionActionRepository) {
         $this->actionRepository = $actionRepository;
+        $this->permissionActionRepository = $permissionActionRepository;
     }
 
     public function getAll() {
@@ -30,10 +34,19 @@ class ActionService {
         try {
             $request->validated();
 
-            return $this->actionRepository->create([
+            $action = $this->actionRepository->create([
                 'name' => $request->input('name'),
                 'value' => $request->input('value')
             ]);
+
+            foreach ($request->input('permissions') as $item) {
+                $this->permissionActionRepository->create([
+                    'action_id' => $action->id,
+                    'permission_id' => $item
+                ]);
+            }
+
+            return $action;
         } catch (\Throwable $th) {
             return $th->getMessage();
         }
@@ -43,7 +56,18 @@ class ActionService {
         try {
             $request->validated();
 
-            return $this->actionRepository->update($id, ['name' => $request->input('name'), 'value' => $request->input('value')]);
+            $this->permissionActionRepository->delete('action_id', $id);
+
+            $action = $this->actionRepository->update($id, ['name' => $request->input('name'), 'value' => $request->input('value')]);
+
+            foreach ($request->input('permissions') as $item) {
+                $this->permissionActionRepository->create([
+                    'action_id' => $id,
+                    'permission_id' => $item
+                ]);
+            }
+
+            return $action;
         } catch (\Throwable $th) {
             return $th->getMessage();
         }

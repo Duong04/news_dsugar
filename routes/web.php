@@ -62,8 +62,10 @@ Route::middleware('auth.admin')->prefix('admin')->group(function () {
 
     // Action
     Route::get('/actions', [ActionController::class, 'index'])->name('actions');
-    Route::post('/actions', [ActionController::class, 'store'])->name('store.action');
-    Route::put('/actions/{id}', [ActionController::class, 'update']);
+    Route::get('/create-action', [ActionController::class, 'create'])->name('create.action');
+    Route::post('/create-action', [ActionController::class, 'store'])->name('store.action');
+    Route::get('/update-action/{id}', [ActionController::class, 'show'])->name('show.action');
+    Route::put('/actions/{id}', [ActionController::class, 'update'])->name('update.action');
     Route::delete('/actions/{id}', [ActionController::class, 'delete'])->name('delete.action');
 
     // User

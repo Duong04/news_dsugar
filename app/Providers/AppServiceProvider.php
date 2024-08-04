@@ -53,7 +53,7 @@ class AppServiceProvider extends ServiceProvider
             return new RolePermissionService($app->make(RolePermissionRepositoryInterface::class));
         });
         $this->app->bind(ActionService::class, function ($app) {
-            return new ActionService($app->make(ActionRepositoryInterface::class));
+            return new ActionService($app->make(ActionRepositoryInterface::class), $app->make(PermissionActionRepositoryInterface::class));
         });
         $this->app->bind(TypeRoleService::class, function ($app) {
             return new TypeRoleService($app->make(TypeRoleRepositoryInterface::class));

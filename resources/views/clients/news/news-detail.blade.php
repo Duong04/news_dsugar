@@ -38,6 +38,9 @@
                 <span class="text-midgray">{{ $post->title }}</span>
             </div>
             <div class="py-4 post-content">
+                <div class="mb-3 text-midgray">
+                    <i>{{ $post->description }}</i>
+                </div>
                 <div class="w-100">
                     <img src="{{ $post->image }}" class="w-100" alt="">
                 </div>

@@ -7,10 +7,9 @@
         <div class="mt-5 bg-pale-white py-4 px-2 rounded-4">
             <h5 class="border-bottom border-dark-subtle text-center fw-semibold pb-2">Bài viết gần đây</h5>
             <div class="d-flex flex-column g-20 mt-3">
-                <x-posts.post-medium-item />
-                <x-posts.post-medium-item />
-                <x-posts.post-medium-item />
-                <x-posts.post-medium-item />
+                @foreach ($postService as $item)
+                <x-posts.post-medium-item :post="$item" />             
+                @endforeach
             </div>
         </div>
         <div class="mt-5 bg-pale-white py-4 px-2 rounded-4">

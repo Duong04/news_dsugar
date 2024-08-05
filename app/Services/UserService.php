@@ -27,13 +27,11 @@ class UserService {
 
     public function updateStatus($request, $id) {
         try {
-            $request->validate([
+            $data = $request->validate([
                 'status' => 'required|string',
             ]);
 
-            return $this->userRepository->update($id, [
-                'status' => $request->input('status')
-            ]);
+            return $this->userRepository->update($id, $data);
         } catch (\Throwable $th) {
             return $th->getMessage();
         }
@@ -41,13 +39,11 @@ class UserService {
 
     public function updateRole($request, $id) {
         try {
-            $request->validate([
+            $data = $request->validate([
                 'role_id' => 'required',
             ]);
 
-            return $this->userRepository->update($id, [
-                'role_id' => $request->input('role_id')
-            ]);
+            return $this->userRepository->update($id, $data);
         } catch (\Throwable $th) {
             return $th->getMessage();
         }

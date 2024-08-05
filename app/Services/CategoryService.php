@@ -25,15 +25,10 @@ class CategoryService {
             $image = $request->file('image');
             $folder = 'news_dsugar/categories';
             $url = $this->cloundinaryService->upload($image, $folder);
+            $category['image'] = $url;
+            $category['slug'] = Str::slug($category['name'], '-');
 
-            $this->categoryInterface->create([
-                'name' => $category['name'],
-                'description' => $category['description'],
-                'slug' => Str::slug($category['name'], '-'),
-                'image' => $url
-            ]);
-
-            return true;
+            return $this->categoryInterface->create($category);
         } catch (\Throwable $th) {
             return $th->getMessage();
         }
@@ -58,21 +53,18 @@ class CategoryService {
     public function update($request, $id) {
         try {
             $category = $request->validated();
-            $data = [
-                'name' =>$category['name'],
-                'description' =>$category['description'],
-                'slug' => Str::slug($category['name'], '-'),
-            ];
+
+            $category['slug'] = Str::slug($category['name'], '-');
 
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
                 $folder = 'news_dsugar/categories';
 
                 $url = $this->cloundinaryService->upload($image, $folder);
-                $data['image'] = $url;
+                $category['image'] = $url;
             }
 
-            return $this->categoryInterface->update($id, $data);
+            return $this->categoryInterface->update($id, $category);
         } catch (\Throwable $th) {
             return $th->getMessage();
         }   

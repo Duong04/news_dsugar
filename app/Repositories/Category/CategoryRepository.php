@@ -10,7 +10,7 @@ class CategoryRepository implements CategoryRepositoryInterface {
         $this->category = $category;
     }
     public function all() {
-        return $this->category::all();
+        return $this->category::with('subcategories')->get();
     }
 
     public function find($id){

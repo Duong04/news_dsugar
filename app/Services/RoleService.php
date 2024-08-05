@@ -26,22 +26,21 @@ class RoleService {
             $request->validated();
             
             $data = $request->input(); 
+            $data['type_id'] = $data['type'];
             
-            $role = Role::create([
-                'name' => $data['name'],
-                'description' => $data['description'],
-                'type_id' => $data['type'],
-            ]);
+            $role = Role::create($data);
     
-            $actions = $data['actions'];
+            $actions = isset($data['actions']) ? $data['actions'] : [];
     
-            foreach ($actions as $permission_id => $action) {
-                foreach ($action as $action_id) {
-                    $this->rolePermissionRepository->create([
-                        'permission_id' => $permission_id,
-                        'role_id' => $role->id,
-                        'action_id' => $action_id
-                    ]);
+            if (!empty($actions)) {
+                foreach ($actions as $permission_id => $action) {
+                    foreach ($action as $action_id) {
+                        $this->rolePermissionRepository->create([
+                            'permission_id' => $permission_id,
+                            'role_id' => $role->id,
+                            'action_id' => $action_id
+                        ]);
+                    }
                 }
             }
     
@@ -67,23 +66,22 @@ class RoleService {
             $request->validated();
 
             $data = $request->input();
+            $data['type_id'] = $data['type'];
 
             $this->rolePermissionRepository->delete($id);
-            $this->roleRepository->update($id, [
-                'name' => $data['name'],
-                'description' => $data['description'],
-                'type_id' => $data['type'],
-            ]);
+            $this->roleRepository->update($id, $data);
 
-            $actions = $data['actions'];
+            $actions = isset($data['actions']) ? $data['actions'] : [];
     
-            foreach ($actions as $permission_id => $action) {
-                foreach ($action as $action_id) {
-                    $this->rolePermissionRepository->create([
-                        'permission_id' => $permission_id,
-                        'role_id' => $id,
-                        'action_id' => $action_id
-                    ]);
+            if (!empty($actions)) {
+                foreach ($actions as $permission_id => $action) {
+                    foreach ($action as $action_id) {
+                        $this->rolePermissionRepository->create([
+                            'permission_id' => $permission_id,
+                            'role_id' => $id,
+                            'action_id' => $action_id
+                        ]);
+                    }
                 }
             }
     

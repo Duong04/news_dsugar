@@ -32,12 +32,9 @@ class ActionService {
 
     public function create($request) {
         try {
-            $request->validated();
+            $data = $request->validated();
 
-            $action = $this->actionRepository->create([
-                'name' => $request->input('name'),
-                'value' => $request->input('value')
-            ]);
+            $action = $this->actionRepository->create($data);
 
             foreach ($request->input('permissions') as $item) {
                 $this->permissionActionRepository->create([
@@ -54,11 +51,11 @@ class ActionService {
 
     public function update($request, $id) {
         try {
-            $request->validated();
+            $data = $request->validated();
 
             $this->permissionActionRepository->delete('action_id', $id);
 
-            $action = $this->actionRepository->update($id, ['name' => $request->input('name'), 'value' => $request->input('value')]);
+            $action = $this->actionRepository->update($id, $data);
 
             foreach ($request->input('permissions') as $item) {
                 $this->permissionActionRepository->create([

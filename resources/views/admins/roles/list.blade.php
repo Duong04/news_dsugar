@@ -28,6 +28,50 @@
             </li>
             </ul>
         </div>
+        <div class="row px-3 my-5">
+            @foreach ($roles as $item)
+            <div class="col-4 p-2">
+                <div class="p-3 bg-white rounded-3 shadow d-flex justify-content-between">
+                    <div class="d-flex flex-column justify-content-between">
+                        <h6>Total {{ $item->users_count }} users</h6>
+                        <div class="pt-3">
+                            <h5>{{ $item->name }}</h5>
+                            <a href="{{ route('show.role', ['id' => $item->id]) }}"
+                                data-bs-toggle="tooltip"
+                                title="Sửa"
+                                class="btn btn-link btn-primary btn-lg p-0"
+                                data-original-title="Edit Task"
+                              >
+                                <i class="fa fa-edit"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="img-users d-flex position-relative">
+                            <div class="img-user">
+                                <img class="h-100 w-100 rounded-circle" src="/images/avatar/icon/avatar-1-sTigs3cJ.png" alt="">
+                            </div>
+                            <div class="img-user">
+                                <img class="h-100 w-100 rounded-circle" src="/images/avatar/icon/avatar-2-wiQeFG56.png" alt="">
+                            </div>
+                            <div class="img-user">
+                                <img class="h-100 w-100 rounded-circle" src="/images/avatar/icon/avatar-3-wR29q9GN.png" alt="">
+                            </div>
+                            @if ($item->users_count < 4)
+                            <div class="img-user">
+                                <img class="h-100 w-100 rounded-circle" src="/images/avatar/icon/avatar-4-MfzD5fCs.png" alt="">
+                            </div>
+                            @else
+                            <div class="img-user">
+                                <div class="h-100 w-100 rounded-circle">+5</div>
+                            </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">

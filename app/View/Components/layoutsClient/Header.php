@@ -5,7 +5,7 @@ namespace App\View\Components\layoutsClient;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
-use App\Repositories\Category\CategoryRepositoryInterface;
+use App\Services\CategoryService;
 
 class Header extends Component
 {
@@ -13,9 +13,9 @@ class Header extends Component
      * Create a new component instance.
      */
     public $categories;
-    public function __construct(CategoryRepositoryInterface $categoryRepository)
+    public function __construct(CategoryService $categoryService)
     {
-        $this->categories = $categoryRepository->all();
+        $this->categories = $categoryService->getAll();
     }
 
     /**

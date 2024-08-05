@@ -30,14 +30,10 @@ class SubcategoryService {
             $folder = 'news_dsugar/subcategories';
 
             $url = $this->cloundinaryService->upload($image, $folder);
+            $subcategory['image'] = $url;
+            $subcategory['slug'] = Str::slug($subcategory['name'], '-');
 
-            return $this->subcategoryInterface->create([
-                'name' => $subcategory['name'],
-                'description' => $subcategory['description'],
-                'category_id' => $subcategory['category_id'],
-                'slug' => Str::slug($subcategory['name'], '-'),
-                'image' => $url
-            ]);
+            return $this->subcategoryInterface->create($subcategory);
             
         } catch (\Throwable $th) {
             return response()->json(['error' => $th->getMessage()], 422);
@@ -62,22 +58,17 @@ class SubcategoryService {
     public function update($request, $id) {
         try {
             $subcategory = $request->validated();
-            $data = [
-                'name' => $subcategory['name'],
-                'description' => $subcategory['description'],
-                'category_id' => $subcategory['category_id'],
-                'slug' => Str::slug($subcategory['name'], '-')
-            ];
+            $subcategory['slug'] = Str::slug($subcategory['name'], '-');
 
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
                 $folder = 'news_dsugar/subcategories';
 
                 $url = $this->cloundinaryService->upload($image, $folder);
-                $data['image'] = $url;
+                $subcategory['image'] = $url;
             }
 
-            return $this->subcategoryInterface->update($id, $data);
+            return $this->subcategoryInterface->update($id, $subcategory);
         } catch (\Throwable $th) {
             return response()->json(['error' => $th->getMessage()], 422);
         }

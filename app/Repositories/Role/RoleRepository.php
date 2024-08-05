@@ -11,7 +11,7 @@ class RoleRepository implements RoleRepositoryInterface {
         $this->role = $role;
     }
     public function all() {
-        return $this->role::all();
+        return $this->role::withCount('users')->with('users')->get();
     }
     public function find($id) {
         $role = $this->role::with('permissions.actions')->findOrFail($id);

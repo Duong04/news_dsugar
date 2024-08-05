@@ -28,4 +28,8 @@ class HomeController extends Controller
         $postFashions = $this->postService->getPostByCategory('Thời trang', 'category', 5, [$postFashion->id]);
         return view('clients.home.home', compact('latestPost', 'latestPosts', 'mostViewed', 'postRands', 'post24Coder', 'post24Coders', 'postTech', 'postTechs', 'postFashion', 'postFashions'));
     }
+
+    public function search(Request $request) {
+        return view('clients.home.search');
+    }
 }

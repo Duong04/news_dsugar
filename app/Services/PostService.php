@@ -88,19 +88,11 @@ class PostService {
 
             $url = $this->cloundinaryService->upload($image, $folder);
 
-            $data = [
-                'content' => $post['content'],
-                'title' => $post['title'],
-                'description' => $post['description'],
-                'author_id' => Auth::user()->id,
-                'category_id' => $post['category_id'],
-                'subcat_id' => $post['subcat_id'],
-                'status' => $post['status'],
-                'image' => $url,
-                'slug' => Str::slug($post['title'], '-'),
-            ];
+            $post['author_id'] = Auth::user()->id;
+            $post['slug'] = Str::slug($post['title'], '-');
+            $post['image'] = $url;
 
-            return $this->postInterface->create($data);
+            return $this->postInterface->create($post);
         } catch (\Throwable $th) {
             return $th->getMessage();
         }
@@ -118,16 +110,9 @@ class PostService {
         try {
             $request->validated();
             $data = $request->input();
-            $postData = [
-                'content' => $data['content'],
-                'title' => $data['title'],
-                'description' => $data['description'],
-                'author_id' => Auth::user()->id,
-                'category_id' => $data['category_id'],
-                'subcat_id' => $data['subcat_id'],
-                'status' => $data['status'],
-                'slug' => Str::slug($data['title'], '-'),
-            ];
+
+            $postData['author_id'] = Auth::user()->id;
+            $postData['slug'] = Str::slug($data['title'], '-');
 
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
@@ -139,6 +124,14 @@ class PostService {
 
 
             return $this->postInterface->update($id, $postData);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
+    public function postIncrement($col, $id) {
+        try {
+            return $this->postInterface->postIncrement($col, $id);
         } catch (\Throwable $th) {
             return $th->getMessage();
         }

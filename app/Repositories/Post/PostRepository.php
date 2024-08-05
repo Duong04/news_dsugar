@@ -115,6 +115,10 @@ class PostRepository implements PostRepositoryInterface {
         return $this->post::where('slug', $slug)->first();
     }
 
+    public function postIncrement($col, $id) {
+        $post = $this->post->find($id);
+        return $post->increment('view');
+    }
     public function find($id) {
         return $this->post::with('category', 'subcategory')->findOrFail($id);
     }

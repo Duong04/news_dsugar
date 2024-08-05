@@ -22,12 +22,12 @@ Route::middleware('auth.admin')->prefix('admin')->group(function () {
     })->name('dashboard');
 
     // Danh mục
-    Route::get('/danh-muc', [CategoryController::class, 'index'])->name('categories');
-    Route::get('/them-danh-muc', [CategoryController::class, 'create'])->name('create.category');
-    Route::post('/them-danh-muc', [CategoryController::class, 'store'])->name('store.category');
-    Route::get('/sua-danh-muc/{id}', [CategoryController::class, 'show'])->name('show.category');
-    Route::put('/sua-danh-muc/{id}', [CategoryController::class, 'edit'])->name('update.category');
-    Route::delete('/xoa-danh-muc/{id}', [CategoryController::class, 'destroy'])->name('delete.category');
+    Route::get('/danh-muc', [CategoryController::class, 'index'])->name('categories')->middleware('permission.action:Categories Management,viewany');
+    Route::get('/them-danh-muc', [CategoryController::class, 'create'])->name('create.category')->middleware('permission.action:Categories Management,create');
+    Route::post('/them-danh-muc', [CategoryController::class, 'store'])->name('store.category')->middleware('permission.action:Categories Management,create');
+    Route::get('/sua-danh-muc/{id}', [CategoryController::class, 'show'])->name('show.category')->middleware('permission.action:Categories Management,view');
+    Route::put('/sua-danh-muc/{id}', [CategoryController::class, 'edit'])->name('update.category')->middleware('permission.action:Categories Management,update');
+    Route::delete('/xoa-danh-muc/{id}', [CategoryController::class, 'destroy'])->name('delete.category')->middleware('permission.action:Categories Management,delete');
 
     // Danh mục con
     Route::get('/danh-muc-con', [SubcategoryController::class, 'index'])->name('subcategories')->middleware('permission.action:Subcategies Management,viewany');
@@ -46,30 +46,30 @@ Route::middleware('auth.admin')->prefix('admin')->group(function () {
     Route::delete('/xoa-bai-viet/{id}', [PostController::class, 'delete'])->name('delete.post')->middleware('permission.action:Posts Management,delete');
 
     // Phân quyền
-    Route::get('/permissions', [PermissionController::class, 'index'])->name('permissions');
-    Route::get('/create-permission', [PermissionController::class, 'create'])->name('create.permission');
-    Route::post('/create-permissions', [PermissionController::class, 'store'])->name('store.permission');
-    Route::get('/update-permissions/{id}', [PermissionController::class, 'show'])->name('show.permission');
-    Route::put('/update-permissions/{id}', [PermissionController::class, 'update'])->name('update.permission');
-    Route::delete('/permissions/{id}', [PermissionController::class, 'delete'])->name('delete.permission');
+    Route::get('/permissions', [PermissionController::class, 'index'])->name('permissions')->middleware('permission.action:Permissions Management,viewany');
+    Route::get('/create-permission', [PermissionController::class, 'create'])->name('create.permission')->middleware('permission.action:Permissions Management,create');
+    Route::post('/create-permissions', [PermissionController::class, 'store'])->name('store.permission')->middleware('permission.action:Permissions Management,create');
+    Route::get('/update-permissions/{id}', [PermissionController::class, 'show'])->name('show.permission')->middleware('permission.action:Permissions Management,view');
+    Route::put('/update-permissions/{id}', [PermissionController::class, 'update'])->name('update.permission')->middleware('permission.action:Permissions Management,update');
+    Route::delete('/permissions/{id}', [PermissionController::class, 'delete'])->name('delete.permission')->middleware('permission.action:Permissions Management,delete');
 
     // Vai trò
-    Route::get('/role', [RoleController::class, 'index'])->name('roles');
-    Route::get('/create-role', [RoleController::class, 'create'])->name('create.role');
-    Route::post('/create-role', [RoleController::class, 'store'])->name('store.role');
-    Route::get('/update-role/{id}', [RoleController::class, 'show'])->name('show.role');
-    Route::put('/update-role/{id}', [RoleController::class, 'update'])->name('update.role');
+    Route::get('/role', [RoleController::class, 'index'])->name('roles')->middleware('permission.action:Roles Management,viewany');
+    Route::get('/create-role', [RoleController::class, 'create'])->name('create.role')->middleware('permission.action:Roles Management,create');
+    Route::post('/create-role', [RoleController::class, 'store'])->name('store.role')->middleware('permission.action:Roles Management,create');
+    Route::get('/update-role/{id}', [RoleController::class, 'show'])->name('show.role')->middleware('permission.action:Roles Management,view');
+    Route::put('/update-role/{id}', [RoleController::class, 'update'])->name('update.role')->middleware('permission.action:Roles Management,update');
 
     // Action
-    Route::get('/actions', [ActionController::class, 'index'])->name('actions');
-    Route::get('/create-action', [ActionController::class, 'create'])->name('create.action');
-    Route::post('/create-action', [ActionController::class, 'store'])->name('store.action');
-    Route::get('/update-action/{id}', [ActionController::class, 'show'])->name('show.action');
-    Route::put('/actions/{id}', [ActionController::class, 'update'])->name('update.action');
-    Route::delete('/actions/{id}', [ActionController::class, 'delete'])->name('delete.action');
+    Route::get('/actions', [ActionController::class, 'index'])->name('actions')->middleware('permission.action:Actions Management,viewany');
+    Route::get('/create-action', [ActionController::class, 'create'])->name('create.action')->middleware('permission.action:Actions Management,create');
+    Route::post('/create-action', [ActionController::class, 'store'])->name('store.action')->middleware('permission.action:Actions Management,create');
+    Route::get('/update-action/{id}', [ActionController::class, 'show'])->name('show.action')->middleware('permission.action:Actions Management,view');
+    Route::put('/actions/{id}', [ActionController::class, 'update'])->name('update.action')->middleware('permission.action:Actions Management,update');
+    Route::delete('/actions/{id}', [ActionController::class, 'delete'])->name('delete.action')->middleware('permission.action:Actions Management,delete');
 
     // User
-    Route::get('/users', [UserController::class, 'index'])->name('users');
+    Route::get('/users', [UserController::class, 'index'])->name('users')->middleware('permission.action:Users Management,viewany');
 
     //grant permissions
     Route::get('/grant-role', [UserController::class, 'grantRole'])->name('grant.role');
@@ -94,9 +94,8 @@ Route::get('/check-mail', function () {
     return view('clients.auth.checkmail');
 })->name('checkmail');
 
-Route::get('/chi-tiet', function () {
-    return view('clients.news.new-detail');
-});
+
+Route::get('/search', [HomeController::class, 'search']);
 
 Route::get('/bai-viet/{post}', [ClientPostController::class, 'postDetail'])->name('post.detail');
 Route::get('/{category}', [ClientPostController::class, 'getPostByCategory'])->name('category');

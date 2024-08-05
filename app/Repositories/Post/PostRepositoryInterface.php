@@ -11,6 +11,7 @@ interface PostRepositoryInterface {
     public function postByCategorySlug($slug, $table, $limit = null, $id = null);
     public function postByCategorySlugPaginate($slug, $table, $limit = null, $id = null);
     public function postBySlug($slug);
+    public function postIncrement($col, $id);
     public function create(array $data);
     public function update($id, array $data);
     public function delete($id);

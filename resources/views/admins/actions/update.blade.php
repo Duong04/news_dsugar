@@ -40,7 +40,7 @@
                         </div>
                     </div>
                     <div class="col-6 form-group">
-                        <button class="btn btn-primary">Thêm ngay</button>
+                        <button class="btn btn-primary">Cập nhật</button>
                     </div>
                 </form>
             </div>

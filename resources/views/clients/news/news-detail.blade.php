@@ -3,6 +3,11 @@
 @section('header')
     <x-layouts-client.header />
 @endsection
+@section('script-bottom')
+<script type="module">
+    import '/libraries/emoji-picker-element/index.js';
+</script>
+@endsection
 
 @section('content')
 <section class="py-5">
@@ -50,6 +55,25 @@
                 
             </div>
             <hr>
+            <div class="d-flex justify-content-between flex-column g-10 flex-md-row align-items-md-center">
+                <div>
+                    <h5>Nếu thấy bài viết hay hãy để lại bình luận cho tôi nha 🙆‍♀️</h5>
+                    <span>(Bạn cần đăng nhập mới có thể bình luận được 😒)</span>
+                </div>
+                <div class="btn-comment">Bình luận</div>
+            </div>
+            <div class="my-3">
+                <div class="position-relative">
+                    <textarea id="comment" class="form-control" name="comment" placeholder="Chia sẻ ý kiến của bạn tại đây"></textarea>
+                    <div class="emoji-button">
+                        <i class="fa-regular fa-face-smile"></i>
+                        <div id="emoji-picker">
+                            <emoji-picker></emoji-picker>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
             <div class="my-4">
                 <div class="d-flex flex-column g-20">
                     <div class="mt-3 d-flex g-20 align-items-start">
@@ -76,14 +100,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <hr>
-            <div class="d-flex justify-content-between flex-column g-10 flex-md-row align-items-md-center">
-                <div>
-                    <h5>Nếu thấy bài viết hay hãy để lại bình luận cho tôi nha 🙆‍♀️</h5>
-                    <span>(Bạn cần đăng nhập mới có thể bình luận được 😒)</span>
-                </div>
-                <div class="btn-comment">Bình luận</div>
             </div>
         </article>
         <x-layouts-client.aside />

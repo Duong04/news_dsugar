@@ -47,13 +47,18 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="d-flex g-5 navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link menu-hv fs-6" href="{{ route('home') }}">Trang chủ</a>
+                        <ul class="d-flex g-5 position-relative navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item menu-far position-relative">
+                                <a class="nav-link nav-link menu-hv fs-6" href="{{ route('home') }}">Trang chủ</a>
                             </li>
                             @foreach ($categories as $item)
-                            <li class="nav-item">
+                            <li class="nav-item menu-far position-relative">
                                 <a class="nav-link menu-hv fs-6" href="{{ route('category', ['category' => $item->slug]) }}">{{ $item->name }}</a>
+                                <ul class="menu-child">
+                                    @foreach ($item->subcategories as $subcategory)
+                                    <li><a class="nav-link" href="{{ route('subcategory', ['category' => $item->slug, 'subcategory' => $subcategory->slug]) }}">{{ $subcategory->name }}</a></li>
+                                    @endforeach
+                                </ul>
                             </li>
                             @endforeach
                         </ul>
@@ -65,7 +70,10 @@
                                 <ul style="left: -50px;" class="dropdown-menu">
                                     <li><a class="dropdown-item" href="#">Tài khoản</a></li>
                                     <li><a class="dropdown-item" href="#">Thêm bài viết</a></li>
-                                    @if (Auth::user()->role->name == 'Super Admin')
+                                    @php
+                                        $typeName = Auth::user()->role->typeRole->name;
+                                    @endphp
+                                    @if ($typeName == 'Administration' || $typeName == 'System')
                                     <li><a class="dropdown-item" href="{{ route('dashboard') }}">Quản trị viên</a></li>
                                     @endif
                                     <li><form class="dropdown-item" action="{{ route('logout') }}" method="POST">@csrf <button class="nav-link">Đăng xuất</button></form></li>

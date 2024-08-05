@@ -39,6 +39,7 @@ class PostController extends Controller
 
     public function postDetail($slug) {
         $post = $this->postService->getPostBySlug($slug);
+        $this->postService->postIncrement('view', $post->id);
         return view('clients.news.news-detail', compact('post'));
     }
 }

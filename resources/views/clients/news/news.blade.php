@@ -10,14 +10,14 @@
             <div class="d-flex g-10 align-items-center">
                 <a href="" class="text-decoration-none text-black">Trang chủ</a>
                 <i class="fa-solid fa-circle fs-7 text-midgray" style="font-size: 0.4rem;"></i>
-                <span class="text-midgray">Công nghệ</span>
+                <span class="text-midgray">{{ $post->category->name }}</span>
                 @if (request()->segment(2))
-                <i class="fa-solid fa-circle fs-7 text-midgray" style="font-size: 0.4rem;"></i>
-                <span class="text-midgray">{{ $post->subcategory->name }}</span>
+                    <i class="fa-solid fa-circle fs-7 text-midgray" style="font-size: 0.4rem;"></i>
+                    <span class="text-midgray">{{ $post->subcategory->name }}</span>
                 @endif
             </div>
             <h2 class="mt-3 d-flex align-items-center g-10 fw-sm-semibold"><span>Danh mục</span> <i
-                    class="fa-solid fa-angle-right"></i> <span>Công nghệ</span></h2>
+                    class="fa-solid fa-angle-right"></i> <span>{{ $post->category->name }}</span></h2>
         </div>
     </section>
     <section class="container-md py-4">

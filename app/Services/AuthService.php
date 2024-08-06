@@ -7,6 +7,7 @@ use Hash;
 use Str;
 use App\Jobs\ProcessMail;
 use Auth;
+use Illuminate\Support\Facades\Cookie;
 
 class AuthService {
     protected $userInterface;

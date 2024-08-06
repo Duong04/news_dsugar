@@ -53,7 +53,7 @@
                             </li>
                             @foreach ($categories as $item)
                             <li class="nav-item menu-far position-relative">
-                                <a class="nav-link menu-hv fs-6" href="{{ route('category', ['category' => $item->slug]) }}">{{ $item->name }}</a>
+                                <a class="nav-link menu-hv fs-6" href="{{ route('category', ['category' => $item->slug]) }}">{{ $item->name }} <i class="fa-solid fa-angle-down"></i></a>
                                 <ul class="menu-child">
                                     @foreach ($item->subcategories as $subcategory)
                                     <li><a class="nav-link" href="{{ route('subcategory', ['category' => $item->slug, 'subcategory' => $subcategory->slug]) }}">{{ $subcategory->name }}</a></li>

@@ -4,8 +4,16 @@
     <x-layouts-client.header />
 @endsection
 @section('script-bottom')
+<script src="/libraries/axios/axios.min.js"></script>
+<script type="module" src="/js/comment.js"></script>
 <script type="module">
     import '/libraries/emoji-picker-element/index.js';
+</script>
+<script>
+    window.auth = {
+        isAuthenticated: {{ Auth::check() ? 'true' : 'false' }},
+        user: @json(Auth::user())
+    };
 </script>
 @endsection
 
@@ -63,42 +71,28 @@
                 <div class="btn-comment">Bình luận</div>
             </div>
             <div class="my-3">
-                <div class="position-relative">
-                    <textarea id="comment" class="form-control" name="comment" placeholder="Chia sẻ ý kiến của bạn tại đây"></textarea>
-                    <div class="emoji-button">
-                        <i class="fa-regular fa-face-smile"></i>
-                        <div id="emoji-picker">
-                            <emoji-picker></emoji-picker>
+                <div>
+                    <div class="position-relative form-comment">
+                        <textarea id="comment" data-post="{{$post->id}}" class="form-control comment" name="comment" placeholder="Chia sẻ ý kiến của bạn tại đây"></textarea>
+                        <div id="emoji-button">
+                            <i class="fa-regular fa-face-smile"></i>
+                            <div id="emoji-picker">
+                                <emoji-picker></emoji-picker>
+                            </div>
                         </div>
+                        @auth
+                        <button disabled id="btn-comment" class="btn-comment-2"><i class="fa-regular fa-paper-plane"></i></button>
+                        @endauth
+                        @guest
+                        <button disabled><i class="fa-regular fa-paper-plane"></i></button>
+                        @endguest
                     </div>
                 </div>
             </div>
             <hr>
             <div class="my-4">
-                <div class="d-flex flex-column g-20">
-                    <div class="mt-3 d-flex g-20 align-items-start">
-                        <img class="rounded-circle object-fit-cover" width="60px" height="60px" src="/images/avatar/1b70c830da30f39d5c6fab323017430c.png" alt="">
-                        <div class="d-flex flex-column">
-                            <span class="fs-7 fw-semibold author hover-fillip-item" data-text="Nguyễn Thành Đường">Nguyễn Thành Đường</span>
-                            <span class="fs-7">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Pariatur necessitatibus, numquam beatae consectetur omnis voluptas cupiditate expedita labore molestiae vitae at vero iusto molestias! Omnis expedita quos ducimus qui odit.</span>
-                            <span class="fs-7 text-midgray">January 21, 2021</span>
-                            <div class="d-flex g-10 align-items-center">
-                                <div><span class="badge text-bg-danger">10</span> <i class="fa-regular fa-thumbs-up cursor-pointer"></i></div>
-                                <div><i class="fa-regular fa-comment cursor-pointer"></i></div>
-                            </div>
-                            <div class="mt-3 d-flex g-20 align-items-start">
-                                <img class="rounded-circle object-fit-cover" width="60px" height="60px" src="/images/avatar/1b70c830da30f39d5c6fab323017430c.png" alt="">
-                                <div class="d-flex flex-column">
-                                    <span class="fs-7 fw-semibold author hover-fillip-item" data-text="Nguyễn Thành Đường">Nguyễn Thành Đường</span>
-                                    <span class="fs-7">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Pariatur necessitatibus, numquam beatae consectetur omnis voluptas cupiditate expedita labore molestiae vitae at vero iusto molestias! Omnis expedita quos ducimus qui odit.</span>
-                                    <span class="fs-7 text-midgray">January 21, 2021</span>
-                                    <div class="d-flex g-10 align-items-center">
-                                        <div><span class="badge text-bg-danger">10</span> <i class="fa-regular fa-thumbs-up cursor-pointer"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div id="comments" class="d-flex flex-column g-20">
+                    
                 </div>
             </div>
         </article>

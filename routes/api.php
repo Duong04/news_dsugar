@@ -8,9 +8,19 @@ use App\Http\Controllers\Api\ActionController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\TypeController;
+use App\Http\Controllers\Api\CommentController;
+use App\Http\Controllers\Api\CommentReplyController;
 
 
 Route::prefix('v1')->group(function () {
+    Route::prefix('comments')->group(function () {
+        Route::get('/', [CommentController::class, 'index']);
+        Route::get('/posts/{id}', [CommentController::class, 'commentByPostId']);
+        Route::post('/', [CommentController::class, 'create']);
+    });
+    Route::prefix('comment-replys')->group(function () {
+        Route::post('/', [CommentReplyController::class, 'create']);
+    });
     Route::get('/categories/{id}/subcategories', [SubcategoryController::class, 'getByCategoryId']);
 
     Route::get('/permissions/{id}', [PermissionController::class, 'getById']);

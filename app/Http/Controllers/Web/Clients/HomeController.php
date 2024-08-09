@@ -30,6 +30,13 @@ class HomeController extends Controller
     }
 
     public function search(Request $request) {
-        return view('clients.home.search');
+        $limit = 8;
+        $q = $request->query('q', null);
+        $posts = $this->postService->getPosts($limit, $q);
+        $total = $posts->total();
+        $hasPage = $posts->hasPages();
+        $nextPage = $posts->nextPageUrl();
+        $prevPage = $posts->previousPageUrl();
+        return view('clients.home.search', compact('posts', 'total', 'hasPage', 'nextPage', 'prevPage', 'limit', 'q'));
     }
 }

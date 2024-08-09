@@ -10,6 +10,7 @@ use App\Http\Controllers\Web\Admins\RoleController;
 use App\Http\Controllers\Web\Admins\ActionController;
 use App\Http\Controllers\Web\Admins\UserController;
 use App\Http\Controllers\Web\Admins\TypeController;
+use App\Http\Controllers\Web\Admins\CommentController;
 use App\Http\Controllers\Web\Clients\HomeController;
 use App\Http\Controllers\Web\Clients\PostController as ClientPostController;
 
@@ -75,12 +76,18 @@ Route::middleware('auth.admin')->prefix('admin')->group(function () {
     Route::get('/grant-role', [UserController::class, 'grantRole'])->name('grant.role');
 
     //Type 
-    Route::get('type-roles', [TypeController::class, 'index'])->name('types');
-    Route::post('type-roles', [TypeController::class, 'store'])->name('store.type');
-    Route::put('type-roles/{id}', [TypeController::class, 'update'])->name('update.type');
-    Route::delete('type-roles/{id}', [TypeController::class, 'delete'])->name('delete.type');
+    Route::get('/type-roles', [TypeController::class, 'index'])->name('types');
+    Route::post('/type-roles', [TypeController::class, 'store'])->name('store.type');
+    Route::put('/type-roles/{id}', [TypeController::class, 'update'])->name('update.type');
+    Route::delete('/type-roles/{id}', [TypeController::class, 'delete'])->name('delete.type');
+
+    Route::get('/binh-luan', [CommentController::class, 'index'])->name('comments');
+    Route::delete('/xoa-binh-luan/{id}', [CommentController::class, 'delete'])->name('delete.comment');
 });
 
+Route::get('/profile', function() {
+    return view('clients.profile.profile');
+});
 Route::get('/dang-nhap', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/dang-nhap', [AuthController::class, 'actionLogin'])->name('action.login');
 Route::get('/dang-ky', [AuthController::class, 'showRegister'])->name('register');
@@ -95,7 +102,7 @@ Route::get('/check-mail', function () {
 })->name('checkmail');
 
 
-Route::get('/search', [HomeController::class, 'search']);
+Route::get('/search', [HomeController::class, 'search'])->name('search');
 
 Route::get('/bai-viet/{post}', [ClientPostController::class, 'postDetail'])->name('post.detail');
 Route::get('/{category}', [ClientPostController::class, 'getPostByCategory'])->name('category');

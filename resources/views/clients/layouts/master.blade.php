@@ -12,6 +12,7 @@
     <link href="/libraries/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="/libraries/splide/splide.min.css">
+    @yield('css')
 </head>
 </head>
 
@@ -30,6 +31,7 @@
     <script src="/libraries/bootstrap/bootstrap.min.js"></script>
     <script src="/libraries/splide/splide.min.js"></script>
     <script src="/js/slider.js"></script>
+    <script src="/libraries/axios/axios.min.js"></script>
     <script src="/js/header.js"></script>
     @yield('script-bottom')
 </body>

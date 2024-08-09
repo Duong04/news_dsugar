@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User;
 use App\Models\CommentReply;
+use App\Models\Post;
 
 class Comment extends Model
 {
@@ -23,6 +24,10 @@ class Comment extends Model
 
     public function commentReplys() {
         return $this->hasMany(CommentReply::class, 'comment_id');
+    }
+
+    public function post() {
+        return $this->belongsTo(Post::class, 'post_id');
     }
 
 }

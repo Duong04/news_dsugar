@@ -12,6 +12,31 @@ class PostRepository implements PostRepositoryInterface {
     public function all() {
         return $this->post::with('category', 'subcategory', 'user')->get();
     }
+    public function getPosts($limit, $q) {
+        $posts = $this->post::published()->latest()->with('category', 'subcategory', 'user');
+    
+        if ($q !== null) {
+            $posts->where(function ($query) use ($q) {
+                $query->where('title', 'like', "%{$q}%")
+                      ->orWhereHas('user', function ($qUser) use ($q) {
+                          $qUser->where('user_name', 'like', "%{$q}%");
+                      })
+                      ->orWhereHas('category', function ($qCategory) use ($q) {
+                          $qCategory->where('name', 'like', "%{$q}%");
+                      })
+                      ->orWhereHas('subcategory', function ($qSubcategory) use ($q) {
+                          $qSubcategory->where('name', 'like', "%{$q}%");
+                      });
+            });
+        }
+    
+    
+        if ($limit !== null) {
+            return $posts->paginate($limit);
+        }
+    
+        return $posts->get();
+    }
     public function getLastPost($limit = null, $id = null) {
         $query = $this->post::published()->latest()->with('category', 'subcategory', 'user');
     

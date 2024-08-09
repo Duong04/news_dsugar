@@ -168,7 +168,7 @@
                     <div class="collapse" id="tables">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="">
+                                <a href="{{ route('comments') }}">
                                     <span class="sub-item">Danh sách bình luận</span>
                                 </a>
                             </li>

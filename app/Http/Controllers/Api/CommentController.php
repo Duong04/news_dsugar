@@ -40,4 +40,13 @@ class CommentController extends Controller
             return response()->json(['error' => $th->getMessage()], 422);
         }
     }
+
+    public function delete($id) {
+        try {
+            $this->commentService->delete($id);
+            return response()->json(['message' => 'Delete successfully'], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 422);
+        }
+    }
 }

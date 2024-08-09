@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\TypeController;
 use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\CommentReplyController;
+use App\Http\Controllers\Api\PostController;
 
 
 Route::prefix('v1')->group(function () {
@@ -17,9 +18,14 @@ Route::prefix('v1')->group(function () {
         Route::get('/', [CommentController::class, 'index']);
         Route::get('/posts/{id}', [CommentController::class, 'commentByPostId']);
         Route::post('/', [CommentController::class, 'create']);
+        Route::delete('/{id}', [CommentController::class, 'delete']);
     });
     Route::prefix('comment-replys')->group(function () {
         Route::post('/', [CommentReplyController::class, 'create']);
+        Route::delete('/{id}', [CommentReplyController::class, 'delete']);
+    });
+    Route::prefix('posts')->group(function () {
+        Route::get('/', [PostController::class, 'index']);
     });
     Route::get('/categories/{id}/subcategories', [SubcategoryController::class, 'getByCategoryId']);
 

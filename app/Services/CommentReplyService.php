@@ -17,4 +17,12 @@ class CommentReplyService {
             return $th->getMessage();
         }
     }
+
+    public function delete($id) {
+        try {
+            return $this->commentReplyRepository->delete($id);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
 }

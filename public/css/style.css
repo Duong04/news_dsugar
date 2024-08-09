@@ -218,6 +218,23 @@ body {
     box-shadow: none;
 }
 
+.search-result {
+    margin-top: 8px;
+    width: 100%;
+    left: 0;
+    right: auto;
+    min-width: 300px;
+    box-shadow: 0 0 8px #ccc;
+    background-color: #fff;
+    border-radius: 6px;
+    z-index: 10;
+    display: none;
+}
+
+.search-result.active {
+    display: flex;
+}
+
 .h-600 {
     height: 600px;
 }
@@ -407,6 +424,10 @@ body {
 
 .h-300 {
     height: 288px;
+}
+
+.post-list-img {
+    height: 250px;
 }
 
 .gallery-ins-img,
@@ -735,6 +756,61 @@ body {
 .form-comment button:disabled {
     opacity: 0.7;
 }
+
+.three-dot {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    cursor: pointer;
+}
+
+.aside-shadow {
+    box-shadow: 0 0 10px #ccc;
+    border-radius: 8px;
+}
+
+.img-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.rp-task {
+    width: 150px;
+}
+
+.box-purple {
+    background-color: rgb(222, 206, 255);
+    color: rgb(140, 87, 255);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+.nav-pills-2 .nav-link.active,
+.btn-purple {
+    background-color: rgb(140, 87, 255) !important;
+    color: #fff !important;
+    transition: all ease 0.4s;
+}
+
+.nav-pills-2 .nav-link {
+    color: #000;
+}
+
+.nav-pills-2 .nav-link:hover {
+    background-color: rgb(222, 206, 255);
+    color: rgb(140, 87, 255);
+}
+
+.btn-purple:hover {
+    background-color: rgb(102, 68, 173) !important;
+    color: #fff !important;
+}
+
 @keyframes moveUp {
     from {
         opacity: 0;

@@ -3,7 +3,7 @@
         <img class="h-100 w-100 object-fit-cover" src="{{ $post->image }}" alt="">
     </div>
     <div class="col-12 col-sm-8 p-0 ps-sm-3 post-list-text">
-        <div class="rounded-bottom-sm-4 rounded-4 border border-2 px-3 pt-5 px-md-4 pb-4 p-lg-5 d-flex flex-column g-10 justify-content-center">
+        <div class="rounded-bottom-sm-4 h-100 rounded-4 border border-2 px-3 pt-5 px-md-4 pb-4 p-lg-5 d-flex flex-column g-10 justify-content-center">
             <span class="b-red position-relative hover-fillip-item" data-text="{{ $post->subcategory->name }}"></span>
             <a href="{{ route('post.detail', ['post' => $post->slug]) }}" class="text-black fw-semibold text-decoration-none fs-5 post-title">{{ $post->title }}</a>
             <div class="w-100 d-flex flex-column flex-xl-row align-items-xl-center justify-content-between g-5">

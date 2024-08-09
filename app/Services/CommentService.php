@@ -33,4 +33,12 @@ class CommentService {
             return $th->getMessage();
         }
     }
+
+    public function delete($id) {
+        try {
+            return $this->commentRepository->delete($id);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
 }

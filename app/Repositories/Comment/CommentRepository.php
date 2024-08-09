@@ -10,7 +10,7 @@ class CommentRepository implements CommentRepositoryInterface {
         $this->comment = $comment;
     }
     public function all() {
-        return $this->comment::with('user', 'commentReplys.user')->get();
+        return $this->comment::with('user', 'post')->get();
     }
     public function commentByPostId($postId) {
         return $this->comment::with('user', 'commentReplys.user')->where('post_id', $postId)->get();

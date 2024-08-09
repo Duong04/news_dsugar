@@ -3,6 +3,7 @@ namespace App\Repositories\Post;
 
 interface PostRepositoryInterface {
     public function all();
+    public function getPosts($limit, $q);
     public function find($id);
     public function getLastPost($limit = null, $id = null);
     public function mostViewedPost($limit = null, $id = null);

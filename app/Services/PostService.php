@@ -23,6 +23,14 @@ class PostService {
         }
     }
 
+    public function getPosts($limit, $q) {
+        try {
+            return $this->postInterface->getPosts($limit, $q);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
     public function getLastPost($limit = null, $id = null) {
         try {
             return $this->postInterface->getLastPost($limit, $id);

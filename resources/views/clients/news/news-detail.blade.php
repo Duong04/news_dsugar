@@ -3,12 +3,17 @@
 @section('header')
     <x-layouts-client.header />
 @endsection
+@section('css')
+<link rel="stylesheet" href="/templates/css/plugins.min.css" />
+@endsection
 @section('script-bottom')
 <script src="/libraries/axios/axios.min.js"></script>
 <script type="module" src="/js/comment.js"></script>
 <script type="module">
     import '/libraries/emoji-picker-element/index.js';
 </script>
+<script src="/templates/js/plugin/sweetalert/sweetalert.min.js"></script>
+<script src="/templates/js/sweetalert.js"></script>
 <script>
     window.auth = {
         isAuthenticated: {{ Auth::check() ? 'true' : 'false' }},

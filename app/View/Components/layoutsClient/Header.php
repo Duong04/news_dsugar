@@ -5,15 +5,17 @@ namespace App\View\Components\layoutsClient;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+use App\Services\CategoryService;
 
 class Header extends Component
 {
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public $categories;
+    public function __construct(CategoryService $categoryService)
     {
-        //
+        $this->categories = $categoryService->getAll();
     }
 
     /**

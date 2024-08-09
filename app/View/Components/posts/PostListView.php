@@ -11,9 +11,10 @@ class PostListView extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public $post;
+    public function __construct($post)
     {
-        //
+        $this->post = $post;
     }
 
     /**

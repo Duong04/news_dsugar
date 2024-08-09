@@ -7,10 +7,9 @@
         <div class="mt-5 bg-pale-white py-4 px-2 rounded-4">
             <h5 class="border-bottom border-dark-subtle text-center fw-semibold pb-2">Bài viết gần đây</h5>
             <div class="d-flex flex-column g-20 mt-3">
-                <x-posts.post-medium-item />
-                <x-posts.post-medium-item />
-                <x-posts.post-medium-item />
-                <x-posts.post-medium-item />
+                @foreach ($postService as $item)
+                <x-posts.post-medium-item :post="$item" />             
+                @endforeach
             </div>
         </div>
         <div class="mt-5 bg-pale-white py-4 px-2 rounded-4">
@@ -21,24 +20,29 @@
             <h5 class="border-bottom border-dark-subtle text-center fw-semibold pb-2">Trưng bày</h5>
             <div class="gallery mt-2">
                 <div class="gallery-img">
-                    <img class="w-100 h-100 object-fit-cover rounded-3" src="images/gallery/demo_image-6-300x300.jpg" alt="">
+                    <img class="w-100 h-100 object-fit-cover rounded-3" src="/images/gallery/demo_image-6-300x300.jpg" alt="">
                 </div>
                 <div class="gallery-img">
-                    <img class="w-100 h-100 object-fit-cover rounded-3" src="images/gallery/demo_image-26-150x150.jpg" alt="">
+                    <img class="w-100 h-100 object-fit-cover rounded-3" src="/images/gallery/demo_image-26-150x150.jpg" alt="">
                 </div>
                 <div class="gallery-img">
-                    <img class="w-100 h-100 object-fit-cover rounded-3" src="images/gallery/demo_image-38-1-150x150.jpg" alt="">
+                    <img class="w-100 h-100 object-fit-cover rounded-3" src="/images/gallery/demo_image-38-1-150x150.jpg" alt="">
                 </div>
                 <div class="gallery-img">
-                    <img class="w-100 h-100 object-fit-cover rounded-3" src="images/gallery/post-column-01-4-150x150.jpg" alt="">
+                    <img class="w-100 h-100 object-fit-cover rounded-3" src="/images/gallery/post-column-01-4-150x150.jpg" alt="">
                 </div>
                 <div class="gallery-img">
-                    <img class="w-100 h-100 object-fit-cover rounded-3" src="images/gallery/post-column-01-6-150x150.jpg" alt="">
+                    <img class="w-100 h-100 object-fit-cover rounded-3" src="/images/gallery/post-column-01-6-150x150.jpg" alt="">
                 </div>
                 <div class="gallery-img">
-                    <img class="w-100 h-100 object-fit-cover rounded-3" src="images/gallery/post-column-01-13-150x150.jpg" alt="">
+                    <img class="w-100 h-100 object-fit-cover rounded-3" src="/images/gallery/post-column-01-13-150x150.jpg" alt="">
                 </div>
             </div>
         </div>
+        @if (request()->segment(1) == 'bai-viet')
+        <div class="mt-5 bg-pale-white py-4 px-2 rounded-4">
+            <img class="w-100" src="/images/banner/banner-02.png" alt="">
+        </div>
+        @endif
     </div>
 </aside>

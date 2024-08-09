@@ -7,6 +7,7 @@ use Hash;
 use Str;
 use App\Jobs\ProcessMail;
 use Auth;
+use Illuminate\Support\Facades\Cookie;
 
 class AuthService {
     protected $userInterface;
@@ -52,6 +53,7 @@ class AuthService {
 
         if (Auth::attempt($user)) {
             $userData = Auth::user();
+            $typeName = $userData->role->typeRole->name;
 
             if ($userData->status == 'inactive' || $userData->status == 'disabled') {
                 $message = $userData->status == 'inactive' ? 'chưa kích hoạt!' : 'đã bị vô hiệu hóa!';
@@ -63,7 +65,7 @@ class AuthService {
             $request->session()->regenerate();
             toastr()->success('Đăng nhập thành công');
 
-            if ($userData->role->name == 'Admin') {
+            if ($typeName == 'Administration' || $typeName == 'System') {
                 return redirect()->route('dashboard');
             }
 

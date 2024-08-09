@@ -16,10 +16,11 @@ class Subcategory extends Model
         'name',
         'description',
         'slug',
-        'category_id'
+        'category_id',
+        'image'
     ]; 
 
-    public function categories()
+    public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');
     }

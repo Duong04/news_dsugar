@@ -1,40 +1,6 @@
 @extends('admins.layouts.master')
 @section('script-bottom')
-    <script>
-      $(document).ready(function () {
-        $("#multi-filter-select").DataTable({
-          pageLength: 10,
-          initComplete: function () {
-            this.api()
-              .columns()
-              .every(function () {
-                var column = this;
-                var select = $(
-                  '<select class="form-select"><option value=""></option></select>'
-                )
-                  .appendTo($(column.footer()).empty())
-                  .on("change", function () {
-                    var val = $.fn.dataTable.util.escapeRegex($(this).val());
-
-                    column
-                      .search(val ? "^" + val + "$" : "", true, false)
-                      .draw();
-                  });
-
-                column
-                  .data()
-                  .unique()
-                  .sort()
-                  .each(function (d, j) {
-                    select.append(
-                      '<option value="' + d + '">' + d + "</option>"
-                    );
-                  });
-              });
-          },
-        });
-      });
-    </script>
+<script src="/js/admins/datatable.js"></script>
 @endsection
 
 @section('content')
@@ -85,6 +51,7 @@
                               <td>Stt</td>
                               <th>Tên danh mục</th>
                               <th>Mô tả ngắn</th>
+                              <th>Image</th>
                               <th>Ngày tạo</th>
                               <th>Ngày cập nhật</th>
                               <th style="width: 10%">Action</th>
@@ -95,6 +62,7 @@
                             <td>Stt</td>
                             <th>Tên danh mục</th>
                             <th>Mô tả ngắn</th>
+                            <th>Image</th>
                             <th>Ngày tạo</th>
                             <th>Ngày cập nhật</th>
                             <th style="width: 10%">Action</th>
@@ -109,6 +77,7 @@
                               <td>{{ $i++ }}</td>
                               <td>{{ $item->name }}</td>
                               <td>{{ $item->description }}</td>
+                              <th><img width="80px" src="{{ $item->image }}" alt=""></th>
                               <td>{{ $item->created_at }}</td>
                               <td>{{ $item->updated_at }}</td>
                               <td>

@@ -1,0 +1,45 @@
+.colorinput-color.bg-info {
+    background-color: transparent !important;
+}
+
+.colorinput-input:checked ~ .colorinput-color.bg-info {
+    background-color: #48abf7 !important
+}
+
+.img-user {
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    padding: 2px;
+    border-radius: 50%;
+}
+
+.img-user {
+    position: absolute;
+    right: 0;
+    transition: all ease 0.4s;
+}
+
+.img-user div {
+    background-color: #e8e8e8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-user:nth-child(1) {
+    right: 90px;
+}
+
+.img-user:nth-child(2) {
+    right: 60px;
+}
+
+.img-user:nth-child(3) {
+    right: 30px;
+}
+
+.img-user:hover {
+    transform: translateY(-6px);
+    z-index: 2;
+}

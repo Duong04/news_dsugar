@@ -14,7 +14,8 @@ class Input2 extends Component
     public $error;
     public $value;
     public $class;
-    public function __construct($name, $label, $type, $class, $error = null, $value = null)
+    public $classChild;
+    public function __construct($name, $label, $type, $class, $classChild=null, $error = null, $value = null)
     {
         $this->name = $name;
         $this->label = $label;
@@ -22,6 +23,7 @@ class Input2 extends Component
         $this->error = $error;
         $this->value = $value;
         $this->class = $class;
+        $this->classChild = $classChild;
     }
 
     /**

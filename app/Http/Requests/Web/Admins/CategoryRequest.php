@@ -28,7 +28,12 @@ class CategoryRequest extends FormRequest
             'description' => 'required',
         ];
 
+        if (!$id) {
+            $rules['image'] = 'required|image|mimes:jpg,jpeg,webp,png|max:2048';
+        }
+
         if ($id) {
+            $rules['image'] = 'image|mimes:jpg,jpeg,webp,png|max:2048';
             $rules['name'] .=','. $id;
         }
 

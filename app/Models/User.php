@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Role;
-
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -55,4 +54,42 @@ class User extends Authenticatable
     public function role() {
         return $this->belongsTo(Role::class);
     }
+
+    public function permissions()
+    {
+        return $this->role()->with('permissions')->get()->pluck('permissions')->flatten()->unique('id');
+    }
+
+    public function actions()
+    {
+        return $this->role->actions();
+    }
+
+    public function hasPermission($permissionName)
+    {
+        return $this->permissions()->contains('name', $permissionName);
+    }
+
+    public function hasAction($permissionName, $actionName, $role_id)
+    {
+        $permission = $this->permissions()->where('name', $permissionName)->first();
+
+        if (!$permission) {
+            return []; 
+        }
+
+        $filteredActions = $permission->actions->filter(function ($action) use ($role_id, $permission) {
+            return $action->pivot->role_id == $role_id && $action->pivot->permission_id == $permission->id;
+        })->values();
+
+        $permissionNew = [
+            'actions' => $filteredActions,
+        ];
+        
+        if ($permissionNew) {
+            return $permissionNew['actions']->contains('value', $actionName);
+        }
+        return false;
+    }
+
 }

@@ -39,7 +39,7 @@
             <nav class="navbar navbar-expand-lg">
                 <div class="container-fluid">
                     <div class="navbar-brand logo me-2 me-xl-5">
-                        <img class="w-100" src="images/logo.png" alt="">
+                        <a href="{{ route('home') }}"><img class="w-100" src="/images/logo.png" alt=""></a>
                     </div>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -47,22 +47,20 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="d-flex g-5 navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link menu-hv fs-6" href="#">Trang chủ</a>
+                        <ul class="d-flex g-5 position-relative navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item menu-far position-relative">
+                                <a class="nav-link nav-link menu-hv fs-6" href="{{ route('home') }}">Trang chủ</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link menu-hv fs-6" href="#">Công nghệ</a>
+                            @foreach ($categories as $item)
+                            <li class="nav-item menu-far position-relative">
+                                <a class="nav-link menu-hv fs-6" href="{{ route('category', ['category' => $item->slug]) }}">{{ $item->name }} <i class="fa-solid fa-angle-down"></i></a>
+                                <ul class="menu-child">
+                                    @foreach ($item->subcategories as $subcategory)
+                                    <li><a class="nav-link" href="{{ route('subcategory', ['category' => $item->slug, 'subcategory' => $subcategory->slug]) }}">{{ $subcategory->name }}</a></li>
+                                    @endforeach
+                                </ul>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link menu-hv fs-6" href="#">Phong cách sống</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link menu-hv fs-6" href="#">Sức Khỏe</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link menu-hv fs-6" href="#">Coder 24h</a>
-                            </li>
+                            @endforeach
                         </ul>
                         <div class="d-flex g-10 align-items-center">
                             <x-search.search />
@@ -72,7 +70,10 @@
                                 <ul style="left: -50px;" class="dropdown-menu">
                                     <li><a class="dropdown-item" href="#">Tài khoản</a></li>
                                     <li><a class="dropdown-item" href="#">Thêm bài viết</a></li>
-                                    @if (Auth::user()->role->name == 'Admin')
+                                    @php
+                                        $typeName = Auth::user()->role->typeRole->name;
+                                    @endphp
+                                    @if ($typeName == 'Administration' || $typeName == 'System')
                                     <li><a class="dropdown-item" href="{{ route('dashboard') }}">Quản trị viên</a></li>
                                     @endif
                                     <li><form class="dropdown-item" action="{{ route('logout') }}" method="POST">@csrf <button class="nav-link">Đăng xuất</button></form></li>

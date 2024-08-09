@@ -3,31 +3,38 @@ namespace App\Repositories\User;
 
 use App\Repositories\User\UserRepositoryInterface;
 use App\Models\User;
+use App\Http\Resources\UserResource;
 
 class UserRepository implements UserRepositoryInterface {
+    private $user;
+    public function __construct(User $user) {
+        $this->user = $user;
+    }
     public function all() {
-        return User::all();
+        $users = $this->user::with('role.permissions.actions')->get();
+
+        return UserResource::collection($users);
     }
 
     public function pagination() {
-        return User::paginate();
+        return $this->user::paginate();
     }
 
     public function create(array $data) {
-        return User::create($data);
+        return $this->user::create($data);
     }
 
     public function find($id) {
-        return User::find($id);
+        return $this->user::find($id);
     }
 
     public function update($id, array $data) {
-        $user = User::find($id);
+        $user = $this->user::find($id);
         return $user->update($data);
     }
 
     public function updateToken($token, array $data) {
-        $user = User::where('token', $token)->first();
+        $user = $this->user::where('token', $token)->first();
         if (!$user) {
             return false; 
         }

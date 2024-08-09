@@ -8,14 +8,13 @@
 <section class="outstanding bg-lightest py-5">
     <div class="container-md row mx-auto py-3">
         <div class="col-12 col-xl-6 mt-4">
-            <x-posts.new-post />
+            <x-posts.new-post :post="$latestPost" />
         </div>
         <div class="col-12 col-xl-6 mt-4">
             <div class="h-600 d-grid-2">
-                <x-posts.new-post-item />
-                <x-posts.new-post-item />
-                <x-posts.new-post-item />
-                <x-posts.new-post-item />
+                @foreach ($latestPosts as $item)
+                <x-posts.new-post-item :post="$item" />
+                @endforeach
             </div>
         </div>
     </div>
@@ -97,10 +96,9 @@
     <div class="container-md">
         <h3 class="fw-bold">Bài viết nổi bật</h3>
         <div class="d-grid-lg-2 d-grid-2 g-10">
-            <x-posts.featured-post-item />
-            <x-posts.featured-post-item />
-            <x-posts.featured-post-item />
-            <x-posts.featured-post-item />
+            @foreach ($mostViewed as $item)
+            <x-posts.featured-post-item :post="$item" />
+            @endforeach
         </div>
     </div>
 </section>
@@ -115,20 +113,20 @@
         <div class="tab-content">
             <div id="tab-1" class="mt-5 tab-pane fade show active">
                 <div class="d-flex flex-column flex-lg-row align-items-center g-20">
-                    <x-posts.top-post-col5 />
-                    <x-posts.top-post-col7 />
+                    <x-posts.top-post-col5 :posts="$post24Coders" />
+                    <x-posts.top-post-col7 :post="$post24Coder" />
                 </div>
             </div>
             <div id="tab-2" class="mt-5 tab-pane fade show">
                 <div class="d-flex flex-column flex-lg-row align-items-center g-20">
-                    <x-posts.top-post-col7 />
-                    <x-posts.top-post-col5 />
+                    <x-posts.top-post-col7 :post="$postTech" />
+                    <x-posts.top-post-col5 :posts="$postTechs" />
                 </div>
             </div>
             <div id="tab-3" class="mt-5 tab-pane fade show">
                 <div class="d-flex flex-column flex-lg-row align-items-center g-20">
-                    <x-posts.top-post-col5 />
-                    <x-posts.top-post-col7 />
+                    <x-posts.top-post-col5 :posts="$postFashions" />
+                    <x-posts.top-post-col7 :post="$postFashion" />
                 </div>
             </div>
         </div>
@@ -141,11 +139,9 @@
                 <img class="w-100 object-fit-cover" src="images/banner/banner-01.png" alt="">
             </div>
             <div class="d-flex flex-column g-30 mt-4">
-                <x-posts.post-list-view />
-                <x-posts.post-list-view />
-                <x-posts.post-list-view />
-                <x-posts.post-list-view />
-                <x-posts.post-list-view />
+                @foreach ($postRands as $item)
+                <x-posts.post-list-view :post="$item" />    
+                @endforeach
             </div>
         </article>
         <x-layouts-client.aside />

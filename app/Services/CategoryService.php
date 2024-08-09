@@ -3,13 +3,16 @@ namespace App\Services;
 
 use App\Repositories\Category\CategoryRepositoryInterface;
 use Str;
+use App\Services\CloundinaryService;
 
 class CategoryService {
     protected $categoryInterface;
+    protected $cloundinaryService;
 
-    public function __construct(CategoryRepositoryInterface $categoryInterface) {
+    public function __construct(CategoryRepositoryInterface $categoryInterface, CloundinaryService $cloundinaryService) {
         $this->categoryInterface = $categoryInterface;
-    }
+        $this->cloundinaryService = $cloundinaryService;
+    }  
 
     public function getAll() {
         return $this->categoryInterface->all();
@@ -19,15 +22,23 @@ class CategoryService {
         try {
             $category = $request->validated();
 
-            $this->categoryInterface->create([
-                'name' => $category['name'],
-                'description' => $category['description'],
-                'slug' => Str::slug($category['name'], '-')
-            ]);
+            $image = $request->file('image');
+            $folder = 'news_dsugar/categories';
+            $url = $this->cloundinaryService->upload($image, $folder);
+            $category['image'] = $url;
+            $category['slug'] = Str::slug($category['name'], '-');
 
-            return true;
+            return $this->categoryInterface->create($category);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 422);
+            return $th->getMessage();
+        }
+    }
+
+    public function getBySlug($slug) {
+        try {
+            return $this->categoryInterface->getBySlug($slug);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
         }
     }
 
@@ -35,22 +46,27 @@ class CategoryService {
         try {
             return $this->categoryInterface->find($id);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 404);
+            return $th->getMessage();
         }
     }
 
     public function update($request, $id) {
         try {
             $category = $request->validated();
-            $data = [
-                'name' =>$category['name'],
-                'description' =>$category['description'],
-                'slug' => Str::slug($category['name'], '-'),
-            ];
 
-            return $this->categoryInterface->update($id, $data);
+            $category['slug'] = Str::slug($category['name'], '-');
+
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $folder = 'news_dsugar/categories';
+
+                $url = $this->cloundinaryService->upload($image, $folder);
+                $category['image'] = $url;
+            }
+
+            return $this->categoryInterface->update($id, $category);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 422);
+            return $th->getMessage();
         }   
     }
 
@@ -58,7 +74,7 @@ class CategoryService {
         try {
             return $this->categoryInterface->delete($id);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()], 422);
+            return $th->getMessage();
         }
     }
 }

@@ -2,7 +2,7 @@
 
 @section('script-bottom')
 <script src="/libraries/axios/axios.min.js"></script>
-<script src="/js/admins/async.js"></script>
+<script type="module" src="/js/admins/async.js"></script>
 <script src="/js/admins/datatable.js"></script>
 @endsection
 

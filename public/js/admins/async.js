@@ -1,6 +1,4 @@
-const axios_ins = axios.create({
-    baseURL: "http://127.0.0.1:8000/api/v1",
-});
+import axios_ins from "/js/axios.js";
 
 const editFormAction = document.querySelectorAll(".btn-edit-action");
 const editFormType = document.querySelectorAll(".btn-edit-type");

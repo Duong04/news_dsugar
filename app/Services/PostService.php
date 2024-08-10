@@ -5,6 +5,7 @@ use App\Repositories\Post\PostRepositoryInterface;
 use Auth;
 use Str;
 use App\Services\CloundinaryService;
+use Carbon\Carbon;
 
 class PostService {
     protected $postInterface;
@@ -150,6 +151,25 @@ class PostService {
             return $this->postInterface->delete($id);
         } catch (\Throwable $th) {
             return $th->getMessage();
+        }
+    }
+
+    public function formatCommentTime($timestamp) {
+        $commentTime = Carbon::parse($timestamp);
+        $currentTime = Carbon::now();
+
+        $diffInMinutes = $commentTime->diffInMinutes($currentTime);
+        $diffInHours = $commentTime->diffInHours($currentTime);
+        $diffInDays = $commentTime->diffInDays($currentTime);
+
+        if ($diffInMinutes < 60) {
+            return $diffInMinutes . ' phút trước';
+        } elseif ($diffInHours < 24) {
+            return $diffInHours . ' giờ trước';
+        } elseif ($diffInDays < 30) {
+            return $commentTime->format('d') . ' tháng ' . $commentTime->format('m');
+        } else {
+            return $commentTime->format('Y');
         }
     }
 }

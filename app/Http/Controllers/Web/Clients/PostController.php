@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\CategoryService;
 use Illuminate\Http\Request;
 use App\Services\PostService;
+use App\Http\Requests\Web\Admins\PostRequest;
 
 class PostController extends Controller
 {
@@ -37,9 +38,16 @@ class PostController extends Controller
         return view('clients.news.news', compact('post', 'posts', 'postPaginates', 'category'));
     }
 
+    public function create() {
+        return view('clients.news.create');
+    }
+
     public function postDetail($slug) {
+        $formatCommentTime = function ($time) {
+            return $this->postService->formatCommentTime($time);
+        };
         $post = $this->postService->getPostBySlug($slug);
         $this->postService->postIncrement('view', $post->id);
-        return view('clients.news.news-detail', compact('post'));
+        return view('clients.news.news-detail', compact('post', 'formatCommentTime'));
     }
 }

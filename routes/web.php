@@ -85,14 +85,21 @@ Route::middleware('auth.admin')->prefix('admin')->group(function () {
     Route::delete('/xoa-binh-luan/{id}', [CommentController::class, 'delete'])->name('delete.comment');
 });
 
-Route::get('/profile', function() {
-    return view('clients.profile.profile');
+Route::middleware('auth')->group(function() {
+    Route::get('/tai-khoan', function() {
+        return view('clients.profile.profile');
+    })->name('profile');
+    Route::get('/them-bai-viet', [ClientPostController::class, 'create'])->name('client.create.post');
 });
-Route::get('/dang-nhap', [AuthController::class, 'showLogin'])->name('login');
-Route::post('/dang-nhap', [AuthController::class, 'actionLogin'])->name('action.login');
-Route::get('/dang-ky', [AuthController::class, 'showRegister'])->name('register');
-Route::post('/dang-ky', [AuthController::class, 'actionRegister'])->name('action.register');
-Route::get('/email/verify/{token}', [AuthController::class, 'verifyEmail']);
+
+Route::middleware('guest')->group(function () {
+    Route::get('/dang-nhap', [AuthController::class, 'showLogin'])->name('login');
+    Route::post('/dang-nhap', [AuthController::class, 'actionLogin'])->name('action.login');
+    Route::get('/dang-ky', [AuthController::class, 'showRegister'])->name('register');
+    Route::post('/dang-ky', [AuthController::class, 'actionRegister'])->name('action.register');
+    Route::get('/email/verify/{token}', [AuthController::class, 'verifyEmail']);
+});
+
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/upload', [PostController::class, 'upload']);

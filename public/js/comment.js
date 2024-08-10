@@ -1,6 +1,4 @@
-const axios_ins = axios.create({
-    baseURL: "http://127.0.0.1:8000/api/v1",
-});
+import axios_ins from "/js/axios";
 
 const btnComment = document.querySelector('#btn-comment');
 const inpComment = document.querySelector('#comment');
@@ -28,7 +26,7 @@ const layoutComment = ({ content, user, created_at, id, comment_replys }, post_i
                     </div> 
                     `: ``}
                 </div>
-                <span class="fs-7 text-midgray">${created_at}</span>
+                <span class="fs-7 text-midgray">${formatCommentTime(created_at)}</span>
                 <div class="d-flex g-10 align-items-center">
                     <div><span class="badge text-bg-danger">10</span> <i class="fa-regular fa-thumbs-up cursor-pointer"></i></div>
                     <div data-bs-toggle="collapse" href="#collapseModal-${id}" role="button" aria-expanded="false" aria-controls="collapseModal-${id}"><i class="fa-regular fa-comment cursor-pointer"></i></div>
@@ -61,12 +59,12 @@ const layoutComment = ({ content, user, created_at, id, comment_replys }, post_i
                                     <i class="fa-solid fa-ellipsis-vertical"></i>
                                 </div>
                                 <ul class="dropdown-menu">
-                                    <li><a data-id="${id}" data-type="comment-reply" class="dropdown-item btn-delete">Xóa</a></li>
+                                    <li><a data-id="${reply.id}" data-type="comment-reply" class="dropdown-item btn-delete">Xóa</a></li>
                                     <li><a class="dropdown-item" href="#">Chỉnh sửa</a></li>
                                 </ul>    
                             </div> 
                         `: ``}
-                        <span class="fs-7 text-midgray">${reply.created_at}</span>
+                        <span class="fs-7 text-midgray">${formatCommentTime(reply.created_at)}</span>
                         <div class="d-flex g-10 align-items-center">
                             <div><span class="badge text-bg-danger">1</span> <i class="fa-regular fa-thumbs-up cursor-pointer"></i></div>
                         </div>
@@ -76,6 +74,26 @@ const layoutComment = ({ content, user, created_at, id, comment_replys }, post_i
         </div>
     `);
 }
+
+const formatCommentTime = (timestamp) => {
+    const commentTime = new Date(timestamp);
+    const currentTime = new Date();
+    
+    const diffInMinutes = Math.floor((currentTime - commentTime) / 1000 / 60);
+    const diffInHours = Math.floor(diffInMinutes / 60);
+    const diffInDays = Math.floor(diffInHours / 24);
+
+    if (diffInMinutes < 60) {
+        return `${diffInMinutes} phút trước`;
+    } else if (diffInHours < 24) {
+        return `${diffInHours} giờ trước`;
+    } else if (diffInDays < 30) {
+        return `${commentTime.getDate()} tháng ${commentTime.getMonth() + 1}`;
+    } else {
+        return commentTime.getFullYear();
+    }
+}
+
 const getAll = async () => {
     try {
         const post_id = inpComment.getAttribute('data-post');

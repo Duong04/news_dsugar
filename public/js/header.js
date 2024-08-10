@@ -1,6 +1,4 @@
-const axios_ins = axios.create({
-    baseURL: "http://127.0.0.1:8000/api/v1",
-});
+import axios_ins from "/js/axios.js";
 
 const layoutSearchs = ({slug, image, title, subcategory, category}) => {
     return (`
@@ -47,7 +45,7 @@ const handleSearch = async (e) => {
     searchResults.innerHTML = htmls;
 };
 
-inpSearch.oninput = debounce(handleSearch, 300);
+inpSearch.oninput = debounce(handleSearch, 200);
 
 const headerMain = document.querySelector('#header');
 const goToTop = document.querySelector('.go-to-top');

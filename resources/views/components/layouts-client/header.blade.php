@@ -68,7 +68,7 @@
                             <div class="dropdown">
                                 <a href="" class="account" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><img class="w-100 h-100 rounded-circle" src="{{ Auth::user()->avatar }}" alt=""></a>                                
                                 <ul style="left: -50px;" class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Tài khoản</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('profile') }}">Tài khoản</a></li>
                                     <li><a class="dropdown-item" href="#">Thêm bài viết</a></li>
                                     @php
                                         $typeName = Auth::user()->role->typeRole->name;
@@ -83,7 +83,6 @@
                             @guest
                             <a href="{{ route('login') }}" class="account"><i class="fa-solid fa-user fs-7"></i></a>                                
                             @endguest
-                            
                         </div>
                     </div>
                 </div>

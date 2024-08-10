@@ -32,7 +32,7 @@
     <script src="/libraries/splide/splide.min.js"></script>
     <script src="/js/slider.js"></script>
     <script src="/libraries/axios/axios.min.js"></script>
-    <script src="/js/header.js"></script>
+    <script type="module" src="/js/header.js"></script>
     @yield('script-bottom')
 </body>
 

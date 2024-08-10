@@ -19,10 +19,10 @@
             <div class="py-5 bg-white aside-shadow">
                 <div class="text-center">
                     <div class="img-avatar mx-auto">
-                        <img class="w-100 h-100 rounded-circle" src="/images/avatar/icon/avatar-1-sTigs3cJ.png" alt="">
+                        <img class="w-100 h-100 rounded-circle" src="{{ Auth::user()->avatar }}" alt="">
                     </div>
-                    <h5 class="fs-5 mt-3">Nguyen Thanh Duong</h5>
-                    <span class="badge text-bg-success">Author</span>
+                    <h5 class="fs-5 mt-3">{{ Auth::user()->user_name }}</h5>
+                    <span class="badge text-bg-success">{{ Auth::user()->role->name }}</span>
                 </div>
                 <div class="rp-task mx-auto d-flex flex-column g-20 mt-4">
                     <div class="d-flex g-10 align-items-center">
@@ -49,24 +49,28 @@
                     <hr>
                     <ul class="nav d-flex flex-column g-10">
                         <li class="fs-7">
-                            <span class="fw-semibold">Tên:</span>
-                            <span class="text-midgray">Nguyen Thanh Duong</span>
+                            <span class="fw-semibold">Nick name:</span>
+                            <span class="text-midgray">{{ Auth::user()->user_name }}</span>
+                        </li>
+                        <li class="fs-7">
+                            <span class="fw-semibold">Email:</span>
+                            <span class="text-midgray">{{ Auth::user()->email }}</span>
                         </li>
                         <li class="fs-7">
                             <span class="fw-semibold">Tên:</span>
-                            <span class="text-midgray">Nguyen Thanh Duong</span>
+                            <span class="text-midgray">{{ Auth::user()->first_name ? Auth::user()->first_name : 'Chưa cập nhật thông tin' }}</span>
                         </li>
                         <li class="fs-7">
-                            <span class="fw-semibold">Tên:</span>
-                            <span class="text-midgray">Nguyen Thanh Duong</span>
+                            <span class="fw-semibold">Họ:</span>
+                            <span class="text-midgray">{{ Auth::user()->last_name ? Auth::user()->last_name : 'Chưa cập nhật thông tin' }}</span>
                         </li>
                         <li class="fs-7">
-                            <span class="fw-semibold">Tên:</span>
-                            <span class="text-midgray">Nguyen Thanh Duong</span>
+                            <span class="fw-semibold">Địa chỉ:</span>
+                            <span class="text-midgray">{{ Auth::user()->address ? Auth::user()->address : 'Chưa cập nhật thông tin'}}</span>
                         </li>
                         <li class="fs-7">
-                            <span class="fw-semibold">Tên:</span>
-                            <span class="text-midgray">Nguyen Thanh Duong</span>
+                            <span class="fw-semibold">Địa chỉ:</span>
+                            <span class="text-midgray">{{ Auth::user()->phone_number ? Auth::user()->phone_number : 'Chưa cập nhật thông tin'}}</span>
                         </li>
                     </ul>
                 </div>
@@ -77,16 +81,16 @@
         </aside>
         <article class="col-8">
             <nav class="nav nav-pills nav-pills-2 nav-fill g-10">
-                <a class="nav-link active" data-bs-toggle="tab" aria-current="page" href="#tab-1">Tổng quan</a>
-                <a class="nav-link" data-bs-toggle="tab" href="#">Bình luận</a>
-                <a class="nav-link" data-bs-toggle="tab" href="#">Chưa biết ^^</a>
+                <a class="nav-link active" data-bs-toggle="tab" aria-current="page" href="#tab-1"><i class="fa-solid fa-dumpster-fire"></i> Tổng quan</a>
+                <a class="nav-link" data-bs-toggle="tab" href="#"><i class="fa-regular fa-comments"></i> Bình luận</a>
+                <a class="nav-link" data-bs-toggle="tab" href="#"><i class="fa-solid fa-chart-bar"></i> Thống kê</a>
             </nav>
             <div class="tab-content w-100">
                 <div id="tab-1" class="mt-4 tab-pane fade show active">
                     <div class="card">
                         <div class="card-header d-flex align-items-center">
                             <h4 class="card-title">Bài viết</h4>
-                            <a href="{{ route('create.post') }}" class="btn btn-purple btn-round ms-auto">
+                            <a href="{{ route('client.create.post') }}" class="btn btn-purple btn-round ms-auto">
                                 <i class="fa fa-plus"></i>
                                 Thêm bài viết
                             </a>

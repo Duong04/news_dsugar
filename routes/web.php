@@ -12,6 +12,7 @@ use App\Http\Controllers\Web\Admins\UserController;
 use App\Http\Controllers\Web\Admins\TypeController;
 use App\Http\Controllers\Web\Admins\CommentController;
 use App\Http\Controllers\Web\Clients\HomeController;
+use App\Http\Controllers\Web\Clients\ProfileController;
 use App\Http\Controllers\Web\Clients\PostController as ClientPostController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -71,6 +72,9 @@ Route::middleware('auth.admin')->prefix('admin')->group(function () {
 
     // User
     Route::get('/users', [UserController::class, 'index'])->name('users')->middleware('permission.action:Users Management,viewany');
+    Route::get('/users/{id}', [UserController::class, 'show'])->name('show.user')->middleware('permission.action:Users Management,view');
+    Route::get('/create-user', [UserController::class, 'create'])->name('create.user');
+    Route::post('/create-user', [UserController::class, 'store'])->name('store.user');
 
     //grant permissions
     Route::get('/grant-role', [UserController::class, 'grantRole'])->name('grant.role');
@@ -86,10 +90,9 @@ Route::middleware('auth.admin')->prefix('admin')->group(function () {
 });
 
 Route::middleware('auth')->group(function() {
-    Route::get('/tai-khoan', function() {
-        return view('clients.profile.profile');
-    })->name('profile');
+    Route::get('/tai-khoan', [ProfileController::class, 'account'])->name('profile');
     Route::get('/them-bai-viet', [ClientPostController::class, 'create'])->name('client.create.post');
+    Route::post('/them-bai-viet', [ClientPostController::class, 'store'])->name('client.store.post');
 });
 
 Route::middleware('guest')->group(function () {

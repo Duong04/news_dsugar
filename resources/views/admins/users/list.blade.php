@@ -36,7 +36,7 @@
                 <div class="card">
                     <div class="card-header d-flex align-items-center">
                     <h4 class="card-title">Danh mục</h4>
-                    <a href="{{route('create.subcategory')}}"
+                    <a href="{{route('create.user')}}"
                         class="btn btn-primary btn-round ms-auto"
                         >
                         <i class="fa fa-plus"></i>
@@ -107,6 +107,12 @@
                                         data-status="disabled"
                                         class="btn btn-link btn-danger btn-lg btn-status"
                                         data-original-title="Edit Task"><i class="fas fa-user-lock"></i></button>
+                                        <a href="{{ route('show.user', ['id' => $item->id]) }}" data-bs-toggle="tooltip"
+                                        title="Xem chi tiết"
+                                        data-id="{{ $item->id }}"
+                                        data-status="detail"
+                                        class="btn btn-link btn-warning btn-lg"
+                                        data-original-title="Edit Task"><i class="fas fa-eye"></i></a>
                                     </div>
                                 @else
                                     <p class="badge badge-info">Bạn không thể thao tác được người này!</p>

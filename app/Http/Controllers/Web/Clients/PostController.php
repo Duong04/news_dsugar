@@ -42,6 +42,16 @@ class PostController extends Controller
         return view('clients.news.create');
     }
 
+    public function store(PostRequest $request) {
+        $status = $request->input('action') == 'pending' ? 'pending' : 'draft';
+        $postSuccess = $this->postService->create($request, $status);
+        return $postSuccess;
+        if ($postSuccess) {
+            toastr()->success('Đã gửi yêu cầu thành công!');
+            return redirect()->back();
+        }
+    }
+
     public function postDetail($slug) {
         $formatCommentTime = function ($time) {
             return $this->postService->formatCommentTime($time);

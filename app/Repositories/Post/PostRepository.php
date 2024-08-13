@@ -12,6 +12,10 @@ class PostRepository implements PostRepositoryInterface {
     public function all() {
         return $this->post::with('category', 'subcategory', 'user')->get();
     }
+    public function getPostByUserId($userId) {
+        return $this->post::with('category', 'subcategory', 'user')->where('author_id', $userId)->get();
+    }
+
     public function getPosts($limit, $q) {
         $posts = $this->post::published()->latest()->with('category', 'subcategory', 'user');
     

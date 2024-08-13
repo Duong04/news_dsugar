@@ -101,9 +101,11 @@
                                     <thead>
                                         <tr>
                                             <td>Stt</td>
-                                            <th>Tên danh mục</th>
-                                            <th>Lượt xem</th>
+                                            <th>Tiêu đề</th>
                                             <th>Ảnh</th>
+                                            <th>Danh mục</th>
+                                            <th>Danh mục con</th>
+                                            <th>Lượt xem</th>
                                             <th>Tác giả</th>
                                             <th style="width: 10%">Action</th>
                                         </tr>
@@ -114,10 +116,21 @@
                                             $statusPost = [
                                                 'draft' => ['Bản nháp', 'badge-warning'],
                                                 'published' => ['Đã xuất bản', 'badge-success'],
-                                                'archived' => ['Lưu trử', 'badge-info'],
+                                                'archived' => ['Lưu trữ', 'badge-info'],
                                             ];
                                         @endphp
-                                        
+                                        @foreach ($posts as $item)
+                                        <tr>
+                                            <td>{{ $i++ }}</td>
+                                            <td><div style="width: 180px;" class="ct-title">{{ $item->title }}</div></td>
+                                            <td><img width="50px" src="{{ $item->image }}" alt=""></td>
+                                            <td><div style="width: 150px;">{{ $item->category->name }}</div></td>
+                                            <td><div style="width: 150px;">{{ $item->subcategory->name }}</div></td>
+                                            <td><div style="width: 150px;">{{ $item->view }}</div></td>
+                                            <td><div style="width: 180px;">{{ $item->user->user_name }}</div></td>
+                                            <td>ok</td>
+                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

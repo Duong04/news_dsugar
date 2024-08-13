@@ -88,12 +88,16 @@ class PostService {
         }
     }
 
-    public function create($request) {
+    public function create($request, $status = null) {
         try {
             $post = $request->validated();
 
             $image = $request->file('image');
             $folder = 'news_dsugar/posts';
+            
+            if ($status) {
+                $post['status'] = $status;
+            }
 
             $url = $this->cloundinaryService->upload($image, $folder);
 
@@ -102,6 +106,14 @@ class PostService {
             $post['image'] = $url;
 
             return $this->postInterface->create($post);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
+    public function getPostByUserId($userId) {
+        try {
+            return $this->postInterface->getPostByUserId($userId);
         } catch (\Throwable $th) {
             return $th->getMessage();
         }

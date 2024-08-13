@@ -811,6 +811,30 @@ body {
     color: #fff !important;
 }
 
+.form-check, .form-group {
+    margin-bottom: 0;
+    padding: 10px;
+}
+
+.has-error .form-control {
+    border-color: #f25961 !important;
+    color: #f25961 !important;
+}
+
+.active>.page-link, .page-link.active {
+    color: #fff !important;
+    background-color: rgb(140, 87, 255) !important;
+    border-color: rgb(140, 87, 255) !important;
+}
+
+.page-link {
+    color: rgb(140, 87, 255) !important;
+}
+
+.page-link:focus {
+    box-shadow: none;
+}
+
 @keyframes moveUp {
     from {
         opacity: 0;

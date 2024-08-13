@@ -4,11 +4,11 @@
     <x-layouts-client.header />
 @endsection
 @section('css')
-<link rel="stylesheet" href="/templates/css/plugins.min.css" />
 {{-- <link rel="stylesheet" href="/templates/css/kaiadmin.min.css" /> --}}
+<link rel="stylesheet" href="/templates/css/plugins.min.css" />
 <style>
     .ck-editor__editable_inline {
-        min-height: 500px;
+        height: auto;
     }
 </style>
 @endsection
@@ -29,10 +29,11 @@
 <section class="py-5">
     <div class="container-md d-flex flex-column flex-lg-row mx-auto">
         <div class="row">
-            <form class="row col-12" action="{{ route('store.post') }}" method="POST" enctype="multipart/form-data">
+            <form class="row col-12" action="{{ route('client.store.post') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <div class="col-6 mb-3">
-                    <button class="btn btn-primary">Thêm bài viết</button>
+                <div class="col-6 mb-3 g-10">
+                    <button name="action" value="pending" class="btn btn-purple">Gửi yêu cầu</button>
+                    <button name="action" value="draft" class="btn btn-purple">Lưu bản nhóm</button>
                 </div>
                 <div class="col-8">
                     <x-form.CkEditor class="col-12" :error="$errors->first('content')" name="content" label="Nội dung bài viết" />
@@ -46,9 +47,9 @@
                     <div class="col-12 form-group">
                         <img id="preview" class="w-100" src="/images/7076ab1c0b9cd177babc715173427ce8.jpg" alt="">
                     </div>
-                    <x-form.select-status class="col-12" :error="$errors->first('status')" name="status" />
-                    <div class="col-6 mt-3 form-group">
-                        <button class="btn btn-primary">Thêm bài viết</button>
+                    <div class="col-12 mt-3 form-group d-flex g-10">
+                        <button name="action" value="pending" class="btn btn-purple">Gửi yêu cầu</button>
+                    <button name="action" value="draft" class="btn btn-purple">Lưu bản nhóm</button>
                     </div>
               </div>
             </form>

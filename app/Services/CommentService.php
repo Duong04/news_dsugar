@@ -25,6 +25,14 @@ class CommentService {
         }
     }
 
+    public function getCommentByAuthor($authorId) {
+        try {
+            return $this->commentRepository->commentByAuthorId($authorId);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
     public function create($request) {
         try {
             $data = $request->validated();

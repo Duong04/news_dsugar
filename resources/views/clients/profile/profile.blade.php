@@ -82,8 +82,8 @@
         <article class="col-8">
             <nav class="nav nav-pills nav-pills-2 nav-fill g-10">
                 <a class="nav-link active" data-bs-toggle="tab" aria-current="page" href="#tab-1"><i class="fa-solid fa-dumpster-fire"></i> Tổng quan</a>
-                <a class="nav-link" data-bs-toggle="tab" href="#"><i class="fa-regular fa-comments"></i> Bình luận</a>
-                <a class="nav-link" data-bs-toggle="tab" href="#"><i class="fa-solid fa-chart-bar"></i> Thống kê</a>
+                <a class="nav-link" data-bs-toggle="tab" href="#tab-2"><i class="fa-regular fa-comments"></i> Bình luận</a>
+                <a class="nav-link" data-bs-toggle="tab" href="#tab-3"><i class="fa-solid fa-chart-bar"></i> Thống kê</a>
             </nav>
             <div class="tab-content w-100">
                 <div id="tab-1" class="mt-4 tab-pane fade show active">
@@ -103,10 +103,79 @@
                                             <td>Stt</td>
                                             <th>Tiêu đề</th>
                                             <th>Ảnh</th>
+                                            <th>Trạng thái</th>
                                             <th>Danh mục</th>
                                             <th>Danh mục con</th>
                                             <th>Lượt xem</th>
                                             <th>Tác giả</th>
+                                            <th class="text-center">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @php
+                                            $i = 1;
+                                            $statusPost = [
+                                                'draft' => ['Bản nháp', 'badge-warning'],
+                                                'published' => ['Đã xuất bản', 'badge-success'],
+                                                'archived' => ['Lưu trữ', 'badge-info'],
+                                                'pending' => ['Chờ kiểm duyệt', 'badge-secondary'],
+                                                'rejected' => ['Đã từ chối', 'badge-danger'],
+                                            ];
+                                        @endphp
+                                        @foreach ($posts as $item)
+                                            @php
+                                                $textStatus = $statusPost[$item->status][0];
+                                                $bgStatus = $statusPost[$item->status][1];
+                                            @endphp
+                                        <tr>
+                                            <td>{{ $i++ }}</td>
+                                            <td><div style="width: 180px;" class="ct-title">{{ $item->title }}</div></td>
+                                            <td><img width="50px" src="{{ $item->image }}" alt=""></td>
+                                            <td><div style="width: 100px;" class="text-center"><span class="badge {{ $bgStatus }}">{{ $textStatus }}</span></div></td>
+                                            <td><div style="width: 150px;">{{ $item->category->name }}</div></td>
+                                            <td><div style="width: 150px;">{{ $item->subcategory->name }}</div></td>
+                                            <td><div style="width: 150px;">{{ $item->view }}</div></td>
+                                            <td><div style="width: 180px;">{{ $item->user->user_name }}</div></td>
+                                            <td>
+                                                <div style="width: 120px;" class="d-flex g-10 justify-content-center align-items-center">
+                                                    <a href="" class="text-warning">
+                                                        <i class="fa-solid fa-pen-to-square"></i>
+                                                    </a>
+                                                    <a href="" class="text-danger">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                    </a>
+                                                    <a href="" class="text-info">
+                                                        <i class="fa-solid fa-eye"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="tab-2" class="mt-4 tab-pane fade show active">
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center">
+                            <h4 class="card-title">Bài viết</h4>
+                            <a href="{{ route('client.create.post') }}" class="btn btn-purple btn-round ms-auto">
+                                <i class="fa fa-plus"></i>
+                                Thêm bài viết
+                            </a>
+                        </div>
+                        <div class="card-body w-100">
+                            <div class="table-responsive">
+                                <table id="multi-filter-select-2" class="display table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td>Stt</td>
+                                            <th>Nội dung</th>
+                                            <th>Người bình luận</th>
+                                            <th>Bài viết</th>
+                                            <th>Ngày bình luận</th>
                                             <th style="width: 10%">Action</th>
                                         </tr>
                                     </thead>
@@ -119,16 +188,18 @@
                                                 'archived' => ['Lưu trữ', 'badge-info'],
                                             ];
                                         @endphp
-                                        @foreach ($posts as $item)
+                                        @foreach ($comments as $item)
                                         <tr>
                                             <td>{{ $i++ }}</td>
-                                            <td><div style="width: 180px;" class="ct-title">{{ $item->title }}</div></td>
-                                            <td><img width="50px" src="{{ $item->image }}" alt=""></td>
-                                            <td><div style="width: 150px;">{{ $item->category->name }}</div></td>
-                                            <td><div style="width: 150px;">{{ $item->subcategory->name }}</div></td>
-                                            <td><div style="width: 150px;">{{ $item->view }}</div></td>
+                                            <td><div style="width: 180px;">{{ $item->content }}</div></td>
                                             <td><div style="width: 180px;">{{ $item->user->user_name }}</div></td>
-                                            <td>ok</td>
+                                            <td><div style="width: 150px;" class="ct-title">{{ $item->post->title }}</div></td>
+                                            <td><div style="width: 150px;">{{ $item->created_at }}</div></td>
+                                            <td>
+                                                <a href="" class="btn btn-warning">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </a>
+                                            </td>
                                         </tr>
                                         @endforeach
                                     </tbody>

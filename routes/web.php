@@ -13,6 +13,7 @@ use App\Http\Controllers\Web\Admins\TypeController;
 use App\Http\Controllers\Web\Admins\CommentController;
 use App\Http\Controllers\Web\Clients\HomeController;
 use App\Http\Controllers\Web\Clients\ProfileController;
+use App\Http\Resources\UserResource;
 use App\Http\Controllers\Web\Clients\PostController as ClientPostController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -61,6 +62,7 @@ Route::middleware('auth.admin')->prefix('admin')->group(function () {
     Route::post('/create-role', [RoleController::class, 'store'])->name('store.role')->middleware('permission.action:Roles Management,create');
     Route::get('/update-role/{id}', [RoleController::class, 'show'])->name('show.role')->middleware('permission.action:Roles Management,view');
     Route::put('/update-role/{id}', [RoleController::class, 'update'])->name('update.role')->middleware('permission.action:Roles Management,update');
+    Route::delete('/delete-role/{id}', [RoleController::class, 'delete'])->name('delete.role')->middleware('permission.action:Roles Management,delete');
 
     // Action
     Route::get('/actions', [ActionController::class, 'index'])->name('actions')->middleware('permission.action:Actions Management,viewany');
@@ -115,8 +117,8 @@ Route::get('/check-mail', function () {
 Route::get('/search', [HomeController::class, 'search'])->name('search');
 
 Route::get('/bai-viet/{post}', [ClientPostController::class, 'postDetail'])->name('post.detail');
-Route::get('/{category}', [ClientPostController::class, 'getPostByCategory'])->name('category');
-Route::get('/{category}/{subcategory}', [ClientPostController::class, 'getPostBySubcategory'])->name('subcategory');
+Route::get('/danh-muc/{category}', [ClientPostController::class, 'getPostByCategory'])->name('category');
+Route::get('/danh-muc/{category}/{subcategory}', [ClientPostController::class, 'getPostBySubcategory'])->name('subcategory');
 
 
 Route::fallback(function () {

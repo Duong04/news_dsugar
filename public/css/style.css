@@ -835,6 +835,56 @@ body {
     box-shadow: none;
 }
 
+
+.badge {
+    border-radius: 5px;
+    margin-left: auto;
+    line-height: 1;
+    padding: 4px 7px;
+    vertical-align: middle;
+    font-weight: 400;
+    font-size: 11px;
+    border: 1px solid #ddd;
+    height: fit-content!important
+}
+
+[class*=badge-]:not(.badge-count) {
+    border: 0!important
+}
+
+.badge-count {
+    color: inherit!important
+}
+
+.badge-black {
+    background: #1a2035;
+    color: #fff!important
+}
+
+.badge-primary {
+    background: #1572e8
+}
+
+.badge-secondary {
+    background: #6861ce
+}
+
+.badge-info {
+    background: #48abf7
+}
+
+.badge-success {
+    background-color: #31ce36
+}
+
+.badge-warning {
+    background: #ffad46
+}
+
+.badge-danger {
+    background-color: #f25961
+}
+
 @keyframes moveUp {
     from {
         opacity: 0;

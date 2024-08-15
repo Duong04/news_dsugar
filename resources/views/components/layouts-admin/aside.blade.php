@@ -44,6 +44,7 @@
                     </span>
                     <h4 class="text-section">Components</h4>
                 </li>
+                @can('general-check', ['Categories Management', 'viewany'])
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#base">
                         <i class="fas fa-layer-group"></i>
@@ -65,6 +66,8 @@
                         </ul>
                     </div>
                 </li>
+                @endcan
+                @can('general-check', ['Subcategies Management', 'viewany'])
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#subcat">
                         <i class="fas fa-list-alt"></i>
@@ -86,6 +89,8 @@
                         </ul>
                     </div>
                 </li>
+                @endcan
+                @can('general-check', ['Posts Management', 'viewany'])
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#sidebarLayouts">
                         <i class="fas fa-th-list"></i>
@@ -107,6 +112,8 @@
                         </ul>
                     </div>
                 </li>
+                @endcan
+                @can('general-check', ['Users Management' ,'viewany'])
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#users">
                         <i class="fas fa-user"></i>
@@ -120,14 +127,17 @@
                                     <span class="sub-item">Tài khoản</span>
                                 </a>
                             </li>
+                            @can('general-check', ['Users Management' ,'grant.role'])
                             <li>
                                 <a href="{{ route('grant.role') }}">
                                     <span class="sub-item">Cấp vai trò</span>
                                 </a>
                             </li>
+                            @endcan
                         </ul>
                     </div>
                 </li>
+                @endcan
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#forms">
                         <i class="fas fa-pen-square"></i>
@@ -136,26 +146,34 @@
                     </a>
                     <div class="collapse" id="forms">
                         <ul class="nav nav-collapse">
+                            @can('general-check', ['Roles Management', 'viewAny'])
                             <li>
                                 <a href="{{ route('roles') }}">
                                     <span class="sub-item">Vai trò</span>
                                 </a>
                             </li>
+                            @endcan
+                            @can('general-check', ['Permissions Management', 'viewAny'])
                             <li>
                                 <a href="{{ route('permissions') }}">
                                     <span class="sub-item">Quyền người dùng</span>
                                 </a>
                             </li>
+                            @endcan
+                            @can('general-check', ['Actions Management', 'viewAny'])
                             <li>
                                 <a href="{{ route('actions') }}">
                                     <span class="sub-item">Actions</span>
                                 </a>
                             </li>
+                            @endcan
+                            @can('general-check', ['Types Management', 'viewAny'])
                             <li>
                                 <a href="{{ route('types') }}">
                                     <span class="sub-item">Types</span>
                                 </a>
                             </li>
+                            @endcan
                         </ul>
                     </div>
                 </li>

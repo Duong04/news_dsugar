@@ -33,7 +33,7 @@
                 @csrf
                 <div class="col-6 mb-3 g-10">
                     <button name="action" value="pending" class="btn btn-purple">Gửi yêu cầu</button>
-                    <button name="action" value="draft" class="btn btn-purple">Lưu bản nhóm</button>
+                    <button name="action" value="draft" class="btn btn-purple">Lưu bản nháp</button>
                 </div>
                 <div class="col-8">
                     <x-form.CkEditor class="col-12" :error="$errors->first('content')" name="content" label="Nội dung bài viết" />
@@ -49,7 +49,7 @@
                     </div>
                     <div class="col-12 mt-3 form-group d-flex g-10">
                         <button name="action" value="pending" class="btn btn-purple">Gửi yêu cầu</button>
-                    <button name="action" value="draft" class="btn btn-purple">Lưu bản nhóm</button>
+                    <button name="action" value="draft" class="btn btn-purple">Lưu bản nháp</button>
                     </div>
               </div>
             </form>

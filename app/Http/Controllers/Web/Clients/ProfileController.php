@@ -20,6 +20,11 @@ class ProfileController extends Controller
         $userId = Auth::user()->id;
         $comments = $this->commentService->getCommentByAuthor($userId);
         $posts = $this->postService->getPostByUserId($userId);
-        return view('clients.profile.profile', compact('posts', 'comments'));
+        $pending = $this->postService->countPost('pending', 'status');
+        $draft = $this->postService->countPost('draft', 'status');
+        $published = $this->postService->countPost('published', 'status');
+        $archived = $this->postService->countPost('archived', 'status');
+        $rejected = $this->postService->countPost('rejected', 'status');
+        return view('clients.profile.profile', compact('posts', 'comments', 'pending', 'draft', 'published', 'archived', 'rejected'));
     }
 }

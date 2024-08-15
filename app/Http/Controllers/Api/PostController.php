@@ -24,4 +24,9 @@ class PostController extends Controller
             'prev_page' => $posts->previousPageUrl()
         ], 200);
     }
+
+    public function topCategoriesByPostView(Request $request) {
+        $data = $this->postService->topCategoriesByPostViews($request);
+        return response()->json(['data' => $data], 200);
+    }
 }

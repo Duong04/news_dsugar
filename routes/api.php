@@ -27,7 +27,14 @@ Route::prefix('v1')->group(function () {
     Route::prefix('posts')->group(function () {
         Route::get('/', [PostController::class, 'index']);
     });
-    Route::get('/categories/{id}/subcategories', [SubcategoryController::class, 'getByCategoryId']);
+
+    Route::prefix('/categories')->group(function () {
+        Route::get('/{id}/subcategories', [SubcategoryController::class, 'getByCategoryId']);
+    });
+
+    Route::prefix('/stats')->group(function () {
+        Route::get('/categories/top-views', [PostController::class, 'topCategoriesByPostView']);
+    });
 
     Route::get('/permissions/{id}', [PermissionController::class, 'getById']);
 

@@ -41,7 +41,6 @@ class PostController extends Controller
     public function create() {
         return view('clients.news.create');
     }
-
     public function store(PostRequest $request) {
         $status = $request->input('action') == 'pending' ? 'pending' : 'draft';
         $postSuccess = $this->postService->create($request, $status);
@@ -51,6 +50,10 @@ class PostController extends Controller
         }
     }
 
+    public function show($slug) {
+        $post = $this->postService->getPostBySlug($slug);
+        return view('clients.news.update', compact('post'));
+    }
     public function postDetail($slug) {
         $formatCommentTime = function ($time) {
             return $this->postService->formatCommentTime($time);

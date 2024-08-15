@@ -166,6 +166,23 @@ class PostService {
         }
     }
 
+    public function countPost($status, $col) {
+        try {
+            return $this->postInterface->countPost($status, $col);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
+    public function topCategoriesByPostViews($request) {
+        try {
+            $limit = $request->query('limit', null);
+            return $this->postInterface->topCategoriesByPostViews($limit);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
     public function formatCommentTime($timestamp) {
         $commentTime = Carbon::parse($timestamp);
         $currentTime = Carbon::now();

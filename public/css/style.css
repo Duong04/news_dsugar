@@ -827,6 +827,10 @@ body {
     border-color: rgb(140, 87, 255) !important;
 }
 
+.nav-pills-2 .nav-link {
+    border: 1px solid rgb(140, 87, 255) !important;
+}
+
 .page-link {
     color: rgb(140, 87, 255) !important;
 }
@@ -834,7 +838,6 @@ body {
 .page-link:focus {
     box-shadow: none;
 }
-
 
 .badge {
     border-radius: 5px;

@@ -95,6 +95,7 @@ Route::middleware('auth')->group(function() {
     Route::get('/tai-khoan', [ProfileController::class, 'account'])->name('profile');
     Route::get('/them-bai-viet', [ClientPostController::class, 'create'])->name('client.create.post');
     Route::post('/them-bai-viet', [ClientPostController::class, 'store'])->name('client.store.post');
+    Route::get('/sua-bai-viet/{slug}', [ClientPostController::class, 'show'])->name('client.show.post');
 });
 
 Route::middleware('guest')->group(function () {

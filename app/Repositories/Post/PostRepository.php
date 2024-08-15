@@ -2,12 +2,15 @@
 namespace App\Repositories\Post;
 
 use App\Models\Post;
+use App\Models\Category;
 use App\Repositories\Post\PostRepositoryInterface;
 
 class PostRepository implements PostRepositoryInterface {
     private $post;
-    public function __construct(Post $post) {
+    private $category;
+    public function __construct(Post $post, Category $category) {
         $this->post = $post;
+        $this->category = $category;
     }
     public function all() {
         return $this->post::with('category', 'subcategory', 'user')->orderByDesc('created_at')->get();
@@ -41,6 +44,24 @@ class PostRepository implements PostRepositoryInterface {
     
         return $posts->get();
     }
+
+    public function countPost($status, $col = null) {
+        return $this->post::where('status', $status)->count($col);
+    }
+
+    public function topCategoriesByPostViews($limit) {
+        $posts = $this->category::select('categories.*')
+        ->join('posts', 'categories.id', '=', 'posts.category_id')
+        ->selectRaw('SUM(posts.view) as total_views')
+        ->groupBy('categories.id')
+        ->orderBy('total_views', 'desc');
+
+        if ($limit) {
+            $posts->limit($limit);
+        }
+        return $posts->get();
+    }
+
     public function getLastPost($limit = null, $id = null) {
         $query = $this->post::published()->latest()->with('category', 'subcategory', 'user');
     

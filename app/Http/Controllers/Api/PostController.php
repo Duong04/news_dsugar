@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\PostService;
+use Auth;
 
 class PostController extends Controller
 {
@@ -25,8 +26,18 @@ class PostController extends Controller
         ], 200);
     }
 
+    public function topPostView(Request $request) {
+        $data = $this->postService->topPostView($request);
+        return response()->json(['data' => $data], 200);
+    }
+
     public function topCategoriesByPostView(Request $request) {
         $data = $this->postService->topCategoriesByPostViews($request);
+        return response()->json(['data' => $data], 200);
+    }
+
+    public function topSubcategoriesByPostView(Request $request) {
+        $data = $this->postService->topSubcategoriesByPostViews($request);
         return response()->json(['data' => $data], 200);
     }
 }

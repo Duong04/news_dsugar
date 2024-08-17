@@ -5,7 +5,6 @@ use App\Repositories\Post\PostRepositoryInterface;
 use Auth;
 use Str;
 use App\Services\CloundinaryService;
-use Carbon\Carbon;
 
 class PostService {
     protected $postInterface;
@@ -174,31 +173,39 @@ class PostService {
         }
     }
 
-    public function topCategoriesByPostViews($request) {
+    public function topPostView($request) {
         try {
             $limit = $request->query('limit', null);
-            return $this->postInterface->topCategoriesByPostViews($limit);
+            return $this->postInterface->topPostView($limit);
         } catch (\Throwable $th) {
             return $th->getMessage();
         }
     }
 
-    public function formatCommentTime($timestamp) {
-        $commentTime = Carbon::parse($timestamp);
-        $currentTime = Carbon::now();
+    public function getPedingPost() {
+        try {
+            return $this->postInterface->getPendingPost();
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
 
-        $diffInMinutes = $commentTime->diffInMinutes($currentTime);
-        $diffInHours = $commentTime->diffInHours($currentTime);
-        $diffInDays = $commentTime->diffInDays($currentTime);
+    public function topSubcategoriesByPostViews($request) {
+        try {
+            $limit = $request->query('limit', null);
+            return $this->postInterface->topSubcategoriesByPostViews($limit);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
 
-        if ($diffInMinutes < 60) {
-            return $diffInMinutes . ' phút trước';
-        } elseif ($diffInHours < 24) {
-            return $diffInHours . ' giờ trước';
-        } elseif ($diffInDays < 30) {
-            return $commentTime->format('d') . ' tháng ' . $commentTime->format('m');
-        } else {
-            return $commentTime->format('Y');
+    public function topCategoriesByPostViews($request) {
+        try {
+            $limit = $request->query('limit', null);
+            $author_id = $request->query('author_id', null);
+            return $this->postInterface->topCategoriesByPostViews($limit, $author_id);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
         }
     }
 }

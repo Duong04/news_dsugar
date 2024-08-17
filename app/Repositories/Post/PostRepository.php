@@ -3,20 +3,27 @@ namespace App\Repositories\Post;
 
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\Subcategory;
 use App\Repositories\Post\PostRepositoryInterface;
 
 class PostRepository implements PostRepositoryInterface {
     private $post;
     private $category;
-    public function __construct(Post $post, Category $category) {
+    private $subcategory;
+    public function __construct(Post $post, Category $category, Subcategory $subcategory) {
         $this->post = $post;
         $this->category = $category;
+        $this->subcategory = $subcategory;
     }
     public function all() {
         return $this->post::with('category', 'subcategory', 'user')->orderByDesc('created_at')->get();
     }
     public function getPostByUserId($userId) {
         return $this->post::with('category', 'subcategory', 'user')->orderByDesc('created_at')->where('author_id', $userId)->get();
+    }
+
+    public function getPendingPost() {
+        return $this->post::pending()->get();
     }
 
     public function getPosts($limit, $q) {
@@ -49,11 +56,39 @@ class PostRepository implements PostRepositoryInterface {
         return $this->post::where('status', $status)->count($col);
     }
 
-    public function topCategoriesByPostViews($limit) {
+    public function topPostView($limit) {
+        $posts = $this->post->orderByDesc('view');
+
+        if ($limit) {
+            $posts->limit($limit);
+        }
+
+        return $posts->get(['title', 'view']);
+    }
+
+    public function topCategoriesByPostViews($limit, $user_id = null) {
         $posts = $this->category::select('categories.*')
-        ->join('posts', 'categories.id', '=', 'posts.category_id')
-        ->selectRaw('SUM(posts.view) as total_views')
+        ->join('posts', 'categories.id', '=', 'posts.category_id');
+        
+        if ($user_id) {
+            $posts->where('author_id', $user_id);
+        }
+        
+        $posts->selectRaw('SUM(posts.view) as total_views')
         ->groupBy('categories.id')
+        ->orderBy('total_views', 'desc');
+
+        if ($limit) {
+            $posts->limit($limit);
+        }
+        return $posts->get();
+    }
+
+    public function topSubcategoriesByPostViews($limit) {
+        $posts = $this->subcategory::select('subcategories.*')
+        ->join('posts', 'subcategories.id', '=', 'posts.subcat_id')
+        ->selectRaw('SUM(posts.view) as total_views')
+        ->groupBy('subcategories.id')
         ->orderBy('total_views', 'desc');
 
         if ($limit) {

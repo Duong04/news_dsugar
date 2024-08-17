@@ -6,7 +6,7 @@
     <div class="container">
         <div class="page-inner">
             <div class="page-header">
-                <h3 class="fw-bold mb-3">Thêm user</h3>
+                <h3 class="fw-bold mb-3">Thêm tài khoản</h3>
                 <ul class="breadcrumbs mb-3">
                     <li class="nav-home">
                         <a href="{{ route('dashboard') }}">
@@ -23,7 +23,7 @@
                         <i class="icon-arrow-right"></i>
                     </li>
                     <li class="nav-item">
-                        <a href="#">Thêm người dùng</a>
+                        <a href="#">Thêm tài khoản</a>
                     </li>
                 </ul>
             </div>
@@ -35,7 +35,7 @@
                     <x-form.select-role class="col-6" :error="$errors->first('role_id')" name="role_id" label="Vai trò người dùng" />
                     <x-form.select-status-user class="col-6" :error="$errors->first('status')" name="status" />
                     <div class="col-12 form-group">
-                        <button class="btn btn-primary">Thêm người dùng</button>
+                        <button class="btn btn-primary">Thêm ngay</button>
                     </div>
                 </form>
             </div>

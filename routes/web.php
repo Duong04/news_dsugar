@@ -43,6 +43,7 @@ Route::middleware('auth.admin')->prefix('admin')->group(function () {
     // Bài viết
     Route::get('/bai-viet', [PostController::class, 'index'])->name('posts')->middleware('permission.action:Posts Management,viewany');
     Route::get('/them-bai-viet', [PostController::class, 'create'])->name('create.post')->middleware('permission.action:Posts Management,create');
+    Route::get('/kiem-duyet', [PostController::class, 'approve'])->name('approve.post')->middleware('permission.action:Posts Management,approve');
     Route::post('/them-bai-viet', [PostController::class, 'store'])->name('store.post')->middleware('permission.action:Posts Management,create');
     Route::get('/sua-bai-viet/{id}', [PostController::class, 'show'])->name('show.post')->middleware('permission.action:Posts Management,view');
     Route::put('/sua-bai-viet/{id}', [PostController::class, 'update'])->name('update.post')->middleware('permission.action:Posts Management,update');

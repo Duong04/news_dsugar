@@ -194,7 +194,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a href="">
+                    <a href="{{ route('approve.post') }}">
                         <i class="fas fa-list"></i>
                         <p>Kiểm duyệt bài viết</p>
                     </a>

@@ -1,3 +1,111 @@
+
+.card,.card-light {
+    border-radius: 10px;
+    background-color: #fff;
+    margin-bottom: 30px;
+    -webkit-box-shadow: 2px 6px 15px 0 rgba(69,65,78,.1);
+    -moz-box-shadow: 2px 6px 15px 0 rgba(69,65,78,.1);
+    box-shadow: 2px 6px 15px 0 rgba(69,65,78,.1);
+    border: 0
+}
+
+.card .card-header,.card-light .card-header {
+    padding: 1rem 1.25rem;
+    background-color: transparent;
+    border-bottom: 1px solid #ebecec!important
+}
+
+.card .card-header:first-child,.card-light .card-header:first-child {
+    border-radius: 0
+}
+
+.card .card-head-row,.card-light .card-head-row {
+    display: flex;
+    align-items: center
+}
+
+.card .card-head-row .card-tools,.card-light .card-head-row .card-tools {
+    margin-left: auto;
+    float: right;
+    padding-left: 15px
+}
+
+.card .card-head-row .card-tools .btn,.card-light .card-head-row .card-tools .btn {
+    margin-right: 10px
+}
+
+.card .card-head-row .card-tools .btn:last-child,.card-light .card-head-row .card-tools .btn:last-child {
+    margin-right: 0
+}
+
+.card .separator-solid,.card-light .separator-solid {
+    border-top: 1px solid #ebecec;
+    margin: 15px 0
+}
+
+.card .separator-dashed,.card-light .separator-dashed {
+    border-top: 1px dashed #ebecec;
+    margin: 15px 0
+}
+
+.card .separator-dot,.card-light .separator-dot {
+    border-top: 1px dotted #ebecec;
+    margin: 15px 0
+}
+
+.card .full-width-separator,.card-light .full-width-separator {
+    margin: 15px -20px 15px
+}
+
+.card .b-b1,.card-light .b-b1 {
+    border-bottom: 1px solid rgba(255,255,255,.3)
+}
+
+.card .card-body,.card-light .card-body {
+    padding: 1.25rem
+}
+
+.card .card-footer,.card-light .card-footer {
+    background-color: transparent;
+    line-height: 30px;
+    border-top: 1px solid #ebecec!important;
+    font-size: 13px
+}
+
+.card .pull-in,.card-light .pull-in {
+    margin-left: -1.25rem;
+    margin-right: -1.25rem
+}
+
+.card .pull-in.sparkline-fix,.card-light .pull-in.sparkline-fix {
+    margin-left: -1.35rem;
+    margin-right: -1.35rem;
+    margin-bottom: -3px
+}
+
+.card .chart-as-background,.card-light .chart-as-background {
+    position: absolute;
+    bottom: 0;
+    width: calc(100% + 2px)
+}
+
+.card .card-action,.card-light .card-action {
+    padding: 30px;
+    background-color: transparent;
+    line-height: 30px;
+    border-top: 1px solid #ebecec!important;
+    font-size: 1rem
+}
+
+.card .card-footer hr,.card-light .card-footer hr {
+    margin-top: 5px;
+    margin-bottom: 5px
+}
+
+.card .card-footer .legend,.card-light .card-footer .legend {
+    display: inline-block
+}
+
 .card-transparent {
     background: 0 0!important;
     box-shadow: none;

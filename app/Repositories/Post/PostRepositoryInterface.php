@@ -13,7 +13,10 @@ interface PostRepositoryInterface {
     public function postByCategory($categoryName, $table, $limit = null, $id = null);
     public function postByCategorySlug($slug, $table, $limit = null, $id = null);
     public function postByCategorySlugPaginate($slug, $table, $limit = null, $id = null);
-    public function topCategoriesByPostViews($limit);
+    public function topPostView($limit);
+    public function topCategoriesByPostViews($limit, $user_id = null);
+    public function topSubcategoriesByPostViews($limit);
+    public function getPendingPost();
     public function postBySlug($slug);
     public function postIncrement($col, $id);
     public function create(array $data);

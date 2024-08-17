@@ -11,7 +11,7 @@
                         <img class="rounded-circle object-fit-cover" width="60px" height="60px" src="{{ $post->user->avatar }}" alt="">
                         <div class="d-flex flex-column">
                             <span class="fs-7 fw-semibold author hover-fillip-item" data-text="{{ $post->user->user_name }}">{{ $post->user->user_name }}</span>
-                            <span class="fs-7 text-midgray">January 21, 2021</span>
+                            <span class="fs-7 text-midgray">{{ $formatTime($post->created_at) }}</span>
                         </div>
                 </div>
                 <div class="d-flex g-10 social-share">

@@ -42,7 +42,7 @@ const handleSearch = async (e) => {
     const response = await axios_ins.get(`/posts?limit=5&q=${e.target.value}`);
     const data = response.data.data;
     const htmls = data.map(item => layoutSearchs(item)).join('');
-    searchResults.innerHTML = htmls;
+    searchResults.innerHTML = htmls ? htmls : '<div class="text-center fs-7 p-2">Không tìm thấy bài viết 👀</div>';
 };
 
 inpSearch.oninput = debounce(handleSearch, 200);

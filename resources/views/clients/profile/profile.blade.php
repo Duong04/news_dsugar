@@ -12,7 +12,14 @@
     <script src="/js/admins/datatable.js"></script>
     <script src="/templates/js/plugin/datatables/datatables.min.js"></script>
     <script src="/templates/js/kaiadmin.min.js"></script>
+    <script src="/templates/js/plugin/chart.js/chart.umd.js"></script>
     <script type="module" src="/js/stats.js"></script>
+    <script>
+        window.auth = {
+            isAuthenticated: {{ Auth::check() ? 'true' : 'false' }},
+            user: @json(Auth::user())
+        };
+    </script>
 @endsection
 
 @section('content')
@@ -255,8 +262,9 @@
                         </div>
                     </div>
                     <div id="tab-3" class="mt-4 tab-pane fade show">
+                        <h4>Các trạng thái bài viết</h4>
                         <div class="row">
-                            <div class="col-sm-6 col-md-4 mt-4">
+                            <div class="col-sm-6 col-md-4">
                                 <div class="card card-stats card-round">
                                     <div class="card-body">
                                         <div class="row align-items-center">
@@ -275,7 +283,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6 col-md-4 mt-4">
+                            <div class="col-sm-6 col-md-4">
                                 <div class="card card-stats card-round">
                                     <div class="card-body">
                                         <div class="row align-items-center">
@@ -294,7 +302,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6 col-md-4 mt-4">
+                            <div class="col-sm-6 col-md-4">
                                 <div class="card card-stats card-round">
                                     <div class="card-body">
                                         <div class="row align-items-center">
@@ -313,7 +321,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6 col-md-4 mt-4">
+                            <div class="col-sm-6 col-md-4">
                                 <div class="card card-stats card-round">
                                     <div class="card-body">
                                         <div class="row align-items-center">
@@ -332,7 +340,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6 col-md-4 mt-4">
+                            <div class="col-sm-6 col-md-4">
                                 <div class="card card-stats card-round">
                                     <div class="card-body">
                                         <div class="row align-items-center">
@@ -352,8 +360,47 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row mt-4">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="card-title">Top 10 bài viết có lượt xem cao nhất</div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="chart-container">
+                                            <canvas class="w-100 h-100" id="barChart"></canvas> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="card-title">Top 3 danh mục có lượt bài viết xem nhiều nhất</div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="chart-container">
+                                            <canvas class="w-100 h-100" id="doughnutChart" style="width: 50%; height: 50%"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="card-title">Top 5 danh mục con có lượt bài viết xem nhiều nhất</div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="chart-container">
+                                            <canvas class="w-100 h-100" id="pieChart" style="width: 50%; height: 50%"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </article>
         </div>
         </article>
         </div>

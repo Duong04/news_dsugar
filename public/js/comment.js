@@ -1,4 +1,4 @@
-import axios_ins from "/js/axios";
+import axios_ins from "/js/axios.js";
 
 const btnComment = document.querySelector('#btn-comment');
 const inpComment = document.querySelector('#comment');
@@ -83,7 +83,9 @@ const formatCommentTime = (timestamp) => {
     const diffInHours = Math.floor(diffInMinutes / 60);
     const diffInDays = Math.floor(diffInHours / 24);
 
-    if (diffInMinutes < 60) {
+    if (diffInMinutes == 0) {
+        return `Vừa xong`;
+    }else if (diffInMinutes < 60) {
         return `${diffInMinutes} phút trước`;
     } else if (diffInHours < 24) {
         return `${diffInHours} giờ trước`;

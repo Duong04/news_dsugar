@@ -7,9 +7,11 @@ use App\Services\CategoryService;
 use Illuminate\Http\Request;
 use App\Services\PostService;
 use App\Http\Requests\Web\Admins\PostRequest;
+use App\Traits\FormatTime;
 
 class PostController extends Controller
 {
+    use FormatTime;
     private $postService;
     private $categoryService;
     public function __construct(PostService $postService, CategoryService $categoryService) {
@@ -56,7 +58,7 @@ class PostController extends Controller
     }
     public function postDetail($slug) {
         $formatCommentTime = function ($time) {
-            return $this->postService->formatCommentTime($time);
+            return $this->formatTime($time);
         };
         $post = $this->postService->getPostBySlug($slug);
         $this->postService->postIncrement('view', $post->id);

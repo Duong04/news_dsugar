@@ -44,6 +44,11 @@ class Post extends Model
         return $query->where('status', 'published');
     }
 
+    public function scopePending($query)
+    {
+        return $query->where('status', 'pending');
+    }
+
     public function scopeMostViewed($query) {
         return $query->orderByDesc('view');
     }

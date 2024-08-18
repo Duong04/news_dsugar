@@ -4,6 +4,11 @@ const editFormAction = document.querySelectorAll(".btn-edit-action");
 const editFormType = document.querySelectorAll(".btn-edit-type");
 const btnStatus= document.querySelectorAll(".btn-status");
 const btnRole = document.querySelectorAll(".btn-role");
+const publish = document.querySelectorAll(".publish");
+const reject = document.querySelectorAll(".reject");
+
+const isAuthenticated = window.auth.isAuthenticated;
+const currentUser = window.auth.user;
 
 const messageSuccess = (text) => {
     swal("Success!", text, {
@@ -21,6 +26,59 @@ const layoutSelect = ({ id, name }, subcat_id) => {
         subcat_id && subcat_id == id ? "selected" : ""
     }>${name}</option>`;
 };
+
+publish.forEach(item => {
+    item.onchange = async (e) => {
+        let status = '';
+        const id = item.getAttribute('data-id');
+        const statusText = document.querySelector(`.status-${id}`);
+        const rejectItem = document.querySelector(`.reject-${id}`);
+        if (e.target.checked) {
+            status = 'published';
+            rejectItem.checked = false;
+        }else {
+            status = 'archived';
+        }
+
+        approve(id, status);
+        statusText.innerHTML = textStatus(status);
+        
+    }
+})
+
+reject.forEach(item => {
+    item.onchange = async (e) => {
+        let status = '';
+        const id = item.getAttribute('data-id');
+        const statusText = document.querySelector(`.status-${id}`);
+        const publishItem = document.querySelector(`.publish-${id}`);
+
+        if (e.target.checked) {
+            status = 'rejected';
+            publishItem.checked = false;
+        }else {
+            status = 'archived';
+        }
+
+        approve(id, status);
+        statusText.innerHTML = textStatus(status);
+        
+    }
+})
+
+const approve = async (id, status) => {
+    const response = await axios_ins.put(`/posts/${id}?type=approve`, {status});
+
+    if (response.status == 200) {
+        if (status == 'rejected') {
+            toastr.success('Bài viết bị từ chối!');
+        }else if (status == 'published') {
+            toastr.success('Bài viết đã được kiểm duyệt!');
+        }else {
+            toastr.success('Bài viết đã chuyển sang dạng lưu trữ!');
+        }
+    }
+}
 
 document.addEventListener("DOMContentLoaded", () => {
     const categoriesElement = document.querySelector(".categories");
@@ -194,4 +252,18 @@ const textHtml = (roleName) => {
     }
 
     return `<span class="mx-auto badge ${bg[roleName]}">${roleName}</span>`;
+}
+
+const textStatus = (status) => {
+    const statusPost = {
+        draft: ['Bản nháp', 'badge-warning'],
+        published: ['Đã xuất bản', 'badge-success'],
+        archived: ['Lưu trữ', 'badge-info'],
+        pending: ['Chờ kiểm duyệt', 'badge-secondary'],
+        rejected: ['Đã từ chối', 'badge-danger']
+    };
+
+    const statusItem = statusPost[status]; 
+
+    return `<div style="width: 100px;" class="badge ${statusItem[1]}">${statusItem[0]}</div>`
 }

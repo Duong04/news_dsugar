@@ -3,6 +3,7 @@ namespace App\Services;
 
 use App\Repositories\Post\PostRepositoryInterface;
 use Auth;
+use Notification;
 use Str;
 use App\Services\CloundinaryService;
 
@@ -129,10 +130,16 @@ class PostService {
     public function update($request, $id) {
         try {
             $request->validated();
-            $data = $request->input();
+            $postData = $request->input();
+            $type = $request->query('type', null);
 
-            $postData['author_id'] = Auth::user()->id;
-            $postData['slug'] = Str::slug($data['title'], '-');
+            if (isset($type) && $type == 'approve') {
+                $postData['reviewed_at'] = now();
+            }
+
+            if (isset($postData['title'])) {
+                $postData['slug'] = Str::slug($postData['title'], '-');
+            }
 
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
@@ -165,9 +172,9 @@ class PostService {
         }
     }
 
-    public function countPost($status, $col) {
+    public function countPost($status, $author_id, $col) {
         try {
-            return $this->postInterface->countPost($status, $col);
+            return $this->postInterface->countPost($status, $author_id, $col);
         } catch (\Throwable $th) {
             return $th->getMessage();
         }
@@ -176,7 +183,8 @@ class PostService {
     public function topPostView($request) {
         try {
             $limit = $request->query('limit', null);
-            return $this->postInterface->topPostView($limit);
+            $author_id = $request->query('author_id', null);
+            return $this->postInterface->topPostView($limit, $author_id);
         } catch (\Throwable $th) {
             return $th->getMessage();
         }
@@ -193,7 +201,8 @@ class PostService {
     public function topSubcategoriesByPostViews($request) {
         try {
             $limit = $request->query('limit', null);
-            return $this->postInterface->topSubcategoriesByPostViews($limit);
+            $author_id = $request->query('author_id', null);
+            return $this->postInterface->topSubcategoriesByPostViews($limit, $author_id);
         } catch (\Throwable $th) {
             return $th->getMessage();
         }

@@ -3,6 +3,10 @@
 @section('header')
 <x-layouts-client.header />
 @endsection
+@section('script-bottom')
+<script src="/libraries/splide/splide.min.js"></script>
+<script src="/js/slider.js"></script>
+@endsection
 
 @section('content')
 <section class="outstanding bg-lightest py-5">

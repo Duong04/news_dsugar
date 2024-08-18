@@ -14,6 +14,8 @@
     <script src="/templates/js/kaiadmin.min.js"></script>
     <script src="/templates/js/plugin/chart.js/chart.umd.js"></script>
     <script type="module" src="/js/stats.js"></script>
+    <script src="/templates/js/plugin/sweetalert/sweetalert.min.js"></script>
+    <script src="/templates/js/sweetalert.js"></script>
     <script>
         window.auth = {
             isAuthenticated: {{ Auth::check() ? 'true' : 'false' }},
@@ -176,10 +178,18 @@
                                                                 title="Sửa">
                                                                 <i class="fa-solid fa-pen-to-square"></i>
                                                             </a>
-                                                            <a href="" class="text-danger" data-bs-toggle="tooltip"
-                                                                title="Xóa">
-                                                                <i class="fa-solid fa-trash"></i>
-                                                            </a>
+                                                            <form class="d-flex align-items-center"
+                                                                id="delete-form-{{ $item->id }}" method="POST"
+                                                                action="{{ route('delete.post', ['id' => $item->id]) }}">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button data-bs-toggle="tooltip" title="Xóa"
+                                                                    class="btn btn-link text-danger delete"
+                                                                    data-original-title="Remove"
+                                                                    data-id="{{ $item->id }}">
+                                                                    <i class="fa fa-times"></i>
+                                                                </button>
+                                                            </form>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -201,7 +211,8 @@
                             </div>
                             <div class="card-body w-100">
                                 <div class="table-responsive">
-                                    <table id="multi-filter-select-2" class="display table table-striped table-hover">
+                                    <table id="multi-filter-select-2"
+                                        class="display table table-striped table-hover w-100">
                                         <thead>
                                             <tr>
                                                 <td>Stt</td>
@@ -368,7 +379,10 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="chart-container">
-                                            <canvas class="w-100 h-100" id="barChart"></canvas> 
+                                            <canvas class="w-100 h-100" id="barChart"></canvas>
+                                            <div id="noDataMessage"
+                                                class="w-100 align-items-center d-flex flex-column justify-content-center">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -380,7 +394,10 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="chart-container">
-                                            <canvas class="w-100 h-100" id="doughnutChart" style="width: 50%; height: 50%"></canvas>
+                                            <canvas class="w-100 h-100" id="doughnutChart"></canvas>
+                                            <div id="noDataMessage-2"
+                                                class="w-100 align-items-center d-flex flex-column justify-content-center">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -392,7 +409,10 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="chart-container">
-                                            <canvas class="w-100 h-100" id="pieChart" style="width: 50%; height: 50%"></canvas>
+                                            <canvas class="w-100 h-100" id="pieChart"></canvas>
+                                            <div id="noDataMessage-3"
+                                                class="w-100 align-items-center d-flex flex-column justify-content-center">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

@@ -30,10 +30,14 @@
     <div class="mouse-trail"></div>
     <script src="/libraries/bootstrap/popper.min.js"></script>
     <script src="/libraries/bootstrap/bootstrap.min.js"></script>
-    <script src="/libraries/splide/splide.min.js"></script>
-    <script src="/js/slider.js"></script>
     <script src="/libraries/axios/axios.min.js"></script>
     <script type="module" src="/js/header.js"></script>
+    <script>
+        window.auth = {
+            isAuthenticated: {{ Auth::check() ? 'true' : 'false' }},
+            user: @json(Auth::user())
+        };
+    </script>
     @yield('script-bottom')
 </body>
 

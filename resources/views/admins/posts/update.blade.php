@@ -53,7 +53,7 @@
               <div class="col-12 form-group">
                 <img id="preview" class="w-100" src="{{$post->image}}" alt="">
               </div>
-              <x-form.select-status :value="$post->status" class="col-12" :error="$errors->first('status')" name="status" />
+              <x-form.select-status :value="$post->status" method="put" class="col-12" :error="$errors->first('status')" name="status" />
               <div class="col-6 mt-3 form-group">
                 <button class="btn btn-primary">Cập nhật bài viết</button>
               </div>

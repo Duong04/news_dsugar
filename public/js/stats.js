@@ -3,36 +3,48 @@ import axios_ins from "./axios.js";
 const isAuthenticated = window.auth.isAuthenticated;
 const currentUser = window.auth.user;
 
+const emptyData = () => {
+    return (`
+        <img width="200px" src="https://res.cloudinary.com/dsdyprt1q/image/upload/v1723955263/news_dsugar/vi44ibm1q8wuwbhvi7l5.png" alt="">
+        <p>Không có dữ liệu!</p>
+    `);
+}
 
 const getTop10 = async () => {
+    const barChart = document.getElementById("barChart");
     try {
-        const response = await axios_ins.get("/stats/posts/top-views?limit=10");
+        const response = await axios_ins.get(`/stats/posts/top-views?limit=10&author_id=${currentUser.id}`);
         const data = response.data.data;
 
         if (data.length === 0) {
-            document.getElementById("barChart").innerHTML = `<h5>Không có dữ liệu!</h5>`;
+            barChart.style.display = "none";
+            document.getElementById("noDataMessage").innerHTML = emptyData();
             return;
+        }else {
+            let labels = [];
+            let values = [];
+    
+            data.forEach((item) => {
+                let shortTitle =
+                    item.title.length > 10
+                        ? item.title.substring(0, 10) + "..."
+                        : item.title;
+                labels.push(shortTitle);
+                values.push(item.view);
+            });
+    
+            myBarChart(labels, values, data);
+    
+            barChart.getContext("2d");
         }
 
-        let labels = [];
-        let values = [];
-
-        data.forEach((item) => {
-            let shortTitle =
-                item.title.length > 10
-                    ? item.title.substring(0, 10) + "..."
-                    : item.title;
-            labels.push(shortTitle);
-            values.push(item.view);
-        });
-
-        myBarChart(labels, values, data);
     } catch (error) {
         console.error("An error occurred:", error);
     }
 };
 
 const topCategoriesByPostView = async () => {
+    const doughnutChart = document.getElementById("doughnutChart");
     try {
         const response = await axios_ins.get(
             `/stats/categories/top-views?limit=3&author_id=${currentUser.id}`
@@ -40,53 +52,58 @@ const topCategoriesByPostView = async () => {
         const data = response.data.data;
 
         if (data.length === 0) {
-            document.getElementById("doughnutChart").innerHTML = `<h5>Không có dữ liệu!</h5>`;
+            doughnutChart.style.display = "none";
+            document.getElementById("noDataMessage-2").innerHTML = emptyData();
             return;
+        }else {
+            let labels = [];
+            let values = [];
+    
+            data.forEach((item) => {
+                labels.push(item.name);
+                values.push(item.total_views);
+            });
+    
+            myDoughnutChart(labels, values);
+
+            doughnutChart.getContext("2d");
         }
 
-        let labels = [];
-        let values = [];
-
-        data.forEach((item) => {
-            labels.push(item.name);
-            values.push(item.total_views);
-        });
-
-        myDoughnutChart(labels, values);
     } catch (error) {
         console.error("An error occurred:", error);
     }
 };
 
 const topSubcategoriesByPostView = async () => {
+    const pieChart = document.getElementById("pieChart");
     try {
         const response = await axios_ins.get(
-            "/stats/subcategories/top-views?limit=5"
+            `/stats/subcategories/top-views?limit=5&author_id=${currentUser.id}`
         );
         const data = response.data.data;
 
         if (data.length === 0) {
-            document.getElementById("pieChart").innerHTML = `<h5>Không có dữ liệu!</h5>`;
+            pieChart.style.display = "none";
+            document.getElementById("noDataMessage-3").innerHTML = emptyData();
             return;
+        }else {
+            let labels = [];
+            let values = [];
+    
+            data.forEach((item) => {
+                labels.push(item.name);
+                values.push(item.total_views);
+            });
+    
+            myPieChart(labels, values);
+    
+            pieChart.getContext("2d");
         }
 
-        let labels = [];
-        let values = [];
-
-        data.forEach((item) => {
-            labels.push(item.name);
-            values.push(item.total_views);
-        });
-
-        myPieChart(labels, values);
     } catch (error) {
         console.error("An error occurred:", error);
     }
 };
-
-const barChart = document.getElementById("barChart").getContext("2d");
-const doughnutChart = document.getElementById("doughnutChart").getContext("2d");
-const pieChart = document.getElementById("pieChart").getContext("2d");
 
 const myBarChart = (labels, values, data) => {
     new Chart(barChart, {

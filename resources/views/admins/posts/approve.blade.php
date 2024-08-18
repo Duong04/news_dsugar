@@ -1,6 +1,9 @@
 @extends('admins.layouts.master')
 @section('script-bottom')
-<script src="/js/admins/datatable.js"></script>
+    <script src="/libraries/axios/axios.min.js"></script>
+    <script type="module" src="/js/admins/async.js"></script>
+    <script src="/js/admins/datatable.js"></script>
+    <script src="/libraries/toastr/toastr.min.js"></script>
 @endsection
 
 @section('content')
@@ -51,6 +54,8 @@
                                             <th>Danh mục con</th>
                                             <th>Trạng thái</th>
                                             <th>Ngày tạo</th>
+                                            <th style="width: 10%">Duyệt</th>
+                                            <th style="width: 10%">Từ chối</th>
                                             <th style="width: 10%">Action</th>
                                         </tr>
                                     </thead>
@@ -72,13 +77,97 @@
                                             @endphp
                                             <tr>
                                                 <td>{{ $i++ }}</td>
-                                                <td><div style="width: 180px;">{{ $item->title }}</div></td>
+                                                <td>
+                                                    <div style="width: 180px;">{{ $item->title }}</div>
+                                                </td>
                                                 <td><img width="80px" src="{{ $item->image }}" alt=""></td>
-                                                <td><div style="width: 150px;">{{ $item->user->user_name }}</div></td>
-                                                <td><div style="width: 150px;">{{ $item->category->name }}</div></td>
-                                                <td><div style="width: 150px;">{{ $item->subcategory->name }}</div></td>
-                                                <td><div style="width: 100px;" class="badge {{ $bgStatus }}">{{ $textStatus }}</div></td>
-                                                <td><div style="width: 150px;">{{ $item->created_at }}</div></td>
+                                                <td>
+                                                    <div style="width: 150px;">{{ $item->user->user_name }}</div>
+                                                </td>
+                                                <td>
+                                                    <div style="width: 150px;">{{ $item->category->name }}</div>
+                                                </td>
+                                                <td>
+                                                    <div style="width: 150px;">{{ $item->subcategory->name }}</div>
+                                                </td>
+                                                <td>
+                                                    <div class="status-{{ $item->id }}">
+                                                        <div style="width: 100px;" class="badge {{ $bgStatus }}">
+                                                            {{ $textStatus }}</div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div style="width: 150px;">{{ $item->created_at }}</div>
+                                                </td>
+                                                <td>
+                                                    <div class="toggle-container">
+                                                        <input type="checkbox" class="toggle-input publish publish-{{ $item->id }}" data-id="{{ $item->id }}">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 292 142"
+                                                            class="toggle">
+                                                            <path
+                                                                d="M71 142C31.7878 142 0 110.212 0 71C0 31.7878 31.7878 0 71 0C110.212 0 119 30 146 30C173 30 182 0 221 0C260 0 292 31.7878 292 71C292 110.212 260.212 142 221 142C181.788 142 173 112 146 112C119 112 110.212 142 71 142Z"
+                                                                class="toggle-background"></path>
+                                                            <rect rx="6" height="64" width="12" y="39" x="64"
+                                                                class="toggle-icon on"></rect>
+                                                            <path
+                                                                d="M221 91C232.046 91 241 82.0457 241 71C241 59.9543 232.046 51 221 51C209.954 51 201 59.9543 201 71C201 82.0457 209.954 91 221 91ZM221 103C238.673 103 253 88.6731 253 71C253 53.3269 238.673 39 221 39C203.327 39 189 53.3269 189 71C189 88.6731 203.327 103 221 103Z"
+                                                                fill-rule="evenodd" class="toggle-icon off"></path>
+                                                            <g filter="url('#goo')">
+                                                                <rect fill="#fff" rx="29" height="58"
+                                                                    width="116" y="42" x="13"
+                                                                    class="toggle-circle-center"></rect>
+                                                                <rect fill="#fff" rx="58" height="114"
+                                                                    width="114" y="14" x="14" class="toggle-circle left">
+                                                                </rect>
+                                                                <rect fill="#fff" rx="58" height="114"
+                                                                    width="114" y="14" x="164"
+                                                                    class="toggle-circle right"></rect>
+                                                            </g>
+                                                            <filter id="goo">
+                                                                <feGaussianBlur stdDeviation="10" result="blur"
+                                                                    in="SourceGraphic"></feGaussianBlur>
+                                                                <feColorMatrix result="goo"
+                                                                    values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
+                                                                    mode="matrix" in="blur"></feColorMatrix>
+                                                            </filter>
+                                                        </svg>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="toggle-container">
+                                                        <input type="checkbox" class="toggle-input-2 reject reject-{{ $item->id }}" data-id="{{ $item->id }}">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 292 142"
+                                                            class="toggle">
+                                                            <path
+                                                                d="M71 142C31.7878 142 0 110.212 0 71C0 31.7878 31.7878 0 71 0C110.212 0 119 30 146 30C173 30 182 0 221 0C260 0 292 31.7878 292 71C292 110.212 260.212 142 221 142C181.788 142 173 112 146 112C119 112 110.212 142 71 142Z"
+                                                                class="toggle-background"></path>
+                                                            <rect rx="6" height="64" width="12" y="39" x="64"
+                                                                class="toggle-icon on"></rect>
+                                                            <path
+                                                                d="M221 91C232.046 91 241 82.0457 241 71C241 59.9543 232.046 51 221 51C209.954 51 201 59.9543 201 71C201 82.0457 209.954 91 221 91ZM221 103C238.673 103 253 88.6731 253 71C253 53.3269 238.673 39 221 39C203.327 39 189 53.3269 189 71C189 88.6731 203.327 103 221 103Z"
+                                                                fill-rule="evenodd" class="toggle-icon off"></path>
+                                                            <g filter="url('#goo')">
+                                                                <rect fill="#fff" rx="29" height="58"
+                                                                    width="116" y="42" x="13"
+                                                                    class="toggle-circle-center"></rect>
+                                                                <rect fill="#fff" rx="58" height="114"
+                                                                    width="114" y="14" x="14" class="toggle-circle left">
+                                                                </rect>
+                                                                <rect fill="#fff" rx="58" height="114"
+                                                                    width="114" y="14" x="164"
+                                                                    class="toggle-circle right"></rect>
+                                                            </g>
+                                                            <filter id="goo">
+                                                                <feGaussianBlur stdDeviation="10" result="blur"
+                                                                    in="SourceGraphic"></feGaussianBlur>
+                                                                <feColorMatrix result="goo"
+                                                                    values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
+                                                                    mode="matrix" in="blur"></feColorMatrix>
+                                                            </filter>
+                                                        </svg>
+                                                    </div>
+
+                                                </td>
                                                 <td>
                                                     <div class="form-button-action">
                                                         <a href="{{ route('show.post', ['id' => $item->id]) }}"

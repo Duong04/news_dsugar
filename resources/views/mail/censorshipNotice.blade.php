@@ -83,7 +83,7 @@
                                                                                 <tr>
                                                                                     <td align="center" class="esd-block-text es-m-txt-c es-p30t es-p20b">
                                                                                         <h1><b>DSUGAR</b></h1>
-                                                                                        <h1>Kích hoạt tài khoản!</h1>
+                                                                                        <h1>Thông báo trạng thái bài viết: "{{ $title }}"!</h1>
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
@@ -94,40 +94,41 @@
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td class="es-m-p0r esd-container-frame" width="558" valign="top" align="center">
+                                                                    <td class="es-m-p0r esd-container-frame" width="558" valign="top">
                                                                         <table width="100%" cellspacing="0" cellpadding="0">
                                                                             <tbody>
                                                                                 <tr>
-                                                                                    <td align="center" class="esd-block-text es-p30t es-p5b es-m-txt-c">
-                                                                                        <h1>Cảm ơn bạn đã đăng ký tài khoản!</h1>
+                                                                                    <td class="esd-block-text es-p30t es-p5b es-m-txt-c">
+                                                                                        <h1>Kính gửi: {{ $name }}</h1>
+                                                                                        @php
+                                                                                            $statusPost = [
+                                                                                                'draft' => 'Bản nháp',
+                                                                                                'published' => 'Đã xuất bản',
+                                                                                                'archived' => 'Lưu trữ',
+                                                                                                'pending' => 'Chờ kiểm duyệt',
+                                                                                                'rejected' => 'Đã từ chối',
+                                                                                            ];
+                                                                                        @endphp
+                                                                                        <p>
+                                                                                            Chúng tôi xin thông báo rằng bài viết của bạn với tiêu đề "{{ $title }}" đã được trạng thái {{ $statusPost[$status] }} bởi đội ngũ biên tập viên của chúng tôi.
+                                                                                            <ul>
+                                                                                                <li>Trạng thái: {{ $statusPost[$status] }}</li>
+                                                                                                <li>Ngày đăng bài: {{ $created_at }}</li>
+                                                                                                <li>Ngày kiểm duyệt: {{ $reviewed_at }}</li>
+                                                                                            </ul>
+                                                                                        </p>
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
-                                                                                    <td align="center" class="esd-block-text es-p10t es-p20b es-p40r es-p40l">
-                                                                                        <p>Chào mừng bạn đến với DSugar, rất vui khi bạn đã đăng ký thành viên ở web tôi. Để có thể đăng nhập bạn vui lòng click vào nút kích hoạt bên dưới để kích hoạt tài khoản.</p>
+                                                                                    <td class="esd-block-text es-p10t es-p20b es-p40r es-p40l">
+                                                                                        <h5>Thông tin chi tiết</h5>
+                                                                                        @if ($status == 'published')
+                                                                                        <p>Bài viết của bạn hiện đã sẵn sàng để xuất bản và sẽ được đăng tải trên trang web của chúng tôi vào thời gian sớm nhất. Cảm ơn bạn đã đóng góp và mong rằng bạn sẽ tiếp tục gửi các bài viết chất lượng trong tương lai.</p>
+                                                                                        @else
+                                                                                        <p>Chúng tôi đã nhận thấy một số điểm cần cải thiện trong bài viết của bạn. Vui lòng xem xét và chỉnh sửa theo các ghi chú sau trước khi gửi lại:</p>
+                                                                                        <p>Note: {{ $note }}</p>
+                                                                                        @endif
                                                                                     </td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="esd-structure es-p10t es-p40b es-p40r es-p40l" align="left">
-                                                        <table cellpadding="0" cellspacing="0" width="100%">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td width="518" class="esd-container-frame" align="center" valign="top">
-                                                                        <table cellpadding="0" cellspacing="0" width="100%">
-                                                                            <tbody>
-                                                                                <tr>
-                                                                                    <td align="center" class="esd-block-button es-m-txt-c"><span class="es-button-border-1636375556347 es-button-border" style="background: #fb8500;"><a href="{{ $url }}" style="text-decoration: none; padding: 8px 20px; display: block;" class="es-button es-button-1636375556347" target="_blank" style="padding: 10px 25px 10px 15px;">
-                                                                                                <!--[if !mso]><!-- --><img src="https://tlr.stripocdn.email/content/guids/CABINET_2e7b5e7c419fb67c255cca2bf344a8df/images/41781618489806584.png" alt="icon" width="26" class="esd-icon-left" style="margin-right:10px" align="absmiddle">
-                                                                                                <!--<![endif]-->Kích hoạt
-                                                                                            </a></span></td>
                                                                                 </tr>
                                                                             </tbody>
                                                                         </table>

@@ -52,12 +52,18 @@ class PostRepository implements PostRepositoryInterface {
         return $posts->get();
     }
 
-    public function countPost($status, $col = null) {
-        return $this->post::where('status', $status)->count($col);
+    public function countPost($status, $author_id, $col = null) {
+        return $this->post::where('status', $status)->where('author_id', $author_id)->count($col);
     }
 
-    public function topPostView($limit) {
-        $posts = $this->post->orderByDesc('view');
+    public function topPostView($limit, $author_id) {
+        $posts = $this->post::query();
+        
+        if ($author_id) {
+            $posts->where('author_id', $author_id);
+        }
+
+        $posts->orderByDesc('view');
 
         if ($limit) {
             $posts->limit($limit);
@@ -66,12 +72,12 @@ class PostRepository implements PostRepositoryInterface {
         return $posts->get(['title', 'view']);
     }
 
-    public function topCategoriesByPostViews($limit, $user_id = null) {
+    public function topCategoriesByPostViews($limit, $author_id = null) {
         $posts = $this->category::select('categories.*')
         ->join('posts', 'categories.id', '=', 'posts.category_id');
         
-        if ($user_id) {
-            $posts->where('author_id', $user_id);
+        if ($author_id) {
+            $posts->where('author_id', $author_id);
         }
         
         $posts->selectRaw('SUM(posts.view) as total_views')
@@ -84,10 +90,15 @@ class PostRepository implements PostRepositoryInterface {
         return $posts->get();
     }
 
-    public function topSubcategoriesByPostViews($limit) {
+    public function topSubcategoriesByPostViews($limit, $author_id) {
         $posts = $this->subcategory::select('subcategories.*')
-        ->join('posts', 'subcategories.id', '=', 'posts.subcat_id')
-        ->selectRaw('SUM(posts.view) as total_views')
+        ->join('posts', 'subcategories.id', '=', 'posts.subcat_id');
+
+        if ($author_id) {
+            $posts->where('author_id', $author_id);
+        }
+
+        $posts->selectRaw('SUM(posts.view) as total_views')
         ->groupBy('subcategories.id')
         ->orderBy('total_views', 'desc');
 
@@ -205,7 +216,7 @@ class PostRepository implements PostRepositoryInterface {
         return $post->increment('view');
     }
     public function find($id) {
-        return $this->post::with('category', 'subcategory')->findOrFail($id);
+        return $this->post::with('category', 'subcategory', 'user')->findOrFail($id);
     }
 
     public function create(array $data) {

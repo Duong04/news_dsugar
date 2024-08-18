@@ -3,7 +3,7 @@
 }
 
 .colorinput-input:checked ~ .colorinput-color.bg-info {
-    background-color: #48abf7 !important
+    background-color: #48abf7 !important;
 }
 
 .img-user {
@@ -42,4 +42,102 @@
 .img-user:hover {
     transform: translateY(-6px);
     z-index: 2;
+}
+
+/* From Uiverse.io by njesenberger */
+.toggle-container {
+    --active-color: #18e31b;
+    --reject-color: #e32618;
+    --inactive-color: #d3d3d6;
+    position: relative;
+    aspect-ratio: 292 / 142;
+    height: 3em;
+}
+
+.toggle-input-2,
+.toggle-input {
+    appearance: none;
+    margin: 0;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.toggle {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.toggle-background {
+    fill: var(--inactive-color);
+    transition: fill 0.4s;
+}
+
+.toggle-input:checked + .toggle .toggle-background {
+    fill: var(--active-color);
+}
+
+.toggle-input-2:checked + .toggle .toggle-background {
+    fill: var(--reject-color);
+}
+
+.toggle-circle-center {
+    transform-origin: center;
+    transition: transform 0.6s;
+}
+
+.toggle-input-2:checked + .toggle .toggle-circle-center,
+.toggle-input:checked + .toggle .toggle-circle-center {
+    transform: translateX(150px);
+}
+
+.toggle-circle {
+    transform-origin: center;
+    transition: transform 0.45s;
+    backface-visibility: hidden;
+}
+
+.toggle-circle.left {
+    transform: scale(1);
+}
+
+.toggle-input-2:checked + .toggle .toggle-circle.left,
+.toggle-input:checked + .toggle .toggle-circle.left {
+    transform: scale(0);
+}
+
+.toggle-circle.right {
+    transform: scale(0);
+}
+
+.toggle-input-2:checked + .toggle .toggle-circle.right,
+.toggle-input:checked + .toggle .toggle-circle.right {
+    transform: scale(1);
+}
+
+.toggle-icon {
+    transition: fill 0.4s;
+}
+
+.toggle-icon.on {
+    fill: var(--inactive-color);
+}
+
+.toggle-input-2:checked + .toggle .toggle-icon.on,
+.toggle-input:checked + .toggle .toggle-icon.on {
+    fill: #fff;
+}
+
+.toggle-icon.off {
+    fill: #eaeaec;
+}
+
+.toggle-input-2:checked + .toggle .toggle-icon.off,
+.toggle-input:checked + .toggle .toggle-icon.off {
+    fill: var(--active-color);
 }

@@ -24,7 +24,8 @@ class Post extends Model
         'slug',
         'author_id',
         'category_id',
-        'subcat_id'
+        'subcat_id',
+        'reviewed_at'
     ]; 
 
     public function category() {

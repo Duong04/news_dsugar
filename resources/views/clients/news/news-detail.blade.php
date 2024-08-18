@@ -14,12 +14,6 @@
 </script>
 <script src="/templates/js/plugin/sweetalert/sweetalert.min.js"></script>
 <script src="/templates/js/sweetalert.js"></script>
-<script>
-    window.auth = {
-        isAuthenticated: {{ Auth::check() ? 'true' : 'false' }},
-        user: @json(Auth::user())
-    };
-</script>
 @endsection
 
 @section('content')

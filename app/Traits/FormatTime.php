@@ -11,8 +11,8 @@ trait FormatTime
         $commentTime = Carbon::parse($timestamp);
         $currentTime = Carbon::now();
 
-        $diffInMinutes = $commentTime->diffInMinutes($currentTime);
-        $diffInHours = $commentTime->diffInHours($currentTime);
+        $diffInMinutes = (int) $commentTime->diffInMinutes($currentTime);
+        $diffInHours = (int) $commentTime->diffInHours($currentTime);
         $diffInDays = (int) $commentTime->diffInDays($currentTime);
 
         if ($diffInMinutes == 0) {

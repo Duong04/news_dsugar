@@ -4,7 +4,6 @@
     <x-layouts-client.header />
 @endsection
 @section('css')
-{{-- <link rel="stylesheet" href="/templates/css/kaiadmin.min.css" /> --}}
 <link rel="stylesheet" href="/templates/css/plugins.min.css" />
 <style>
     .ck-editor__editable_inline {

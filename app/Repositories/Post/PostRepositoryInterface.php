@@ -9,13 +9,13 @@ interface PostRepositoryInterface {
     public function getLastPost($limit = null, $id = null);
     public function mostViewedPost($limit = null, $id = null);
     public function postRand($limit = null, $id = null);
-    public function countPost($status, $col = null);
+    public function countPost($status, $author_id, $col = null);
     public function postByCategory($categoryName, $table, $limit = null, $id = null);
     public function postByCategorySlug($slug, $table, $limit = null, $id = null);
     public function postByCategorySlugPaginate($slug, $table, $limit = null, $id = null);
-    public function topPostView($limit);
-    public function topCategoriesByPostViews($limit, $user_id = null);
-    public function topSubcategoriesByPostViews($limit);
+    public function topPostView($limit, $author_id);
+    public function topCategoriesByPostViews($limit, $author_id = null);
+    public function topSubcategoriesByPostViews($limit, $author_id);
     public function getPendingPost();
     public function postBySlug($slug);
     public function postIncrement($col, $id);

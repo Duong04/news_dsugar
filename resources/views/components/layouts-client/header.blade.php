@@ -69,7 +69,9 @@
                                 <a href="" class="account" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><img class="w-100 h-100 rounded-circle" src="{{ Auth::user()->avatar }}" alt=""></a>                                
                                 <ul style="left: -50px;" class="dropdown-menu">
                                     <li><a class="dropdown-item" href="{{ route('profile') }}">Tài khoản</a></li>
-                                    <li><a class="dropdown-item" href="#">Thêm bài viết</a></li>
+                                    @if (Auth::user()->role->name == 'Author')
+                                    <li><a class="dropdown-item" href="{{ route('client.create.post') }}">Thêm bài viết</a></li>
+                                    @endif
                                     @php
                                         $typeName = Auth::user()->role->typeRole->name;
                                     @endphp

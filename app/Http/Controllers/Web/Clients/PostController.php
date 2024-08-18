@@ -47,8 +47,13 @@ class PostController extends Controller
         $status = $request->input('action') == 'pending' ? 'pending' : 'draft';
         $postSuccess = $this->postService->create($request, $status);
         if ($postSuccess) {
-            toastr()->success('Đã gửi yêu cầu thành công!');
-            return redirect()->back();
+            if ($status == 'pending') {
+                toastr()->success('Đã gửi yêu cầu thành công!');
+                return redirect()->back();
+            }else {
+                toastr()->info('Bài viết của bạn đã được lưu dưới dạng nháp!');
+                return redirect()->back();
+            }
         }
     }
 
@@ -56,6 +61,7 @@ class PostController extends Controller
         $post = $this->postService->getPostBySlug($slug);
         return view('clients.news.update', compact('post'));
     }
+    
     public function postDetail($slug) {
         $formatCommentTime = function ($time) {
             return $this->formatTime($time);

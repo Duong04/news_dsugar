@@ -98,7 +98,7 @@
                                                                         <table width="100%" cellspacing="0" cellpadding="0">
                                                                             <tbody>
                                                                                 <tr>
-                                                                                    <td class="esd-block-text es-p30t es-p5b es-m-txt-c">
+                                                                                    <td style="padding: 20px;" class="esd-block-text es-p30t es-p5b es-m-txt-c">
                                                                                         <h1>Kính gửi: {{ $name }}</h1>
                                                                                         @php
                                                                                             $statusPost = [
@@ -120,7 +120,7 @@
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
-                                                                                    <td class="esd-block-text es-p10t es-p20b es-p40r es-p40l">
+                                                                                    <td style="padding: 20px;" class="esd-block-text es-p10t es-p20b es-p40r es-p40l">
                                                                                         <h5>Thông tin chi tiết</h5>
                                                                                         @if ($status == 'published')
                                                                                         <p>Bài viết của bạn hiện đã sẵn sàng để xuất bản và sẽ được đăng tải trên trang web của chúng tôi vào thời gian sớm nhất. Cảm ơn bạn đã đóng góp và mong rằng bạn sẽ tiếp tục gửi các bài viết chất lượng trong tương lai.</p>

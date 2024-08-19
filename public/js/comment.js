@@ -82,19 +82,19 @@ const formatCommentTime = (timestamp) => {
     const diffInMinutes = Math.floor((currentTime - commentTime) / 1000 / 60);
     const diffInHours = Math.floor(diffInMinutes / 60);
     const diffInDays = Math.floor(diffInHours / 24);
-
-    if (diffInMinutes == 0) {
-        return `Vừa xong`;
-    }else if (diffInMinutes < 60) {
+    
+    if (diffInMinutes === 0) {
+        return 'Vừa xong';
+    } else if (diffInMinutes < 60) {
         return `${diffInMinutes} phút trước`;
     } else if (diffInHours < 24) {
         return `${diffInHours} giờ trước`;
     } else if (diffInDays < 30) {
-        return `${commentTime.getDate()} tháng ${commentTime.getMonth() + 1}`;
+        return `${diffInDays} ngày trước`;
     } else {
-        return commentTime.getFullYear();
+        return `${commentTime.getDate()} tháng ${commentTime.getMonth() + 1}, ${commentTime.getFullYear()}`;
     }
-}
+};
 
 const getAll = async () => {
     try {

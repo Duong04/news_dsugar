@@ -52,10 +52,24 @@ class PostRepository implements PostRepositoryInterface {
         return $posts->get();
     }
 
-    public function countPost($status, $author_id, $col = null) {
-        return $this->post::where('status', $status)->where('author_id', $author_id)->count($col);
-    }
+    public function countPost($status, $author_id, $col, $notStatus) {
+        $post = $this->post->query();
+        
+        if ($status) {
+            $post->where('status', $status);
+        }
+    
+        if ($author_id) {
+            $post->where('author_id', $author_id);
+        }
 
+        if ($notStatus) {
+            $post->where('status', '!=', $notStatus);
+        }
+    
+        return $post->count($col);
+    }
+    
     public function topPostView($limit, $author_id) {
         $posts = $this->post::query();
         

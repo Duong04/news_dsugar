@@ -37,6 +37,7 @@ Route::prefix('v1')->group(function () {
         Route::get('/categories/top-views', [PostController::class, 'topCategoriesByPostView']);
         Route::get('/subcategories/top-views', [PostController::class, 'topSubcategoriesByPostView']);
         Route::get('/posts/top-views', [PostController::class, 'topPostView']);
+        Route::get('/users/count-user-by-months', [UserController::class, 'countUserByMonths']);
     });
 
     Route::get('/permissions/{id}', [PermissionController::class, 'getById']);

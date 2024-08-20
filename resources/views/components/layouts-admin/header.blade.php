@@ -249,11 +249,11 @@
                     <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#"
                         aria-expanded="false">
                         <div class="avatar-sm">
-                            <img src="/templates/img/profile.jpg" alt="..." class="avatar-img rounded-circle" />
+                            <img src="{{ Auth::user()->avatar }}" alt="..." class="avatar-img rounded-circle" />
                         </div>
                         <span class="profile-username">
                             <span class="op-7">Hi,</span>
-                            <span class="fw-bold">Hizrian</span>
+                            <span class="fw-bold">{{ Auth::user()->user_name }}</span>
                         </span>
                     </a>
                     <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -261,13 +261,13 @@
                             <li>
                                 <div class="user-box">
                                     <div class="avatar-lg">
-                                        <img src="/templates/img/profile.jpg" alt="image profile"
+                                        <img src="{{ Auth::user()->avatar }}" alt="image profile"
                                             class="avatar-img rounded" />
                                     </div>
                                     <div class="u-text">
-                                        <h4>Hizrian</h4>
-                                        <p class="text-muted">hello@example.com</p>
-                                        <a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View
+                                        <h4>{{ Auth::user()->user_name }}</h4>
+                                        <p class="text-muted">{{ Auth::user()->email }}</p>
+                                        <a href="" class="btn btn-xs btn-secondary btn-sm">View
                                             Profile</a>
                                     </div>
                                 </div>
@@ -280,7 +280,10 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">Account Setting</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Logout</a>
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button class="dropdown-item">Đăng xuất</button>
+                                </form>
                             </li>
                         </div>
                     </ul>

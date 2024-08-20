@@ -11,6 +11,7 @@ use App\Http\Controllers\Web\Admins\ActionController;
 use App\Http\Controllers\Web\Admins\UserController;
 use App\Http\Controllers\Web\Admins\TypeController;
 use App\Http\Controllers\Web\Admins\CommentController;
+use App\Http\Controllers\Web\Admins\DashBoardController;
 use App\Http\Controllers\Web\Clients\HomeController;
 use App\Http\Controllers\Web\Clients\ProfileController;
 use App\Http\Resources\UserResource;
@@ -20,9 +21,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 Route::middleware('auth.admin')->prefix('admin')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admins.dashboard.dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashBoardController::class, 'index'])->name('dashboard');
 
     // Danh mục
     Route::get('/danh-muc', [CategoryController::class, 'index'])->name('categories')->middleware('permission.action:Categories Management,viewany');

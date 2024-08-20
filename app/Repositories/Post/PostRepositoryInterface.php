@@ -9,7 +9,7 @@ interface PostRepositoryInterface {
     public function getLastPost($limit = null, $id = null);
     public function mostViewedPost($limit = null, $id = null);
     public function postRand($limit = null, $id = null);
-    public function countPost($status, $author_id, $col = null);
+    public function countPost($status, $author_id, $col, $notStatus);
     public function postByCategory($categoryName, $table, $limit = null, $id = null);
     public function postByCategorySlug($slug, $table, $limit = null, $id = null);
     public function postByCategorySlugPaginate($slug, $table, $limit = null, $id = null);

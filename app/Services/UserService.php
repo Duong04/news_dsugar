@@ -59,6 +59,23 @@ class UserService {
         }
     }
 
+    public function countUsersInLast12Months($request) {
+        try {
+            $year = $request->query('year', null);
+            return $this->userRepository->countUsersInLast12Months($year);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }    
+
+    public function countUser($col = null, $status = null) {
+        try {
+            return $this->userRepository->countUser($col, $status);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
     public function findById($id) {
         try {
             return $this->userRepository->find($id);

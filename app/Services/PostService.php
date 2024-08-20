@@ -172,9 +172,9 @@ class PostService {
         }
     }
 
-    public function countPost($status, $author_id, $col) {
+    public function countPost($status = null, $author_id = null, $col = null, $notStatus = null) {
         try {
-            return $this->postInterface->countPost($status, $author_id, $col);
+            return $this->postInterface->countPost($status, $author_id, $col, $notStatus);
         } catch (\Throwable $th) {
             return $th->getMessage();
         }

@@ -37,6 +37,16 @@ class UserService {
         }
     }
 
+    public function create($request) {
+        try {
+            $data = $request->validated();
+            $data['password'] = env('PASSWORD');
+            return $this->userRepository->create($data);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
     public function updateRole($request, $id) {
         try {
             $data = $request->validate([
@@ -44,6 +54,31 @@ class UserService {
             ]);
 
             return $this->userRepository->update($id, $data);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
+    public function countUsersInLast12Months($request) {
+        try {
+            $year = $request->query('year', null);
+            return $this->userRepository->countUsersInLast12Months($year);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }    
+
+    public function countUser($col = null, $status = null) {
+        try {
+            return $this->userRepository->countUser($col, $status);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
+    public function findById($id) {
+        try {
+            return $this->userRepository->find($id);
         } catch (\Throwable $th) {
             return $th->getMessage();
         }

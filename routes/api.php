@@ -26,8 +26,19 @@ Route::prefix('v1')->group(function () {
     });
     Route::prefix('posts')->group(function () {
         Route::get('/', [PostController::class, 'index']);
+        Route::put('/{id}', [PostController::class, 'update']);
     });
-    Route::get('/categories/{id}/subcategories', [SubcategoryController::class, 'getByCategoryId']);
+
+    Route::prefix('/categories')->group(function () {
+        Route::get('/{id}/subcategories', [SubcategoryController::class, 'getByCategoryId']);
+    });
+
+    Route::prefix('/stats')->group(function () {
+        Route::get('/categories/top-views', [PostController::class, 'topCategoriesByPostView']);
+        Route::get('/subcategories/top-views', [PostController::class, 'topSubcategoriesByPostView']);
+        Route::get('/posts/top-views', [PostController::class, 'topPostView']);
+        Route::get('/users/count-user-by-months', [UserController::class, 'countUserByMonths']);
+    });
 
     Route::get('/permissions/{id}', [PermissionController::class, 'getById']);
 

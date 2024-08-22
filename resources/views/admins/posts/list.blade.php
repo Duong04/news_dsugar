@@ -62,7 +62,9 @@
                                             $statusPost = [
                                                 'draft' => ['Bản nháp', 'badge-warning'],
                                                 'published' => ['Đã xuất bản', 'badge-success'],
-                                                'archived' => ['Lưu trử', 'badge-info'],
+                                                'archived' => ['Lưu trữ', 'badge-info'],
+                                                'pending' => ['Chờ kiểm duyệt', 'badge-secondary'],
+                                                'rejected' => ['Đã từ chối', 'badge-danger'],
                                             ];
                                         @endphp
                                         @foreach ($posts as $item)

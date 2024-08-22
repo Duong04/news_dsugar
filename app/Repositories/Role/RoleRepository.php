@@ -18,6 +18,11 @@ class RoleRepository implements RoleRepositoryInterface {
         
         return new RoleResource($role);
     }
+    public function findNoResource($id) {
+        $role = $this->role::withCount('users')->findOrFail($id);
+        
+        return $role;
+    }
     public function create(array $data) {
         return $this->role::create($data);
     }
@@ -26,6 +31,7 @@ class RoleRepository implements RoleRepositoryInterface {
         return $role->update($data);
     }
     public function delete($id) {
-        
+        $role = $this->role::find($id);
+        return $role->delete();
     }
 }

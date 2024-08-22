@@ -4,6 +4,6 @@
     </div>
     <div class="post-medium-text">
         <h6 class="text-black">{{ $post->title }}</h6>
-        <span class="text-midgray fs-7">{{ $post->created_at }}</span>
+        <span class="text-midgray fs-7">{{ $formatTime($post->created_at) }}</span>
     </div>
 </a>

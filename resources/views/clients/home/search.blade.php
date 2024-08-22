@@ -22,7 +22,7 @@
                 <nav aria-label="Page navigation">
                     <ul class="pagination d-flex justify-content-center mt-3">
                         <li class="page-item">
-                            <a class="page-link {{!$prevPage ? 'disabled' : ''}}" href="{{$prevPage}}" aria-label="Previous">
+                            <a class="page-link {{!$prevPage ? 'disabled' : ''}}" href="{{$prevPage}}&q={{$q}}" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
@@ -30,7 +30,7 @@
                         <li class="page-item"><a class="page-link" href="?page={{$i}}&q={{$q}}">{{$i}}</a></li>
                         @endfor
                         <li class="page-item">
-                            <a class="page-link {{!$nextPage ? 'disabled' : ''}}" href="{{$nextPage}}" aria-label="Next">
+                            <a class="page-link {{!$nextPage ? 'disabled' : ''}}" href="{{$nextPage}}&q={{$q}}" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
                         </li>

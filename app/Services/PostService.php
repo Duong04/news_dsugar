@@ -3,6 +3,7 @@ namespace App\Services;
 
 use App\Repositories\Post\PostRepositoryInterface;
 use Auth;
+use Notification;
 use Str;
 use App\Services\CloundinaryService;
 
@@ -87,12 +88,16 @@ class PostService {
         }
     }
 
-    public function create($request) {
+    public function create($request, $status = null) {
         try {
             $post = $request->validated();
 
             $image = $request->file('image');
             $folder = 'news_dsugar/posts';
+            
+            if ($status) {
+                $post['status'] = $status;
+            }
 
             $url = $this->cloundinaryService->upload($image, $folder);
 
@@ -101,6 +106,14 @@ class PostService {
             $post['image'] = $url;
 
             return $this->postInterface->create($post);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
+    public function getPostByUserId($userId) {
+        try {
+            return $this->postInterface->getPostByUserId($userId);
         } catch (\Throwable $th) {
             return $th->getMessage();
         }
@@ -117,10 +130,16 @@ class PostService {
     public function update($request, $id) {
         try {
             $request->validated();
-            $data = $request->input();
+            $postData = $request->input();
+            $type = $request->query('type', null);
 
-            $postData['author_id'] = Auth::user()->id;
-            $postData['slug'] = Str::slug($data['title'], '-');
+            if (isset($type) && $type == 'approve') {
+                $postData['reviewed_at'] = now();
+            }
+
+            if (isset($postData['title'])) {
+                $postData['slug'] = Str::slug($postData['title'], '-');
+            }
 
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
@@ -148,6 +167,52 @@ class PostService {
     public function delete($id) {
         try {
             return $this->postInterface->delete($id);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
+    public function countPost($status = null, $author_id = null, $col = null, $notStatus = null) {
+        try {
+            return $this->postInterface->countPost($status, $author_id, $col, $notStatus);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
+    public function topPostView($request) {
+        try {
+            $limit = $request->query('limit', null);
+            $author_id = $request->query('author_id', null);
+            return $this->postInterface->topPostView($limit, $author_id);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
+    public function getPedingPost() {
+        try {
+            return $this->postInterface->getPendingPost();
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
+    public function topSubcategoriesByPostViews($request) {
+        try {
+            $limit = $request->query('limit', null);
+            $author_id = $request->query('author_id', null);
+            return $this->postInterface->topSubcategoriesByPostViews($limit, $author_id);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
+    public function topCategoriesByPostViews($request) {
+        try {
+            $limit = $request->query('limit', null);
+            $author_id = $request->query('author_id', null);
+            return $this->postInterface->topCategoriesByPostViews($limit, $author_id);
         } catch (\Throwable $th) {
             return $th->getMessage();
         }

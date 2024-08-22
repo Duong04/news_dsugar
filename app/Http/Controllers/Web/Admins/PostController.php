@@ -52,4 +52,10 @@ class PostController extends Controller
             return redirect()->back();
         }
     }
+
+    public function approve() {
+        $posts = $this->postService->getPedingPost();
+        return view('admins.posts.approve', ['posts' => $posts]);
+    }
+
 }

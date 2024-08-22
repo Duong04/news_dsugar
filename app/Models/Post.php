@@ -24,7 +24,8 @@ class Post extends Model
         'slug',
         'author_id',
         'category_id',
-        'subcat_id'
+        'subcat_id',
+        'reviewed_at'
     ]; 
 
     public function category() {
@@ -42,6 +43,11 @@ class Post extends Model
     public function scopePublished($query)
     {
         return $query->where('status', 'published');
+    }
+
+    public function scopePending($query)
+    {
+        return $query->where('status', 'pending');
     }
 
     public function scopeMostViewed($query) {

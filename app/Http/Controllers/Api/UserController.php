@@ -28,4 +28,13 @@ class UserController extends Controller
         }
         return response()->json(['message' => 'Update Role Successfully'], 203);
     }
+
+    public function countUserByMonths(Request $request) {
+        try {
+            $users = $this->userService->countUsersInLast12Months($request);
+            return response()->json(['data' => $users], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 500);
+        }
+    }
 }

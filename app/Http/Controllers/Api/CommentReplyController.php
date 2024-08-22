@@ -28,7 +28,7 @@ class CommentReplyController extends Controller
     public function delete($id) {
         try {
             $this->commentReplyService->delete($id);
-            return response()->json(['message' => 'Delete comment successfully'], 203);
+            return response()->json(['message' => 'Delete comment reply successfully'], 203);
         } catch (\Throwable $th) {
             return response()->json(['error' => $th->getMessage()], 422);
         }

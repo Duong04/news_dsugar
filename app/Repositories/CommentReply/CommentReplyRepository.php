@@ -26,4 +26,8 @@ class CommentReplyRepository implements CommentReplyRepositoryInterface {
         $commentReply = $this->commentReply::find($id);
         return $commentReply->delete();
     }
+
+    public function getByCommentId($commentId) {
+        return $this->commentReply::with('comment', 'user')->where('comment_id', $commentId)->get();
+    }
 }

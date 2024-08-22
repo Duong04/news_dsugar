@@ -2,6 +2,7 @@ import axios_ins from "./axios.js";
 
 const isAuthenticated = window.auth.isAuthenticated;
 const currentUser = window.auth.user;
+const topLimit = document.querySelector('#top-limit');
 
 const emptyData = () => {
     return (`
@@ -10,10 +11,26 @@ const emptyData = () => {
     `);
 }
 
-const getTop10 = async () => {
+topLimit.oninput = (e) => {
+    let limit = e.target.value;
+    if (limit.length == 0) {
+        limit = 10;
+    }
+
+    if (limit <= 0) {
+        limit = 1;
+    } else if (limit > 30) {
+        limit = 30;
+    }
+
+    getTop10(limit);
+}
+ 
+const getTop10 = async (limit = null) => {
     const barChart = document.getElementById("barChart");
+    document.querySelector('#count-limit').innerText = limit ?? 10; 
     try {
-        const response = await axios_ins.get(`/stats/posts/top-views?limit=10&author_id=${currentUser.id}`);
+        const response = await axios_ins.get(`/stats/posts/top-views?limit=${limit ?? 10}&author_id=${currentUser.id}`);
         const data = response.data.data;
 
         if (data.length === 0) {
@@ -105,8 +122,14 @@ const topSubcategoriesByPostView = async () => {
     }
 };
 
+let chartInstance = null;
+
 const myBarChart = (labels, values, data) => {
-    new Chart(barChart, {
+    if (chartInstance) {
+        chartInstance.destroy();
+    }
+
+    chartInstance = new Chart(barChart, {
         type: "bar",
         data: {
             labels: labels,

@@ -26,7 +26,11 @@ class PostController extends Controller
         $posts = $this->postService->getPostByCategorySlug($slug, 'category', 4, [$post->id]);
         $listId = collect([$post->id])->merge($posts->pluck('id'))->toArray();
         $postPaginates = $this->postService->getPostByCategorySlugPaginate($slug, 'category', $limit, $listId);
-        return view('clients.news.news', compact('post', 'posts', 'postPaginates', 'category'));
+        $total = $postPaginates->total();
+        $hasPage = $postPaginates->hasPages();
+        $nextPage = $postPaginates->nextPageUrl();
+        $prevPage = $postPaginates->previousPageUrl();
+        return view('clients.news.news', compact('post', 'limit', 'total', 'hasPage', 'nextPage', 'prevPage', 'posts', 'postPaginates', 'category'));
     }
 
     public function getPostBySubcategory($categorySlug, $subcategorySlug, Request $request) {
@@ -37,7 +41,11 @@ class PostController extends Controller
         $posts = $this->postService->getPostByCategorySlug($subcategorySlug, 'subcategory', 4, [$post->id]);
         $listId = collect([$post->id])->merge($posts->pluck('id'))->toArray();
         $postPaginates = $this->postService->getPostByCategorySlugPaginate($subcategorySlug, 'subcategory', $limit, $listId);
-        return view('clients.news.news', compact('post', 'posts', 'postPaginates', 'category'));
+        $total = $postPaginates->total();
+        $hasPage = $postPaginates->hasPages();
+        $nextPage = $postPaginates->nextPageUrl();
+        $prevPage = $postPaginates->previousPageUrl();
+        return view('clients.news.news', compact('post', 'limit', 'total', 'hasPage', 'nextPage', 'prevPage', 'posts', 'postPaginates', 'category'));
     }
 
     public function create() {

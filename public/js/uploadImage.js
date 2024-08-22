@@ -1,0 +1,34 @@
+const avatar = document.getElementById("avatar");
+
+avatar.addEventListener("change", handleFiles);
+
+function handleFiles() {
+    const fileList = this.files;
+    if (!fileList.length) {
+        return;
+    }
+
+    const file = fileList[0];
+
+    // Kiểm tra định dạng tệp
+    const allowedExtensions = /(\.jpeg|\.jpg|\.png|\.webp)$/i;
+    if (!allowedExtensions.exec(file.name)) {
+        swal({
+            title: 'Cảnh báo!',
+            text: 'Vui lòng chỉ chọn các file có định dạng .jpeg, .jpg, .png, .webp',
+            icon: 'warning',
+            timer: 5000
+        });
+        this.value = "";
+        return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = function () {
+        const preview = document.getElementById("image-avatar");
+        preview.src = reader.result;
+    };
+
+    reader.readAsDataURL(file);
+}

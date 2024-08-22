@@ -16,6 +16,7 @@
     <script type="module" src="/js/stats.js"></script>
     <script src="/templates/js/plugin/sweetalert/sweetalert.min.js"></script>
     <script src="/templates/js/sweetalert.js"></script>
+    <script src="/js/uploadImage.js"></script>
     <script>
         window.auth = {
             isAuthenticated: {{ Auth::check() ? 'true' : 'false' }},
@@ -31,7 +32,7 @@
                 <div class="py-5 bg-white aside-shadow">
                     <div class="text-center">
                         <div class="img-avatar mx-auto">
-                            <img class="w-100 h-100 rounded-circle" src="{{ Auth::user()->avatar }}" alt="">
+                            <img class="w-100 h-100 rounded-circle object-fit-cover" src="{{ Auth::user()->avatar }}" alt="">
                         </div>
                         <h5 class="fs-5 mt-3">{{ Auth::user()->user_name }}</h5>
                         <span class="badge text-bg-success">{{ Auth::user()->role->name }}</span>
@@ -97,14 +98,18 @@
             </aside>
             <article class="col-8">
                 <nav class="nav nav-pills nav-pills-2 nav-fill g-10">
-                    <a class="nav-link active" data-bs-toggle="tab" aria-current="page" href="#tab-1"><i
+                    @if (Auth::user()->role->name !== 'Subscriber' && Auth::user()->role->name !== 'Support')
+                       <a class="nav-link active" data-bs-toggle="tab" aria-current="page" href="#tab-1"><i
                             class="fa-solid fa-dumpster-fire"></i> Tổng quan</a>
-                    <a class="nav-link" data-bs-toggle="tab" href="#tab-2"><i class="fa-regular fa-comments"></i> Bình
-                        luận</a>
-                    <a class="nav-link" data-bs-toggle="tab" href="#tab-3"><i class="fa-solid fa-chart-bar"></i> Thống
-                        kê</a>
+                        <a class="nav-link" data-bs-toggle="tab" href="#tab-2"><i class="fa-regular fa-comments"></i> Bình
+                            luận</a>
+                        <a class="nav-link" data-bs-toggle="tab" href="#tab-3"><i class="fa-solid fa-chart-bar"></i> Thống 
+                            kê</a>
+                    @endif
+                    <a class="nav-link" data-bs-toggle="tab" href="#tab-4"><i class="fa-solid fa-user"></i> Tài khoản</a>
                 </nav>
                 <div class="tab-content w-100">
+                    @if (Auth::user()->role->name !== 'Subscriber' && Auth::user()->role->name !== 'Support')
                     <div id="tab-1" class="mt-4 tab-pane fade show active">
                         <div class="card">
                             <div class="card-header d-flex align-items-center">
@@ -374,8 +379,11 @@
                         <div class="row mt-4">
                             <div class="col-md-12">
                                 <div class="card">
-                                    <div class="card-header">
-                                        <div class="card-title">Top 10 bài viết có lượt xem cao nhất</div>
+                                    <div class="card-header row justify-content-between">
+                                        <div class="card-title col-7">Top <span id="count-limit"></span> bài viết có lượt xem cao nhất</div>
+                                        <div class="col-3">
+                                            <input type="number" placeholder="Top limit" id="top-limit" class="form-control fs-7">
+                                        </div>
                                     </div>
                                     <div class="card-body">
                                         <div class="chart-container">
@@ -418,6 +426,31 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    @endif
+                    <div id="tab-4" class="mt-4 tab-pane fade show {{ Auth::user()->role->name == 'Subscriber' || Auth::user()->role->name == 'Support' ? 'active' : ''}}">
+                        <h4>Các trạng thái bài viết</h4>
+                        <form class="row" enctype="multipart/form-data" action="{{ route('update.profile', ['id' => Auth::user()->id]) }}" method="POST">
+                            @method('PUT')
+                            @csrf
+                            <div class="col-12 mb-3">
+                                <div class="avatar-image mx-auto">
+                                    <img width="100%" height="100%" class="rounded-circle" src="{{ Auth::user()->avatar }}" id="image-avatar" alt="">
+                                    <input type="file" name="avatar" id="avatar" hidden>
+                                    <label for="avatar"><i class="fa-solid fa-camera-retro"></i></label>
+                                    <span>{{$errors->first('avatar')}}</span>
+                                </div>
+                            </div>
+                            <x-form.input2 :error="$errors->first('email')" class="col-6" name="Email" label="Email của bạn" :value="Auth::user()->email" type="text" />
+                            <x-form.input2 :error="$errors->first('user_name')" class="col-6" name="user_name" label="Nick name của bạn" :value="Auth::user()->user_name" type="text" />
+                            <x-form.input2 :error="$errors->first('first_name')" class="col-6" name="first_name" label="Tên của bạn" :value="Auth::user()->first_name" type="text" />
+                            <x-form.input2 :error="$errors->first('last_name')" class="col-6" name="last_name" label="Họ của bạn" :value="Auth::user()->last_name" type="text" />
+                            <x-form.input2 :error="$errors->first('address')" class="col-6" name="address" label="Địa chỉ của bạn" :value="Auth::user()->address" type="text" />
+                            <x-form.input2 :error="$errors->first('phone')" class="col-6" name="phone" label="Số điện của bạn" :value="Auth::user()->phone" type="text" />
+                            <div class="form-group">
+                                <button class="btn btn-purple">Cập nhật</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </article>

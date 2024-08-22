@@ -91,5 +91,17 @@ class RoleService {
             return $th->getMessage();
         }
     }
+
+    public function delete($id) {
+        try {
+            $role = $this->roleRepository->findNoResource($id);
+            if ($role->users_count > 0) {
+                return false;
+            }
+            return $this->roleRepository->delete($id);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
  
 }

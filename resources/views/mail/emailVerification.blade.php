@@ -104,7 +104,7 @@
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td align="center" class="esd-block-text es-p10t es-p20b es-p40r es-p40l">
-                                                                                        <p>Chào mừng bạn đến với DSugar, rất vui khi bạn đã đăng ký thành viên ở web tôi. Để có thể đăng nhập bạn vui lòng click vào nút kích họt bên dưới để kích hoạt tài khoản.</p>
+                                                                                        <p>Chào mừng bạn đến với DSugar, rất vui khi bạn đã đăng ký thành viên ở web tôi. Để có thể đăng nhập bạn vui lòng click vào nút kích hoạt bên dưới để kích hoạt tài khoản.</p>
                                                                                     </td>
                                                                                 </tr>
                                                                             </tbody>
@@ -124,7 +124,7 @@
                                                                         <table cellpadding="0" cellspacing="0" width="100%">
                                                                             <tbody>
                                                                                 <tr>
-                                                                                    <td align="center" class="esd-block-button es-m-txt-c"><span class="es-button-border-1636375556347 es-button-border" style="background: #fb8500;"><a href="{{ $url }}" style="text-decoration: none; padding: 8px 20px" class="es-button es-button-1636375556347" target="_blank" style="padding: 10px 25px 10px 15px;">
+                                                                                    <td align="center" class="esd-block-button es-m-txt-c"><span class="es-button-border-1636375556347 es-button-border" style="background: #fb8500;"><a href="{{ $url }}" style="text-decoration: none; padding: 8px 20px; display: block;" class="es-button es-button-1636375556347" target="_blank" style="padding: 10px 25px 10px 15px;">
                                                                                                 <!--[if !mso]><!-- --><img src="https://tlr.stripocdn.email/content/guids/CABINET_2e7b5e7c419fb67c255cca2bf344a8df/images/41781618489806584.png" alt="icon" width="26" class="esd-icon-left" style="margin-right:10px" align="absmiddle">
                                                                                                 <!--<![endif]-->Kích hoạt
                                                                                             </a></span></td>

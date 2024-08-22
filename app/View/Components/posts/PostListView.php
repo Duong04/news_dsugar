@@ -5,12 +5,14 @@ namespace App\View\Components\posts;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+use App\Traits\FormatTime;
 
 class PostListView extends Component
 {
     /**
      * Create a new component instance.
      */
+    use FormatTime;
     public $post;
     public function __construct($post)
     {
@@ -22,6 +24,10 @@ class PostListView extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.posts.post-list-view');
+        $formatTime = function ($time) {
+            return $this->formatTime($time);
+        };
+
+        return view('components.posts.post-list-view', compact('formatTime'));
     }
 }

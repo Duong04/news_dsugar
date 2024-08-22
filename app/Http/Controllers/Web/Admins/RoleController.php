@@ -8,22 +8,26 @@ use Illuminate\Http\Request;
 use App\Services\RoleService;
 use App\Services\PermissionService;
 use App\Services\ActionService;
+use App\Services\UserService;
 use App\Http\Requests\Web\Admins\RoleRequest;
 
 class RoleController extends Controller
 {
-    protected $roleService;
-    protected $permissionService;
-    protected $actionService;
-    public function __construct(RoleService $roleService, PermissionService $permissionService, ActionService $actionService) {
+    private $roleService;
+    private $permissionService;
+    private $actionService;
+    private $userService;
+    public function __construct(RoleService $roleService, PermissionService $permissionService, ActionService $actionService, UserService $userService) {
         $this->roleService = $roleService;
         $this->permissionService = $permissionService;
         $this->actionService = $actionService;
+        $this->userService = $userService;
     }
 
     public function index() {
+        $users = $this->userService->getAll();
         $roles = $this->roleService->getAll();
-        return view('admins.roles.list', ['roles' => $roles]);
+        return view('admins.roles.list', ['roles' => $roles, 'users' => $users]);
     }
 
     public function create() {
@@ -60,7 +64,7 @@ class RoleController extends Controller
                         return [
                             'id' => $action->id,
                             'name' => $action->name,
-                            'value' => $action->value, // Thêm value nếu cần thiết
+                            'value' => $action->value, 
                         ];
                     })
                 ];
@@ -78,5 +82,16 @@ class RoleController extends Controller
             toastr()->success('Cập nhật role thành công!');
             return redirect()->route('roles');
         }
+    }
+
+    public function delete($id) {
+        $roleSuccess = $this->roleService->delete($id);
+        if ($roleSuccess) {
+            toastr()->success('Xóa bài viết thành công!');
+            return redirect()->back();
+        }
+
+        toastr()->error('Không thể xóa được role này vì đã có người dùng!');
+        return redirect()->back();
     }
 }

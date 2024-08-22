@@ -28,7 +28,7 @@ class PostRequest extends FormRequest
             'description' => 'required',
             'category_id' => 'required|exists:categories,id',
             'subcat_id' => 'required|exists:subcategories,id',
-            'status' => 'required',
+            'status' => 'nullable',
         ];
 
         if (!$id) {

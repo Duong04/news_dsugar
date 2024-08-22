@@ -1,9 +1,11 @@
 @extends('admins.layouts.master')
 
 @section('script-bottom')
-
     <!-- Chart JS -->
     <script src="/templates/js/plugin/chart.js/chart.min.js"></script>
+    <script src="/templates/js/plugin/chart.js/chart.umd.js"></script>
+    <script src="/libraries/axios/axios.min.js"></script>
+    <script type="module" src="/js/admins/stats.js"></script>
 
     <!-- jQuery Sparkline -->
     <script src="/templates/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
@@ -29,33 +31,32 @@
 
     <!-- Kaiadmin DEMO methods, don't include it in your project! -->
     <script src="/templates/js/setting-demo.js"></script>
-    <script src="/templates/js/demo.js"></script>
     <script>
         $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
-          type: "line",
-          height: "70",
-          width: "100%",
-          lineWidth: "2",
-          lineColor: "#177dff",
-          fillColor: "rgba(23, 125, 255, 0.14)",
+            type: "line",
+            height: "70",
+            width: "100%",
+            lineWidth: "2",
+            lineColor: "#177dff",
+            fillColor: "rgba(23, 125, 255, 0.14)",
         });
-  
+
         $("#lineChart2").sparkline([99, 125, 122, 105, 110, 124, 115], {
-          type: "line",
-          height: "70",
-          width: "100%",
-          lineWidth: "2",
-          lineColor: "#f3545d",
-          fillColor: "rgba(243, 84, 93, .14)",
+            type: "line",
+            height: "70",
+            width: "100%",
+            lineWidth: "2",
+            lineColor: "#f3545d",
+            fillColor: "rgba(243, 84, 93, .14)",
         });
-  
+
         $("#lineChart3").sparkline([105, 103, 123, 100, 95, 105, 115], {
-          type: "line",
-          height: "70",
-          width: "100%",
-          lineWidth: "2",
-          lineColor: "#ffa534",
-          fillColor: "rgba(255, 165, 52, .14)",
+            type: "line",
+            height: "70",
+            width: "100%",
+            lineWidth: "2",
+            lineColor: "#ffa534",
+            fillColor: "rgba(255, 165, 52, .14)",
         });
     </script>
 @endsection
@@ -66,84 +67,187 @@
             <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
                 <div>
                     <h3 class="fw-bold mb-3">Dashboard</h3>
-                    <h6 class="op-7 mb-2">Free Bootstrap 5 Admin Dashboard</h6>
+                    <h6 class="op-7 mb-2">Xin chào bạn {{ Auth::user()->user_name }}, ngày hôm nay của bạn thế nào 😎</h6>
                 </div>
                 <div class="ms-md-auto py-2 py-md-0">
                     <a href="#" class="btn btn-label-info btn-round me-2">Manage</a>
                     <a href="#" class="btn btn-primary btn-round">Add Customer</a>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-6 col-md-3">
-                    <div class="card card-stats card-round">
-                        <div class="card-body">
-                            <div class="row align-items-center">
-                                <div class="col-icon">
-                                    <div class="icon-big text-center icon-primary bubble-shadow-small">
-                                        <i class="fas fa-users"></i>
+            <div>
+                <h5>Số lượng bài viết</h5>
+                <div class="row">
+                    <div class="col-sm-6 col-md-3">
+                        <div class="card card-stats card-round">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-icon">
+                                        <div class="icon-big text-center icon-primary bubble-shadow-small">
+                                            <i class="far fa-list-alt"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col col-stats ms-3 ms-sm-0">
+                                        <div class="numbers">
+                                            <p class="card-category">Tất cả bài viết</p>
+                                            <h4 class="card-title">{{ $postCount }}</h4>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col col-stats ms-3 ms-sm-0">
-                                    <div class="numbers">
-                                        <p class="card-category">Visitors</p>
-                                        <h4 class="card-title">1,294</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="card card-stats card-round">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-icon">
+                                        <div class="icon-big text-center icon-success bubble-shadow-small">
+                                            <i class="far fa-check-circle"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col col-stats ms-3 ms-sm-0">
+                                        <div class="numbers">
+                                            <p class="card-category">Xuất bản</p>
+                                            <h4 class="card-title">{{ $publishedPostCount }}</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="card card-stats card-round">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-icon">
+                                        <div class="icon-big text-center icon-info bubble-shadow-small">
+                                            <i class="fas fa-user-check"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col col-stats ms-3 ms-sm-0">
+                                        <div class="numbers">
+                                            <p class="card-category">Lưu trữ</p>
+                                            <h4 class="card-title">{{ $archivedPostCount }}</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="card card-stats card-round">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-icon">
+                                        <div class="icon-big text-center icon-warning bubble-shadow-small">
+                                            <i class="fas fa-luggage-cart"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col col-stats ms-3 ms-sm-0">
+                                        <div class="numbers">
+                                            <p class="card-category">Chờ kiểm duyệt</p>
+                                            <h4 class="card-title">{{ $pendingPostCount }}</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="card card-stats card-round">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-icon">
+                                        <div class="icon-big text-center icon-danger bubble-shadow-small">
+                                            <i class="far fa-times-circle"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col col-stats ms-3 ms-sm-0">
+                                        <div class="numbers">
+                                            <p class="card-category">Đã từ chối</p>
+                                            <h4 class="card-title">{{ $rejectedPostCount }}</h4>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-3">
-                    <div class="card card-stats card-round">
-                        <div class="card-body">
-                            <div class="row align-items-center">
-                                <div class="col-icon">
-                                    <div class="icon-big text-center icon-info bubble-shadow-small">
-                                        <i class="fas fa-user-check"></i>
+            </div>
+            <div>
+                <h5>Số lượng người dùng</h5>
+                <div class="row">
+                    <div class="col-sm-6 col-md-3">
+                        <div class="card card-stats card-round">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-icon">
+                                        <div class="icon-big text-center icon-primary bubble-shadow-small">
+                                            <i class="fas fa-users"></i>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col col-stats ms-3 ms-sm-0">
-                                    <div class="numbers">
-                                        <p class="card-category">Subscribers</p>
-                                        <h4 class="card-title">1303</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-3">
-                    <div class="card card-stats card-round">
-                        <div class="card-body">
-                            <div class="row align-items-center">
-                                <div class="col-icon">
-                                    <div class="icon-big text-center icon-success bubble-shadow-small">
-                                        <i class="fas fa-luggage-cart"></i>
-                                    </div>
-                                </div>
-                                <div class="col col-stats ms-3 ms-sm-0">
-                                    <div class="numbers">
-                                        <p class="card-category">Sales</p>
-                                        <h4 class="card-title">$ 1,345</h4>
+                                    <div class="col col-stats ms-3 ms-sm-0">
+                                        <div class="numbers">
+                                            <p class="card-category">Tất cả tài khoản</p>
+                                            <h4 class="card-title">{{ $userCount }}</h4>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm-6 col-md-3">
-                    <div class="card card-stats card-round">
-                        <div class="card-body">
-                            <div class="row align-items-center">
-                                <div class="col-icon">
-                                    <div class="icon-big text-center icon-secondary bubble-shadow-small">
-                                        <i class="far fa-check-circle"></i>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="card card-stats card-round">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-icon">
+                                        <div class="icon-big text-center icon-success bubble-shadow-small">
+                                            <i class="fas fa-user-check"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col col-stats ms-3 ms-sm-0">
+                                        <div class="numbers">
+                                            <p class="card-category">Tài khoản đã kích hoạt</p>
+                                            <h4 class="card-title">{{ $activeUserCount }}</h4>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col col-stats ms-3 ms-sm-0">
-                                    <div class="numbers">
-                                        <p class="card-category">Order</p>
-                                        <h4 class="card-title">576</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="card card-stats card-round">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-icon">
+                                        <div class="icon-big text-center icon-warning bubble-shadow-small">
+                                            <i class="fas fa-user-times"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col col-stats ms-3 ms-sm-0">
+                                        <div class="numbers">
+                                            <p class="card-category">Chưa kích hoạt</p>
+                                            <h4 class="card-title">{{ $inactiveUserCount }}</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="card card-stats card-round">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-icon">
+                                        <div class="icon-big text-center icon-danger bubble-shadow-small">
+                                            <i class="far fa-times-circle"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col col-stats ms-3 ms-sm-0">
+                                        <div class="numbers">
+                                            <p class="card-category">Đã vô hiệu hóa</p>
+                                            <h4 class="card-title">{{ $disabledUserCount }}</h4>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -152,73 +256,131 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-7">
                     <div class="card card-round">
                         <div class="card-header">
-                            <div class="card-head-row">
-                                <div class="card-title">User Statistics</div>
-                                <div class="card-tools">
-                                    <a href="#" class="btn btn-label-success btn-round btn-sm me-2">
-                                        <span class="btn-label">
-                                            <i class="fa fa-pencil"></i>
-                                        </span>
-                                        Export
-                                    </a>
-                                    <a href="#" class="btn btn-label-info btn-round btn-sm">
-                                        <span class="btn-label">
-                                            <i class="fa fa-print"></i>
-                                        </span>
-                                        Print
-                                    </a>
+                            <div class="card-head-row flex-column align-items-stretch justify-content-center">
+                                <div class="d-flex">
+                                    <div class="card-title">Thống kê người dùng</div>
+                                    <div class="card-tools">
+                                        <a href="#" class="btn btn-label-success btn-round btn-sm me-2">
+                                            <span class="btn-label">
+                                                <i class="fa fa-pencil"></i>
+                                            </span>
+                                            Export
+                                        </a>
+                                        <a href="#" class="btn btn-label-info btn-round btn-sm">
+                                            <span class="btn-label">
+                                                <i class="fa fa-print"></i>
+                                            </span>
+                                            Print
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="largeInput">Lọc theo năm</label>
+                                    <input type="text" class="form-control form-control filter-years"
+                                        id="defaultInput" placeholder="2024">
                                 </div>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="chart-container" style="min-height: 375px">
                                 <canvas id="statisticsChart"></canvas>
+                                <div id="noDataMessage"
+                                    class="w-100 align-items-center d-flex flex-column justify-content-center">
+                                </div>
                             </div>
                             <div id="myChartLegend"></div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card card-primary card-round">
+                <div class="col-md-5">
+                    <div class="card card-round">
                         <div class="card-header">
                             <div class="card-head-row">
-                                <div class="card-title">Daily Sales</div>
+                                <div class="card-title">Top <span id="count-limit"></span> bài viết lượt xem nhiều nhất
+                                </div>
                                 <div class="card-tools">
-                                    <div class="dropdown">
-                                        <button class="btn btn-sm btn-label-light dropdown-toggle" type="button"
-                                            id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false">
-                                            Export
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                        </div>
+                                    <div class="form-group">
+                                        <input type="number" class="form-control form-control-sm" id="top-limit"
+                                            placeholder="Top limit">
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-category">March 25 - April 02</div>
                         </div>
                         <div class="card-body pb-0">
-                            <div class="mb-4 mt-2">
-                                <h1>$4,578.58</h1>
-                            </div>
-                            <div class="pull-in">
-                                <canvas id="dailySalesChart"></canvas>
+                            <div class="card-body">
+                                <div class="chart-container" style="min-height: 375px">
+                                    <canvas id="barChart"></canvas>
+                                    <div id="noDataMessage-2"
+                                        class="w-100 align-items-center d-flex flex-column justify-content-center">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="card card-round">
-                        <div class="card-body pb-0">
-                            <div class="h1 fw-bold float-end text-primary">+5%</div>
-                            <h2 class="mb-2">17</h2>
-                            <p class="text-muted">Users online</p>
-                            <div class="pull-in sparkline-fix">
-                                <div id="lineChart"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Top <span id="count-limit-2"></span> danh mục có bài viết xem nhiều nhất</div>
+                            <div class="form-group col-4 px-0">
+                                <input type="number" class="form-control form-control-sm" id="top-limit-2"
+                                    placeholder="Top limit">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container">
+                                <div class="chartjs-size-monitor"
+                                    style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                                    <div class="chartjs-size-monitor-expand"
+                                        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                        <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                                    </div>
+                                    <div class="chartjs-size-monitor-shrink"
+                                        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                        <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+                                    </div>
+                                </div>
+                                <canvas id="pieChart" style="width: 331px; height: 300px; display: block;"
+                                    width="413" height="375" class="chartjs-render-monitor"></canvas>
+                                <div id="noDataMessage-3"
+                                    class="w-100 align-items-center d-flex flex-column justify-content-center">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Top <span id="count-limit-3"></span> danh mục con có bài viết xem nhiều nhất</div>
+                            <div class="form-group col-4 px-0">
+                                <input type="number" class="form-control form-control-sm" id="top-limit-3"
+                                    placeholder="Top limit">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container">
+                                <div class="chartjs-size-monitor"
+                                    style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                                    <div class="chartjs-size-monitor-expand"
+                                        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                        <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                                    </div>
+                                    <div class="chartjs-size-monitor-shrink"
+                                        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                        <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+                                    </div>
+                                </div>
+                                <div id="noDataMessage-3"
+                                    class="w-100 align-items-center d-flex flex-column justify-content-center">
+                                </div>
+                                <canvas id="doughnutChart" style="width: 331px; height: 300px; display: block;"
+                                    width="413" height="375" class="chartjs-render-monitor"></canvas>
                             </div>
                         </div>
                     </div>

@@ -11,16 +11,17 @@ use App\Http\Controllers\Web\Admins\ActionController;
 use App\Http\Controllers\Web\Admins\UserController;
 use App\Http\Controllers\Web\Admins\TypeController;
 use App\Http\Controllers\Web\Admins\CommentController;
+use App\Http\Controllers\Web\Admins\DashBoardController;
 use App\Http\Controllers\Web\Clients\HomeController;
+use App\Http\Controllers\Web\Clients\ProfileController;
+use App\Http\Resources\UserResource;
 use App\Http\Controllers\Web\Clients\PostController as ClientPostController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 Route::middleware('auth.admin')->prefix('admin')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admins.dashboard.dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashBoardController::class, 'index'])->name('dashboard');
 
     // Danh mục
     Route::get('/danh-muc', [CategoryController::class, 'index'])->name('categories')->middleware('permission.action:Categories Management,viewany');
@@ -41,6 +42,7 @@ Route::middleware('auth.admin')->prefix('admin')->group(function () {
     // Bài viết
     Route::get('/bai-viet', [PostController::class, 'index'])->name('posts')->middleware('permission.action:Posts Management,viewany');
     Route::get('/them-bai-viet', [PostController::class, 'create'])->name('create.post')->middleware('permission.action:Posts Management,create');
+    Route::get('/kiem-duyet', [PostController::class, 'approve'])->name('approve.post')->middleware('permission.action:Posts Management,approve');
     Route::post('/them-bai-viet', [PostController::class, 'store'])->name('store.post')->middleware('permission.action:Posts Management,create');
     Route::get('/sua-bai-viet/{id}', [PostController::class, 'show'])->name('show.post')->middleware('permission.action:Posts Management,view');
     Route::put('/sua-bai-viet/{id}', [PostController::class, 'update'])->name('update.post')->middleware('permission.action:Posts Management,update');
@@ -60,6 +62,7 @@ Route::middleware('auth.admin')->prefix('admin')->group(function () {
     Route::post('/create-role', [RoleController::class, 'store'])->name('store.role')->middleware('permission.action:Roles Management,create');
     Route::get('/update-role/{id}', [RoleController::class, 'show'])->name('show.role')->middleware('permission.action:Roles Management,view');
     Route::put('/update-role/{id}', [RoleController::class, 'update'])->name('update.role')->middleware('permission.action:Roles Management,update');
+    Route::delete('/delete-role/{id}', [RoleController::class, 'delete'])->name('delete.role')->middleware('permission.action:Roles Management,delete');
 
     // Action
     Route::get('/actions', [ActionController::class, 'index'])->name('actions')->middleware('permission.action:Actions Management,viewany');
@@ -71,6 +74,9 @@ Route::middleware('auth.admin')->prefix('admin')->group(function () {
 
     // User
     Route::get('/users', [UserController::class, 'index'])->name('users')->middleware('permission.action:Users Management,viewany');
+    Route::get('/users/{id}', [UserController::class, 'show'])->name('show.user')->middleware('permission.action:Users Management,view');
+    Route::get('/create-user', [UserController::class, 'create'])->name('create.user');
+    Route::post('/create-user', [UserController::class, 'store'])->name('store.user');
 
     //grant permissions
     Route::get('/grant-role', [UserController::class, 'grantRole'])->name('grant.role');
@@ -85,14 +91,21 @@ Route::middleware('auth.admin')->prefix('admin')->group(function () {
     Route::delete('/xoa-binh-luan/{id}', [CommentController::class, 'delete'])->name('delete.comment');
 });
 
-Route::get('/profile', function() {
-    return view('clients.profile.profile');
+Route::middleware('auth')->group(function() {
+    Route::get('/tai-khoan', [ProfileController::class, 'account'])->name('profile');
+    Route::get('/them-bai-viet', [ClientPostController::class, 'create'])->name('client.create.post');
+    Route::post('/them-bai-viet', [ClientPostController::class, 'store'])->name('client.store.post');
+    Route::get('/sua-bai-viet/{slug}', [ClientPostController::class, 'show'])->name('client.show.post');
 });
-Route::get('/dang-nhap', [AuthController::class, 'showLogin'])->name('login');
-Route::post('/dang-nhap', [AuthController::class, 'actionLogin'])->name('action.login');
-Route::get('/dang-ky', [AuthController::class, 'showRegister'])->name('register');
-Route::post('/dang-ky', [AuthController::class, 'actionRegister'])->name('action.register');
-Route::get('/email/verify/{token}', [AuthController::class, 'verifyEmail']);
+
+Route::middleware('guest')->group(function () {
+    Route::get('/dang-nhap', [AuthController::class, 'showLogin'])->name('login');
+    Route::post('/dang-nhap', [AuthController::class, 'actionLogin'])->name('action.login');
+    Route::get('/dang-ky', [AuthController::class, 'showRegister'])->name('register');
+    Route::post('/dang-ky', [AuthController::class, 'actionRegister'])->name('action.register');
+    Route::get('/email/verify/{token}', [AuthController::class, 'verifyEmail']);
+});
+
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/upload', [PostController::class, 'upload']);
@@ -105,8 +118,8 @@ Route::get('/check-mail', function () {
 Route::get('/search', [HomeController::class, 'search'])->name('search');
 
 Route::get('/bai-viet/{post}', [ClientPostController::class, 'postDetail'])->name('post.detail');
-Route::get('/{category}', [ClientPostController::class, 'getPostByCategory'])->name('category');
-Route::get('/{category}/{subcategory}', [ClientPostController::class, 'getPostBySubcategory'])->name('subcategory');
+Route::get('/danh-muc/{category}', [ClientPostController::class, 'getPostByCategory'])->name('category');
+Route::get('/danh-muc/{category}/{subcategory}', [ClientPostController::class, 'getPostBySubcategory'])->name('subcategory');
 
 
 Route::fallback(function () {

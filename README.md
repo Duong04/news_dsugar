@@ -1,66 +1,292 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# DSugar News
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+DSugar News is a Laravel-based news publishing platform designed for content browsing, article management, user authentication, commenting, and role-based administration.
 
-## About Laravel
+The project can be used as a foundation for an online magazine, news portal, blog platform, or editorial content management system.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Table of Contents
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- [Overview](#overview)
+- [Key Features](#key-features)
+- [Screenshots](#screenshots)
+- [Tech Stack](#tech-stack)
+- [System Requirements](#system-requirements)
+- [Installation](#installation)
+- [Environment Configuration](#environment-configuration)
+- [Running the Project](#running-the-project)
+- [Project Structure](#project-structure)
+- [Main Routes](#main-routes)
+- [Testing](#testing)
+- [Deployment Notes](#deployment-notes)
+- [Author](#author)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Overview
 
-## Learning Laravel
+DSugar News provides a complete news website experience with a public-facing client interface and an admin panel for managing editorial content. Users can browse posts by category, search articles, view post details, register accounts, update profiles, create posts, and interact through comments.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Administrators can manage posts, categories, subcategories, users, roles, permissions, actions, comments, and post approval workflows.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Key Features
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Public Website
 
-## Laravel Sponsors
+- Browse latest, featured, trending, and category-based posts.
+- View detailed article pages with author information, category context, and related content.
+- Search posts by keyword.
+- Register, log in, log out, and verify accounts by email.
+- Manage personal profile information.
+- Allow authenticated users to create and update their own posts.
+- Support comments and comment replies through API endpoints.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Admin Panel
 
-### Premium Partners
+- Dashboard for system statistics.
+- Manage posts, including create, update, delete, and approval actions.
+- Manage categories and subcategories.
+- Manage users, account status, and role assignment.
+- Manage roles, permissions, and actions.
+- Manage comments and comment replies.
+- Protect admin features with custom authentication and permission middleware.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### Integrations
 
-## Contributing
+- Cloudinary integration for image upload and media handling.
+- Email verification for user accounts.
+- Toastr notifications.
+- Splide sliders.
+- Chart.js statistics charts.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Screenshots
 
-## Code of Conduct
+### Home Page
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+![Home Page](public/images/screen/Screenshot%202026-05-28%20180831.png)
 
-## Security Vulnerabilities
+### Trending Topics and Featured Posts
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+![Trending Topics](public/images/screen/Screenshot%202026-05-28%20200008.png)
 
-## License
+### Top Posts
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+![Top Posts](public/images/screen/Screenshot%202026-05-28%20200048.png)
+
+### Post Listing
+
+![Post Listing](public/images/screen/Screenshot%202026-05-28%20200104.png)
+
+### Post Detail
+
+![Post Detail](public/images/screen/Screenshot%202026-05-28%20200208.png)
+
+## Tech Stack
+
+| Layer | Technology |
+| --- | --- |
+| Backend | PHP 8.2, Laravel 11 |
+| Frontend | Blade, Vite, Bootstrap 5, CSS, JavaScript |
+| Database | MySQL or any Laravel-compatible relational database |
+| Authentication | Laravel authentication with custom middleware |
+| API | Laravel API routes |
+| Media Upload | Cloudinary |
+| UI Libraries | Bootstrap Icons, Toastr, Splide |
+| Charts | Chart.js |
+| Testing | PHPUnit |
+
+## System Requirements
+
+- PHP 8.2 or higher.
+- Composer.
+- Node.js and npm.
+- MySQL or MariaDB.
+- A local web environment such as Laragon, XAMPP, Laravel Valet, or Laravel Sail.
+- A Cloudinary account if cloud-based image upload is required.
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone <repository-url>
+cd news_dsugar
+```
+
+Install PHP dependencies:
+
+```bash
+composer install
+```
+
+Install frontend dependencies:
+
+```bash
+npm install
+```
+
+Create the environment file:
+
+```bash
+cp .env.example .env
+```
+
+Generate the application key:
+
+```bash
+php artisan key:generate
+```
+
+Run database migrations:
+
+```bash
+php artisan migrate
+```
+
+Optionally seed sample data:
+
+```bash
+php artisan db:seed
+```
+
+Create the storage symbolic link:
+
+```bash
+php artisan storage:link
+```
+
+## Environment Configuration
+
+Update the main values in your `.env` file:
+
+```env
+APP_NAME="DSugar News"
+APP_URL=http://localhost
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=news_dsugar
+DB_USERNAME=root
+DB_PASSWORD=
+
+MAIL_MAILER=smtp
+MAIL_HOST=
+MAIL_PORT=
+MAIL_USERNAME=
+MAIL_PASSWORD=
+MAIL_ENCRYPTION=
+MAIL_FROM_ADDRESS=
+MAIL_FROM_NAME="${APP_NAME}"
+
+CLOUDINARY_URL=
+CLOUDINARY_UPLOAD_PRESET=
+CLOUDINARY_NOTIFICATION_URL=
+```
+
+Email and Cloudinary credentials must be configured with real account values for email verification and cloud image upload to work correctly.
+
+## Running the Project
+
+Start the Laravel development server:
+
+```bash
+php artisan serve
+```
+
+Start Vite for frontend assets during development:
+
+```bash
+npm run dev
+```
+
+Build frontend assets for production:
+
+```bash
+npm run build
+```
+
+After starting the Laravel server, open:
+
+```text
+http://127.0.0.1:8000
+```
+
+## Project Structure
+
+```text
+app/
+|-- Http/Controllers      Web and API controllers
+|-- Http/Middleware       Authentication and authorization middleware
+|-- Http/Requests         Form request validation
+|-- Jobs                  Background jobs for images and emails
+|-- Models                Eloquent models
+|-- Policies              Authorization policies
+|-- Repositories          Data access layer
+|-- Services              Business logic layer
+`-- View/Components       Blade components
+
+resources/views/
+|-- admins                Admin panel views
+|-- clients               Public website views
+|-- components            Shared Blade components
+|-- errors                Error pages
+`-- mail                  Email templates
+
+routes/
+|-- web.php               Web routes
+`-- api.php               API routes
+
+public/
+|-- css                   Public stylesheets
+|-- js                    Public JavaScript files
+|-- images                Static and demo images
+`-- libraries             Frontend libraries
+```
+
+## Main Routes
+
+| Route | Description |
+| --- | --- |
+| `/` | Home page |
+| `/search` | Post search |
+| `/dang-nhap` | Login page |
+| `/dang-ky` | Registration page |
+| `/tai-khoan` | User profile |
+| `/bai-viet/{post}` | Post detail |
+| `/danh-muc/{category}` | Posts by category |
+| `/danh-muc/{category}/{subcategory}` | Posts by subcategory |
+| `/admin/dashboard` | Admin dashboard |
+| `/admin/bai-viet` | Post management |
+| `/admin/kiem-duyet` | Post approval |
+| `/admin/danh-muc` | Category management |
+| `/admin/users` | User management |
+| `/admin/role` | Role management |
+| `/admin/permissions` | Permission management |
+| `/api/v1/comments` | Comment API |
+| `/api/v1/posts` | Post API |
+| `/api/v1/stats/*` | Statistics API |
+
+## Testing
+
+Run the test suite:
+
+```bash
+php artisan test
+```
+
+Or run PHPUnit directly:
+
+```bash
+vendor/bin/phpunit
+```
+
+## Deployment Notes
+
+- Configure the database connection before running migrations.
+- Admin users must have a role type of `System` or `Administration` to access the `/admin` area.
+- Configure Cloudinary environment variables before using cloud image uploads.
+- Configure SMTP settings before using email verification.
+- For production, run `npm run build` and enable Laravel configuration caching as needed.
+
+## Author
+
+**DSugar News**  
+A Laravel news publishing and content management project.

@@ -25,4 +25,12 @@ class CommentReplyService {
             return $th->getMessage();
         }
     }
+
+    public function getByCommentId($id) {
+        try {
+            return $this->commentReplyRepository->getByCommentId($id);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
 }

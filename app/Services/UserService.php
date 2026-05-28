@@ -5,11 +5,14 @@ use App\Http\Resources\UserResource;
 use Auth;
 use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Support\Facades\Cookie;
+use App\Services\CloundinaryService;
 
 class UserService {
     private $userRepository;
-    public function __construct(UserRepositoryInterface $userRepository) {
+    private $cloundinaryService;
+    public function __construct(UserRepositoryInterface $userRepository, CloundinaryService $cloundinaryService) {
         $this->userRepository = $userRepository;
+        $this->cloundinaryService = $cloundinaryService;
     }
     public function getAll() {
         try {
@@ -79,6 +82,44 @@ class UserService {
     public function findById($id) {
         try {
             return $this->userRepository->find($id);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
+    public function updateProdile($request) {
+        try {
+            $request->validated();
+            $data = [];
+            $user = auth()->user();
+
+            if ($request->has('email') && $request->input('email')) {
+                $data['email'] = $request->input('email');
+            }
+            if ($request->has('user_name') && $request->input('user_name')) {
+                $data['user_name'] = $request->input('user_name');
+            }
+            if ($request->has('first_name') && $request->input('first_name')) {
+                $data['first_name'] = $request->input('first_name');
+            }
+            if ($request->has('last_name') && $request->input('last_name')) {
+                $data['last_name'] = $request->input('last_name');
+            }
+            if ($request->has('address') && $request->input('address')) {
+                $data['address'] = $request->input('address');
+            }
+            if ($request->has('phone') && $request->input('phone')) {
+                $data['phone'] = $request->input('phone');
+            }
+            
+            if ($request->hasFile('avatar')) {
+                $file = $request->file('avatar');
+                $folder = 'news_dsugar/avatars';
+                $url = $this->cloundinaryService->upload($file, $folder);
+                $data['avatar'] = $url;
+            }
+
+            return $user->update($data);
         } catch (\Throwable $th) {
             return $th->getMessage();
         }

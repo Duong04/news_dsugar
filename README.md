@@ -1,6 +1,6 @@
 # DSugar News
 
-DSugar News is a Laravel-based news publishing platform designed for content browsing, article management, user authentication, commenting, and role-based administration.
+DSugar News is a Laravel-based news publishing platform designed for content browsing, article management, user authentication, commenting, and RBAC (Role-Based Access Control) administration.
 
 The project can be used as a foundation for an online magazine, news portal, blog platform, or editorial content management system.
 
@@ -24,7 +24,7 @@ The project can be used as a foundation for an online magazine, news portal, blo
 
 DSugar News provides a complete news website experience with a public-facing client interface and an admin panel for managing editorial content. Users can browse posts by category, search articles, view post details, register accounts, update profiles, create posts, and interact through comments.
 
-Administrators can manage posts, categories, subcategories, users, roles, permissions, actions, comments, and post approval workflows.
+Administrators can manage posts, categories, subcategories, users, roles, permissions, actions, comments, and post approval workflows through an RBAC-based permission system.
 
 ## Key Features
 
@@ -44,7 +44,7 @@ Administrators can manage posts, categories, subcategories, users, roles, permis
 - Manage posts, including create, update, delete, and approval actions.
 - Manage categories and subcategories.
 - Manage users, account status, and role assignment.
-- Manage roles, permissions, and actions.
+- Manage roles, permissions, and actions through RBAC (Role-Based Access Control).
 - Manage comments and comment replies.
 - Protect admin features with custom authentication and permission middleware.
 
@@ -85,7 +85,7 @@ Administrators can manage posts, categories, subcategories, users, roles, permis
 | Backend | PHP 8.2, Laravel 11 |
 | Frontend | Blade, Vite, Bootstrap 5, CSS, JavaScript |
 | Database | MySQL or any Laravel-compatible relational database |
-| Authentication | Laravel authentication with custom middleware |
+| Authentication and Authorization | Laravel authentication, custom middleware, RBAC |
 | API | Laravel API routes |
 | Media Upload | Cloudinary |
 | UI Libraries | Bootstrap Icons, Toastr, Splide |
@@ -287,6 +287,12 @@ vendor/bin/phpunit
 - For production, run `npm run build` and enable Laravel configuration caching as needed.
 
 ## Author
+Developed by **Nguyen Thanh Duong (SugarDev)**
 
 **DSugar News**  
 A Laravel news publishing and content management project.
+
+---
+## 📄 License
+
+This project is for learning and development purposes.

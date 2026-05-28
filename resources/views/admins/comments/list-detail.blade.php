@@ -32,7 +32,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header d-flex align-items-center">
-                            <h4 class="card-title">Danh sách bình luận</h4>
+                            <h4 class="card-title">Danh sách trả lời bình luận</h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -42,7 +42,7 @@
                                             <td>Stt</td>
                                             <th>Nôi dung</th>
                                             <th>Người bình luận</th>
-                                            <th>Bài viết</th>
+                                            <th>Bình luận</th>
                                             <th>Ngày bình luận</th>
                                             <th style="width: 10%" class="text-center">Action</th>
                                         </tr>
@@ -64,13 +64,13 @@
                                                         <span>{{ $item->user->user_name }}</span>
                                                     </div>
                                                 </td>
-                                                <td>{{ $item->post->title }}</td>
+                                                <td>{{ $item->comment->content }}</td>
                                                 <td>{{ $item->created_at }}</td>
                                                 <td>
                                                     <div class="form-button-action">
                                                         <form class="d-flex align-items-center"
                                                             id="delete-form-{{ $item->id }}" method="POST"
-                                                            action="{{ route('delete.comment', ['id' => $item->id]) }}">
+                                                            action="{{ route('delete.commentReply', ['id' => $item->id]) }}">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button data-bs-toggle="tooltip" title="Xóa"
@@ -79,12 +79,6 @@
                                                                 <i class="fa fa-times"></i>
                                                             </button>
                                                         </form>
-                                                        <a href="{{ route('detail.comment', ['id' => $item->id]) }}"
-                                                            data-bs-toggle="tooltip" title="Xem chi tiết"
-                                                            class="btn btn-link btn-warning btn-lg"
-                                                            data-original-title="detail">
-                                                            <i class="fa fa-eye"></i>
-                                                        </a>
                                                     </div>
                                                 </td>
                                             </tr>

@@ -75,24 +75,27 @@ Route::middleware('auth.admin')->prefix('admin')->group(function () {
     // User
     Route::get('/users', [UserController::class, 'index'])->name('users')->middleware('permission.action:Users Management,viewany');
     Route::get('/users/{id}', [UserController::class, 'show'])->name('show.user')->middleware('permission.action:Users Management,view');
-    Route::get('/create-user', [UserController::class, 'create'])->name('create.user');
-    Route::post('/create-user', [UserController::class, 'store'])->name('store.user');
+    Route::get('/create-user', [UserController::class, 'create'])->name('create.user')->middleware('permission.action:Users Management,create');
+    Route::post('/create-user', [UserController::class, 'store'])->name('store.user')->middleware('permission.action:Users Management,create');
 
     //grant permissions
-    Route::get('/grant-role', [UserController::class, 'grantRole'])->name('grant.role');
+    Route::get('/grant-role', [UserController::class, 'grantRole'])->name('grant.role')->middleware('permission.action:Users Management,grant');
 
     //Type 
-    Route::get('/type-roles', [TypeController::class, 'index'])->name('types');
-    Route::post('/type-roles', [TypeController::class, 'store'])->name('store.type');
-    Route::put('/type-roles/{id}', [TypeController::class, 'update'])->name('update.type');
-    Route::delete('/type-roles/{id}', [TypeController::class, 'delete'])->name('delete.type');
+    Route::get('/type-roles', [TypeController::class, 'index'])->name('types')->middleware('permission.action:Types Management,viewany');
+    Route::post('/type-roles', [TypeController::class, 'store'])->name('store.type')->middleware('permission.action:Types Management,create');
+    Route::put('/type-roles/{id}', [TypeController::class, 'update'])->name('update.type')->middleware('permission.action:Types Management,update');
+    Route::delete('/type-roles/{id}', [TypeController::class, 'delete'])->name('delete.type')->middleware('permission.action:Types Management,delete');
 
-    Route::get('/binh-luan', [CommentController::class, 'index'])->name('comments');
-    Route::delete('/xoa-binh-luan/{id}', [CommentController::class, 'delete'])->name('delete.comment');
+    Route::get('/binh-luan', [CommentController::class, 'index'])->name('comments')->middleware('permission.action:Comments Management,viewany');
+    Route::get('/binh-luan/chi-tiet/{id}', [CommentController::class, 'commentReply'])->name('detail.comment')->middleware('permission.action:Comments Reply Management,viewany');
+    Route::delete('/binh-luan/chi-tiet/{id}', [CommentController::class, 'commentReplyDelete'])->name('delete.commentReply')->middleware('permission.action:Comments Reply Management,delete');
+    Route::delete('/xoa-binh-luan/{id}', [CommentController::class, 'delete'])->name('delete.comment')->middleware('permission.action:Comments Management,delete');
 });
 
 Route::middleware('auth')->group(function() {
     Route::get('/tai-khoan', [ProfileController::class, 'account'])->name('profile');
+    Route::put('/tai-khoan/{id}', [ProfileController::class, 'updateProfile'])->name('update.profile');
     Route::get('/them-bai-viet', [ClientPostController::class, 'create'])->name('client.create.post');
     Route::post('/them-bai-viet', [ClientPostController::class, 'store'])->name('client.store.post');
     Route::get('/sua-bai-viet/{slug}', [ClientPostController::class, 'show'])->name('client.show.post');

@@ -177,6 +177,7 @@
                         </ul>
                     </div>
                 </li>
+                @can('general-check', ['Comments Management' ,'viewany'])
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#tables">
                         <i class="fas fa-comment"></i>
@@ -193,12 +194,15 @@
                         </ul>
                     </div>
                 </li>
+                @endcan
+                @can('general-check', ['Posts Management' ,'approve'])
                 <li class="nav-item">
                     <a href="{{ route('approve.post') }}">
                         <i class="fas fa-list"></i>
                         <p>Kiểm duyệt bài viết</p>
                     </a>
                 </li>
+                @endcan
             </ul>
         </div>
     </div>

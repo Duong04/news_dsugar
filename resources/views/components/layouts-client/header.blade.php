@@ -66,7 +66,7 @@
                             <x-search.search />
                             @auth
                             <div class="dropdown">
-                                <a href="" class="account" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><img class="w-100 h-100 rounded-circle" src="{{ Auth::user()->avatar }}" alt=""></a>                                
+                                <a href="" class="account" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><img class="w-100 h-100 rounded-circle object-fit-cover" src="{{ Auth::user()->avatar }}" alt=""></a>                                
                                 <ul style="left: -50px;" class="dropdown-menu">
                                     <li><a class="dropdown-item" href="{{ route('profile') }}">Tài khoản</a></li>
                                     @if (Auth::user()->role->name == 'Author')
